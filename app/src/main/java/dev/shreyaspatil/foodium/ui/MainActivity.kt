@@ -1,4 +1,4 @@
-package dev.shreyaspatil.foodium
+package dev.shreyaspatil.foodium.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -6,6 +6,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.recyclerview.widget.LinearLayoutManager
+import dev.shreyaspatil.foodium.R
+import dev.shreyaspatil.foodium.adapter.PostListAdapter
 import dev.shreyaspatil.foodium.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +20,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.postsRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            setHasFixedSize(true)
+            adapter = PostListAdapter()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
