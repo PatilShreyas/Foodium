@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@android:color/white</color>
+    <color name="colorPrimaryDark">@android:color/black</color>
+    <color name="windowBackground">@android:color/white</color>
+    <color name="colorAccent">#006064</color>
+    <color name="statusBarColor">@android:color/white</color>
+
+    <color name="textColor">@android:color/black</color>
+    <color name="bulbColor">@android:color/black</color>
+</resources>
