@@ -6,4 +6,6 @@
 
     <color name="textColor">@android:color/white</color>
     <color name="bulbColor">@android:color/white</color>
+
+    <color name="post_background">#0DFFFFFF</color>
 </resources>

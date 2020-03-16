@@ -9,6 +9,9 @@
 
         <item name="fontFamily">@font/google_sans</item>
 
+        <item name="android:icon">@mipmap/ic_launcher_foreground</item>
+        <item name="icon">@mipmap/ic_launcher_foreground</item>
+
         <item name="android:windowBackground">@color/windowBackground</item>
         <item name="android:statusBarColor">@color/statusBarColor</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/windowLightStatusBar
@@ -37,8 +40,9 @@
     </style>
 
     <style name="PostImage">
-        <item name="android:layout_marginTop">@dimen/dimen_16</item>
+        <item name="android:layout_marginTop">@dimen/dimen_8</item>
         <item name="android:layout_marginEnd">@dimen/dimen_16</item>
+        <item name="android:layout_marginBottom">@dimen/dimen_8</item>
         <item name="android:scaleType">centerCrop</item>
     </style>
 

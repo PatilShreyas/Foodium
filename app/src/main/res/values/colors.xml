@@ -2,10 +2,11 @@
 <resources>
     <color name="colorPrimary">@android:color/white</color>
     <color name="colorPrimaryDark">@android:color/black</color>
-    <color name="windowBackground">@android:color/white</color>
+    <color name="windowBackground">#F3F3F3</color>
     <color name="colorAccent">#006064</color>
     <color name="statusBarColor">@android:color/white</color>
 
     <color name="textColor">@android:color/black</color>
     <color name="bulbColor">@android:color/black</color>
+    <color name="post_background">@android:color/white</color>
 </resources>
