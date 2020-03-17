@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/dimen_1"
+    android:layout_marginBottom="@dimen/dimen_4"
     android:background="@color/post_background">
 
     <TextView

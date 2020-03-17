@@ -9,4 +9,6 @@
     <color name="textColor">@android:color/black</color>
     <color name="bulbColor">@android:color/black</color>
     <color name="post_background">@android:color/white</color>
+
+    <color name="imageBackgroundTint">#C3C3C3</color>
 </resources>

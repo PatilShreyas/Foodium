@@ -10,7 +10,14 @@ import dev.shreyaspatil.foodium.viewholder.PostViewHolder
 class PostListAdapter(private val mPostList: MutableList<Post> = mutableListOf()) :
     RecyclerView.Adapter<PostViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = createPostViewHolder(parent)
+
+    override fun getItemCount() = mPostList.size
+
+    override fun onBindViewHolder(holder: PostViewHolder, position: Int) =
+        holder.bind(mPostList[position])
+
+    private fun createPostViewHolder(parent: ViewGroup) =
         PostViewHolder(
             ItemPostBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -19,12 +26,7 @@ class PostListAdapter(private val mPostList: MutableList<Post> = mutableListOf()
             )
         )
 
-    override fun getItemCount() = mPostList.size
-
-    override fun onBindViewHolder(holder: PostViewHolder, position: Int) =
-        holder.bind(mPostList[position])
-
-    fun addItems(postList: List<Post>) {
+    fun addPosts(postList: List<Post>) {
         mPostList.addAll(postList)
         notifyDataSetChanged()
     }
@@ -33,4 +35,5 @@ class PostListAdapter(private val mPostList: MutableList<Post> = mutableListOf()
         mPostList.clear()
         notifyDataSetChanged()
     }
+
 }

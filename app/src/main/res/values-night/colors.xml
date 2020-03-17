@@ -8,4 +8,6 @@
     <color name="bulbColor">@android:color/white</color>
 
     <color name="post_background">#0DFFFFFF</color>
+
+    <color name="imageBackgroundTint">#006064</color>
 </resources>

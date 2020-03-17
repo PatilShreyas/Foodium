@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding.postsRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             setHasFixedSize(true)
-            adapter = PostListAdapter()
+            adapter = PostListAdapter() // TODO Inject
         }
     }
 
