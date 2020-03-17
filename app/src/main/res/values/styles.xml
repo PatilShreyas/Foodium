@@ -9,15 +9,19 @@
 
         <item name="fontFamily">@font/google_sans</item>
 
-        <item name="android:icon">@mipmap/ic_launcher_foreground</item>
-        <item name="icon">@mipmap/ic_launcher_foreground</item>
-
         <item name="android:windowBackground">@color/windowBackground</item>
         <item name="android:statusBarColor">@color/statusBarColor</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/windowLightStatusBar
         </item>
 
         <item name="actionBarStyle">@style/Widget.MaterialComponents.ActionBar.Primary</item>
+
+        <!-- Material Dialog Customizations -->
+        <item name="material_dialog_background">@color/windowBackground</item>
+        <item name="material_dialog_message_text_color">@color/textColor</item>
+        <item name="material_dialog_title_text_color">@color/textColor</item>
+        <item name="material_dialog_positive_button_color">@color/colorAccent</item>
+        <item name="material_dialog_positive_button_text_color">@color/colorPrimary</item>
     </style>
 
     <!-- The splash theme to set the background with your splash screen drawable -->
@@ -44,6 +48,17 @@
         <item name="android:layout_marginEnd">@dimen/dimen_16</item>
         <item name="android:layout_marginBottom">@dimen/dimen_16</item>
         <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="StatusTextView">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="StatusView">
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/dimen_8</item>
+        <item name="android:visibility">gone</item>
     </style>
 
 </resources>

@@ -1,4 +1,4 @@
-package dev.shreyaspatil.foodium.viewholder
+package dev.shreyaspatil.foodium.ui.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load

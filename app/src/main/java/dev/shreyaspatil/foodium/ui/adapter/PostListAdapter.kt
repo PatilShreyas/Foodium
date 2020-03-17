@@ -1,14 +1,17 @@
-package dev.shreyaspatil.foodium.adapter
+package dev.shreyaspatil.foodium.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.shreyaspatil.foodium.databinding.ItemPostBinding
 import dev.shreyaspatil.foodium.model.Post
-import dev.shreyaspatil.foodium.viewholder.PostViewHolder
+import dev.shreyaspatil.foodium.ui.viewholder.PostViewHolder
+import javax.inject.Inject
 
-class PostListAdapter(private val mPostList: MutableList<Post> = mutableListOf()) :
+class PostListAdapter @Inject constructor() :
     RecyclerView.Adapter<PostViewHolder>() {
+
+    private val mPostList: MutableList<Post> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = createPostViewHolder(parent)
 
@@ -26,14 +29,13 @@ class PostListAdapter(private val mPostList: MutableList<Post> = mutableListOf()
             )
         )
 
-    fun addPosts(postList: List<Post>) {
+    fun setPosts(postList: List<Post>) {
+        clearAllPosts()
         mPostList.addAll(postList)
         notifyDataSetChanged()
     }
 
     fun clearAllPosts() {
         mPostList.clear()
-        notifyDataSetChanged()
     }
-
 }

@@ -3,7 +3,7 @@
     <color name="colorPrimary">@android:color/white</color>
     <color name="colorPrimaryDark">@android:color/black</color>
     <color name="windowBackground">#F3F3F3</color>
-    <color name="colorAccent">#006064</color>
+    <color name="colorAccent">#00838F</color>
     <color name="statusBarColor">@android:color/white</color>
 
     <color name="textColor">@android:color/black</color>
@@ -11,4 +11,7 @@
     <color name="post_background">@android:color/white</color>
 
     <color name="imageBackgroundTint">#C3C3C3</color>
+
+    <color name="colorStatusConnected">#43A047</color>
+    <color name="colorStatusNotConnected">#D32F2F</color>
 </resources>
