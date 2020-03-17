@@ -7,6 +7,8 @@ import dev.shreyaspatil.foodium.ui.activity.MainActivity
 @Module
 abstract class ActivitiesModule {
 
-    @ContributesAndroidInjector(modules = [])
+    @ContributesAndroidInjector(modules = [MainActivityModule::class])
     abstract fun bindMainActivity(): MainActivity
+
+
 }
