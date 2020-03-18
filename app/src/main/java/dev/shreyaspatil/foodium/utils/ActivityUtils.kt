@@ -14,6 +14,6 @@ fun Activity.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
 
 fun Activity.getColorRes(@ColorRes id: Int) = ContextCompat.getColor(applicationContext, id)
 
-inline fun <reified VM : ViewModel> AppCompatActivity.viewModel() =
-    ViewModelProvider(this).get(VM::class.java)
+inline fun <reified VM : ViewModel> AppCompatActivity.viewModelOf(factory: ViewModelProvider.Factory) =
+    ViewModelProvider(this, factory).get(VM::class.java)
 

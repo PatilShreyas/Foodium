@@ -11,13 +11,17 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ActivityMainBinding
-import dev.shreyaspatil.foodium.model.Post
+import dev.shreyaspatil.foodium.ui.Error
+import dev.shreyaspatil.foodium.ui.Loading
+import dev.shreyaspatil.foodium.ui.Success
 import dev.shreyaspatil.foodium.ui.adapter.PostListAdapter
 import dev.shreyaspatil.foodium.ui.viewmodel.MainViewModel
 import dev.shreyaspatil.foodium.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     @Inject
@@ -33,10 +37,27 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             setHasFixedSize(true)
             adapter = mAdapter
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        initLiveData()
 
         handleNetworkChanges()
+    }
 
-        mAdapter.setPosts(listOf(Post(1, "How can I survive?", "Shreyas", "http://google.com")))
+    private fun initLiveData() {
+        println("ViewModel = $mViewModel")
+        mViewModel.postsLiveData.observe(this, Observer { state ->
+            when (state) {
+                is Loading -> {
+                    showToast("Loading")
+                }
+                is Success -> mAdapter.setPosts(state.data)
+                is Error -> showToast(state.message)
+            }
+        })
     }
 
     private fun handleNetworkChanges() {
@@ -96,9 +117,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         }
     }
 
-    override fun getViewModel(): MainViewModel = viewModel()
-
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+
+    override fun getViewModel() = viewModelOf<MainViewModel>(mViewModelProvider)
 
     companion object {
         const val ANIMATION_TIMEOUT = 1000.toLong()
