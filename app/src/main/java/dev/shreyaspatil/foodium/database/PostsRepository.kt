@@ -15,6 +15,10 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Singleton repository for fetching data from remote and storing it in database
+ * for offline capability. This is Single source of data.
+ */
 @ExperimentalCoroutinesApi
 @Singleton
 class PostsRepository @Inject constructor(
@@ -22,32 +26,61 @@ class PostsRepository @Inject constructor(
     private val foodiumService: FoodiumService
 ) {
 
+    /**
+     * Fetched the posts from network and stored it in database. At the end, data from persistence
+     * storage is fetched and emitted.
+     */
     fun getAllPosts() = flow {
+
+        // Emit Loading State
         emit(Loading<List<Post>>())
 
         try {
+            // Fetch latest posts from remote
             val apiResponse = fetchFromRemote()
+
+            // Parse body
             val remotePosts = apiResponse.body()
+
+            // Check for response validation
             if (apiResponse.isSuccessful && remotePosts != null) {
+                // Save posts into the persistence storage
                 saveRemoteData(remotePosts)
             } else {
+                // Something went wrong! Emit Error state.
                 emit(Error<List<Post>>(apiResponse.message()))
             }
         } catch (e: Exception) {
+            // Exception occurred! Emit error
             emit(Error<List<Post>>("Network error! Can't get latest posts."))
             e.printStackTrace()
         }
+
+        // Retrieve posts from persistence storage and emit
         emitAll(fetchFromDatabase().map {
             if (!it.isNullOrEmpty()) {
+                // Posts retrieved. Emit Success state
                 Success<List<Post>>(it)
             } else {
-                Error<List<Post>>("No posts!")
+                // No posts found in persistence storage.
+                Error<List<Post>>("Can't get latest posts!")
             }
         })
-        emitAll(fetchFromDatabase().map { Success<List<Post>>(it) })
     }.flowOn(Dispatchers.IO)
 
+    /**
+     * Saves [posts] retrieved from remote into the persistence storage.
+     * @param posts List of [Post] which is loaded from remote end point.
+     */
     private fun saveRemoteData(posts: List<Post>) = postsDao.insertPosts(posts)
+
+    /**
+     * Retrieves all posts from persistence storage.
+     */
     private fun fetchFromDatabase() = postsDao.getAllPosts()
+
+    /**
+     * Fetches [PostsResponse] from the remote end point. See [FoodiumService.getPosts]
+     */
     private suspend fun fetchFromRemote(): PostsResponse = foodiumService.getPosts()
 }

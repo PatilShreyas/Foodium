@@ -6,6 +6,10 @@ import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ItemPostBinding
 import dev.shreyaspatil.foodium.model.Post
 
+/**
+ * [RecyclerView.ViewHolder] implementation to inflate View for RecyclerView.
+ * See [dev.shreyaspatil.foodium.ui.adapter.PostListAdapter]]
+ */
 class PostViewHolder(private val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(post: Post) {

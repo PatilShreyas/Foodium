@@ -8,6 +8,9 @@ import androidx.viewbinding.ViewBinding
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
+/**
+ * Abstract Activity which binds [ViewModel] [VM] and [ViewBinding] [VB]
+ */
 abstract class BaseActivity<VM : ViewModel, VB : ViewBinding> : AppCompatActivity() {
 
     @Inject
@@ -22,6 +25,8 @@ abstract class BaseActivity<VM : ViewModel, VB : ViewBinding> : AppCompatActivit
         super.onCreate(savedInstanceState)
 
         mViewBinding = getViewBinding()
+
+        // Check if ViewModel is initialized or not
         if (!this::mViewModel.isInitialized) {
             mViewModel = getViewModel()
         }
@@ -29,7 +34,13 @@ abstract class BaseActivity<VM : ViewModel, VB : ViewBinding> : AppCompatActivit
         setContentView(mViewBinding.root)
     }
 
+    /**
+     * It returns [ViewBinding] [VB] which is assigned to [mViewBinding] and used in [onCreate]
+     */
     abstract fun getViewBinding(): VB
 
+    /**
+     * It returns [ViewModel] [VM] which is assigned to [mViewModel] and initialized in [onCreate]
+     */
     abstract fun getViewModel(): VM
 }

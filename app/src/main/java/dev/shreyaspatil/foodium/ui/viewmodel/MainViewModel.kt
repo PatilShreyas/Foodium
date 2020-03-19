@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel for [dev.shreyaspatil.foodium.ui.activity.MainActivity]
+ */
 @ExperimentalCoroutinesApi
 class MainViewModel @Inject constructor(private val postsRepository: PostsRepository) :
     ViewModel() {

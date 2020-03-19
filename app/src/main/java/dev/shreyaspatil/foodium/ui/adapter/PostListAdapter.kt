@@ -8,6 +8,9 @@ import dev.shreyaspatil.foodium.model.Post
 import dev.shreyaspatil.foodium.ui.viewholder.PostViewHolder
 import javax.inject.Inject
 
+/**
+ * This is [RecyclerView.Adapter] for [RecyclerView] which binds [Post] along with [PostViewHolder]
+ */
 class PostListAdapter @Inject constructor() :
     RecyclerView.Adapter<PostViewHolder>() {
 

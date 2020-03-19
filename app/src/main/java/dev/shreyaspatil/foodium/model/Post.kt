@@ -4,6 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import dev.shreyaspatil.foodium.model.Post.Companion.TABLE_NAME
 
+/**
+ * Data class for Database entity and Serialization.
+ */
 @Entity(tableName = TABLE_NAME)
 data class Post(
 

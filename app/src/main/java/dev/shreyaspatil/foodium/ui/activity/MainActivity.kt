@@ -32,6 +32,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
         super.onCreate(savedInstanceState)
 
+        // Initialize RecyclerView
         mViewBinding.postsRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             setHasFixedSize(true)
@@ -62,6 +63,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             getPosts()
         }
 
+        // If ViewState isn't `Success` then reload posts.
         if (mViewModel.postsLiveData.value !is Success) {
             getPosts()
         }
@@ -75,6 +77,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         mViewBinding.swipeRefreshLayout.isRefreshing = isLoading
     }
 
+    /**
+     * Observe network changes i.e. Internet Connectivity
+     */
     private fun handleNetworkChanges() {
         NetworkUtils.getNetworkLiveData(applicationContext).observe(this, Observer { isConnected ->
             if (!isConnected) {

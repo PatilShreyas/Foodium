@@ -19,11 +19,13 @@ class FoodiumApp : Application(), HasAndroidInjector {
     override fun onCreate() {
         super.onCreate()
 
+        // Initialize Dependency Injection
         DaggerAppComponent.builder()
             .create(this)
             .build()
             .inject(this)
 
+        // Get UI mode and set
         val mode = if (isNight()) {
             AppCompatDelegate.MODE_NIGHT_YES
         } else {

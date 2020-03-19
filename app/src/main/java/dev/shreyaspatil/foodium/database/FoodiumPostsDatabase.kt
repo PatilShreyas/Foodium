@@ -6,12 +6,19 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import dev.shreyaspatil.foodium.model.Post
 
+/**
+ * Abstract Foodium database.
+ * It provides DAO [PostsDao] by using method [getPostsDao].
+ */
 @Database(
     entities = [Post::class],
     version = FoodiumPostsDatabase.DB_VERSION
 )
 abstract class FoodiumPostsDatabase : RoomDatabase() {
 
+    /**
+     * @return Foodium Posts DAO [PostsDao]
+     */
     abstract fun getPostsDao(): PostsDao
 
     companion object {

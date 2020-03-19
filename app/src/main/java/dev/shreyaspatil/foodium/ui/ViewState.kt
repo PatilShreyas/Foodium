@@ -1,5 +1,8 @@
 package dev.shreyaspatil.foodium.ui
 
+/**
+ * State Management for UI & Data
+ */
 sealed class ViewState<T>
 
 class Loading<T> : ViewState<T>()
