@@ -1,10 +1,7 @@
 package dev.shreyaspatil.foodium.api
 
-import dev.shreyaspatil.foodium.model.Post
-import retrofit2.Response
+import dev.shreyaspatil.foodium.utils.PostsResponse
 import retrofit2.http.GET
-
-typealias PostsResponse = Response<List<Post>>
 
 interface FoodiumService {
 

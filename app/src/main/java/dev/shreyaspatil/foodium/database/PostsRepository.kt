@@ -1,12 +1,11 @@
 package dev.shreyaspatil.foodium.database
 
 import dev.shreyaspatil.foodium.api.FoodiumService
-import dev.shreyaspatil.foodium.api.PostsResponse
 import dev.shreyaspatil.foodium.model.Post
 import dev.shreyaspatil.foodium.ui.Error
 import dev.shreyaspatil.foodium.ui.Loading
 import dev.shreyaspatil.foodium.ui.Success
-import dev.shreyaspatil.foodium.ui.ViewState
+import dev.shreyaspatil.foodium.utils.PostsResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.emitAll
@@ -15,8 +14,6 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
-
-typealias PostListViewState = ViewState<List<Post>>
 
 @ExperimentalCoroutinesApi
 @Singleton
