@@ -9,6 +9,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.shreyaspatil.MaterialDialog.MaterialDialog
 import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ActivityMainBinding
 import dev.shreyaspatil.foodium.ui.Error
@@ -36,10 +37,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             setHasFixedSize(true)
             adapter = mAdapter
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
 
         initPosts()
 
@@ -62,7 +59,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         })
 
         mViewBinding.swipeRefreshLayout.setOnRefreshListener {
-            println("Trying to get data = ${mViewModel.postsLiveData.value}")
             getPosts()
         }
 
@@ -90,7 +86,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                     setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
                     animate()
                         .alpha(1f)
-                        .setDuration(ANIMATION_TIMEOUT)
+                        .setDuration(ANIMATION_DURATION)
                         .setListener(null)
                 }
             } else {
@@ -103,8 +99,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
                     animate()
                         .alpha(0f)
-                        .setStartDelay(ANIMATION_TIMEOUT)
-                        .setDuration(ANIMATION_TIMEOUT)
+                        .setStartDelay(ANIMATION_DURATION)
+                        .setDuration(ANIMATION_DURATION)
                         .setListener(object : AnimatorListenerAdapter() {
                             override fun onAnimationEnd(animation: Animator) {
                                 hide()
@@ -130,7 +126,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                     ) {
                         AppCompatDelegate.MODE_NIGHT_YES
                     } else {
-                        AppCompatDelegate.MODE_NIGHT_NO
+                        AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
                     }
 
                 // Change UI Mode
@@ -142,11 +138,26 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         }
     }
 
+    override fun onBackPressed() {
+        MaterialDialog.Builder(this)
+            .setTitle("Exit?")
+            .setMessage("Are you sure want to exit?")
+            .setPositiveButton("Yes") { dialogInterface, _ ->
+                dialogInterface.dismiss()
+                super.onBackPressed()
+            }
+            .setNegativeButton("No") { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
+            .build()
+            .show()
+    }
+
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun getViewModel() = viewModelOf<MainViewModel>(mViewModelProvider)
 
     companion object {
-        const val ANIMATION_TIMEOUT = 1000.toLong()
+        const val ANIMATION_DURATION = 1000.toLong()
     }
 }
