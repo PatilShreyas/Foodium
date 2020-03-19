@@ -17,7 +17,6 @@ import dev.shreyaspatil.foodium.ui.Success
 import dev.shreyaspatil.foodium.ui.adapter.PostListAdapter
 import dev.shreyaspatil.foodium.ui.viewmodel.MainViewModel
 import dev.shreyaspatil.foodium.utils.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
@@ -42,50 +41,76 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override fun onStart() {
         super.onStart()
 
-        initLiveData()
+        initPosts()
 
         handleNetworkChanges()
     }
 
-    private fun initLiveData() {
-        println("ViewModel = $mViewModel")
+    private fun initPosts() {
         mViewModel.postsLiveData.observe(this, Observer { state ->
             when (state) {
-                is Loading -> {
-                    showToast("Loading")
+                is Loading -> showLoading(true)
+                is Success -> {
+                    mAdapter.setPosts(state.data)
+                    showLoading(false)
                 }
-                is Success -> mAdapter.setPosts(state.data)
-                is Error -> showToast(state.message)
+                is Error -> {
+                    showToast(state.message)
+                    showLoading(false)
+                }
             }
         })
+
+        mViewBinding.swipeRefreshLayout.setOnRefreshListener {
+            println("Trying to get data = ${mViewModel.postsLiveData.value}")
+            getPosts()
+        }
+
+        if (mViewModel.postsLiveData.value !is Success) {
+            getPosts()
+        }
+    }
+
+    private fun getPosts() {
+        mViewModel.getPosts()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        mViewBinding.swipeRefreshLayout.isRefreshing = isLoading
     }
 
     private fun handleNetworkChanges() {
         NetworkUtils.getNetworkLiveData(applicationContext).observe(this, Observer { isConnected ->
             if (!isConnected) {
-                networkStatusLayout.setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
-                textViewNetworkStatus.text = getString(R.string.text_no_connectivity)
-                networkStatusLayout.apply {
+
+                mViewBinding.textViewNetworkStatus.text = getString(R.string.text_no_connectivity)
+                mViewBinding.networkStatusLayout.apply {
                     alpha = 0f
                     show()
-
+                    setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
                     animate()
                         .alpha(1f)
                         .setDuration(ANIMATION_TIMEOUT)
                         .setListener(null)
                 }
             } else {
-                networkStatusLayout.setBackgroundColor(getColorRes(R.color.colorStatusConnected))
-                textViewNetworkStatus.text = getString(R.string.text_connectivity)
-                networkStatusLayout.animate()
-                    .alpha(0f)
-                    .setStartDelay(ANIMATION_TIMEOUT)
-                    .setDuration(ANIMATION_TIMEOUT)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            networkStatusLayout.hide()
-                        }
-                    })
+                if (mViewModel.postsLiveData.value is Error) {
+                    getPosts()
+                }
+                mViewBinding.textViewNetworkStatus.text = getString(R.string.text_connectivity)
+                mViewBinding.networkStatusLayout.apply {
+                    setBackgroundColor(getColorRes(R.color.colorStatusConnected))
+
+                    animate()
+                        .alpha(0f)
+                        .setStartDelay(ANIMATION_TIMEOUT)
+                        .setDuration(ANIMATION_TIMEOUT)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                hide()
+                            }
+                        })
+                }
             }
         })
     }

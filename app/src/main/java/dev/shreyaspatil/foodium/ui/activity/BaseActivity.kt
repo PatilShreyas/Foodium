@@ -10,12 +10,12 @@ import javax.inject.Inject
 
 abstract class BaseActivity<VM : ViewModel, VB : ViewBinding> : AppCompatActivity() {
 
+    @Inject
+    protected lateinit var mViewModelProvider: ViewModelProvider.Factory
+
     protected lateinit var mViewModel: VM
 
     protected lateinit var mViewBinding: VB
-
-    @Inject
-    protected lateinit var mViewModelProvider: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)

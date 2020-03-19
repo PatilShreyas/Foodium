@@ -9,7 +9,10 @@ import dev.shreyaspatil.foodium.ui.Success
 import dev.shreyaspatil.foodium.ui.ViewState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,33 +21,34 @@ typealias PostListViewState = ViewState<List<Post>>
 @ExperimentalCoroutinesApi
 @Singleton
 class PostsRepository @Inject constructor(
-    val postsDao: PostsDao,
-    val foodiumService: FoodiumService
+    private val postsDao: PostsDao,
+    private val foodiumService: FoodiumService
 ) {
 
-    fun getAllPosts(): Flow<PostListViewState> =
-        flow {
-            emit(Loading<List<Post>>())
+    fun getAllPosts() = flow {
+        emit(Loading<List<Post>>())
 
-            val dbPosts = fetchFromDatabase().first()
-            emit(Success<List<Post>>(dbPosts))
-            try {
-                val apiResponse = fetchFromRemote()
-                val remotePosts = apiResponse.body()
-                if (apiResponse.isSuccessful && remotePosts != null) {
-                    saveRemoteData(remotePosts)
-                } else {
-                    emit(Error<List<Post>>(apiResponse.message()))
-                }
-                println("API Response = $apiResponse")
-            } catch (e: Exception) {
-                emit(Error<List<Post>>("Failed to load from network!"))
-                e.printStackTrace()
+        try {
+            val apiResponse = fetchFromRemote()
+            val remotePosts = apiResponse.body()
+            if (apiResponse.isSuccessful && remotePosts != null) {
+                saveRemoteData(remotePosts)
+            } else {
+                emit(Error<List<Post>>(apiResponse.message()))
             }
-
-            emitAll(fetchFromDatabase().map { Success<List<Post>>(it) })
-        }.flowOn(Dispatchers.IO)
-
+        } catch (e: Exception) {
+            emit(Error<List<Post>>("Network error! Can't get latest posts."))
+            e.printStackTrace()
+        }
+        emitAll(fetchFromDatabase().map {
+            if (!it.isNullOrEmpty()) {
+                Success<List<Post>>(it)
+            } else {
+                Error<List<Post>>("No posts!")
+            }
+        })
+        emitAll(fetchFromDatabase().map { Success<List<Post>>(it) })
+    }.flowOn(Dispatchers.IO)
 
     private fun saveRemoteData(posts: List<Post>) = postsDao.insertPosts(posts)
     private fun fetchFromDatabase() = postsDao.getAllPosts()
