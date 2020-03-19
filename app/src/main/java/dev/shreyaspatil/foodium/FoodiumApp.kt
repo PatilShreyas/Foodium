@@ -5,8 +5,10 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dev.shreyaspatil.foodium.di.component.DaggerAppComponent
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 class FoodiumApp : Application(), HasAndroidInjector {
 
     @Inject
