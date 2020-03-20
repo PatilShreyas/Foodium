@@ -1,7 +1,6 @@
 ![](FoodiumHeader.png)
 
 # Foodium 🥣
-**Foodium** is a sample food blog 🍲 Android application 📱 built to demonstrate use of *Modern Android development* tools. Dedicated to all Android Developers with ❤️.
 
 ![CI](https://github.com/PatilShreyas/Foodium/workflows/CI/badge.svg?branch=master)
 
@@ -12,3 +11,8 @@
 ![GitHub forks](https://img.shields.io/github/forks/PatilShreyas/LiveStream-kt?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/PatilShreyas/LiveStream-kt?style=social)
 ![Twitter Follow](https://img.shields.io/twitter/follow/imShreyasPatil?label=Follow&style=social)
+
+**Foodium** is a sample food blog 🍲 Android application 📱 built to demonstrate use of *Modern Android development* tools. Dedicated to all Android Developers with ❤️.
+
+## Libraries Used ⚡️
+
