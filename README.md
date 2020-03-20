@@ -13,8 +13,9 @@
 **Foodium** is a sample food blog 🍲 Android application 📱 built to demonstrate use of *Modern Android development* tools. Dedicated to all Android Developers with ❤️. 
 
 ## About 
-Foodium app implements *Material Design* and *MVVM Architecture*. It simply loads **Posts** data from API and stores it in persistence storage (i.e. SQLite Database). Posts will be always loaded from local database. Remote data (from API) and Local data is always synchronized. 
+It simply loads **Posts** data from API and stores it in persistence storage (i.e. SQLite Database). Posts will be always loaded from local database. Remote data (from API) and Local data is always synchronized. 
 - This makes it offline capable 😃. 
+- Clean and Simple Material UI.
 - It supports dark theme too 🌗.
 
 *Dummy API is used in this app. JSON response is statically hosted [here](https://patilshreyas.github.io/DummyFoodiumApi/api/posts/)*.
@@ -35,3 +36,8 @@ Foodium app implements *Material Design* and *MVVM Architecture*. It simply load
 - [Coil-kt](https://coil-kt.github.io/coil/) - An image loading library for Android backed by Kotlin Coroutines.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android
 - [Material Dialog](https://github.com/PatilShreyas/MaterialDialog-Android#introduction) - Library to Implement animated, beautiful, stylish Material Dialog in android apps easily.
+
+## Architecture
+This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
+
+![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
