@@ -1,6 +1,6 @@
 ![](media/FoodiumHeader.png)
 
-# Foodium 🥣
+# Foodium 🍲 
 
 ![CI](https://github.com/PatilShreyas/Foodium/workflows/CI/badge.svg?branch=master)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AkshayChordiya//blob/master/LICENSE)
