@@ -1,4 +1,4 @@
-![](FoodiumHeader.png)
+![](media/FoodiumHeader.png)
 
 # Foodium 🥣
 
