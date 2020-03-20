@@ -3,9 +3,7 @@
 # Foodium 🥣
 
 ![CI](https://github.com/PatilShreyas/Foodium/workflows/CI/badge.svg?branch=master)
-
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AkshayChordiya//blob/master/LICENSE)
-![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg)
 ![Github Followers](https://img.shields.io/github/followers/PatilShreyas?label=Follow&style=social)
 ![GitHub stars](https://img.shields.io/github/stars/PatilShreyas/LiveStream-kt?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/PatilShreyas/LiveStream-kt?style=social)
