@@ -2,9 +2,7 @@ package dev.shreyaspatil.foodium.database
 
 import dev.shreyaspatil.foodium.api.FoodiumService
 import dev.shreyaspatil.foodium.model.Post
-import dev.shreyaspatil.foodium.ui.Error
-import dev.shreyaspatil.foodium.ui.Loading
-import dev.shreyaspatil.foodium.ui.Success
+import dev.shreyaspatil.foodium.ui.State
 import dev.shreyaspatil.foodium.utils.PostsResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -33,7 +31,7 @@ class PostsRepository @Inject constructor(
     fun getAllPosts() = flow {
 
         // Emit Loading State
-        emit(Loading<List<Post>>())
+        emit(State.loading<List<Post>>())
 
         try {
             // Fetch latest posts from remote
@@ -48,23 +46,18 @@ class PostsRepository @Inject constructor(
                 saveRemoteData(remotePosts)
             } else {
                 // Something went wrong! Emit Error state.
-                emit(Error<List<Post>>(apiResponse.message()))
+                emit(State.error<List<Post>>(apiResponse.message()))
             }
         } catch (e: Exception) {
             // Exception occurred! Emit error
-            emit(Error<List<Post>>("Network error! Can't get latest posts."))
+            emit(State.error<List<Post>>("Network error! Can't get latest posts."))
             e.printStackTrace()
         }
 
         // Retrieve posts from persistence storage and emit
         emitAll(fetchFromDatabase().map {
-            if (!it.isNullOrEmpty()) {
                 // Posts retrieved. Emit Success state
-                Success<List<Post>>(it)
-            } else {
-                // No posts found in persistence storage.
-                Error<List<Post>>("Can't get latest posts!")
-            }
+            State.success<List<Post>>(it)
         })
     }.flowOn(Dispatchers.IO)
 

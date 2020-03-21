@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shreyaspatil.MaterialDialog.MaterialDialog
 import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ActivityMainBinding
-import dev.shreyaspatil.foodium.ui.Error
-import dev.shreyaspatil.foodium.ui.Loading
-import dev.shreyaspatil.foodium.ui.Success
+import dev.shreyaspatil.foodium.ui.State
 import dev.shreyaspatil.foodium.ui.adapter.PostListAdapter
 import dev.shreyaspatil.foodium.ui.viewmodel.MainViewModel
 import dev.shreyaspatil.foodium.utils.*
@@ -47,12 +45,12 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     private fun initPosts() {
         mViewModel.postsLiveData.observe(this, Observer { state ->
             when (state) {
-                is Loading -> showLoading(true)
-                is Success -> {
+                is State.Loading -> showLoading(true)
+                is State.Success -> {
                     mAdapter.setPosts(state.data)
                     showLoading(false)
                 }
-                is Error -> {
+                is State.Error -> {
                     showToast(state.message)
                     showLoading(false)
                 }
@@ -63,8 +61,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             getPosts()
         }
 
-        // If ViewState isn't `Success` then reload posts.
-        if (mViewModel.postsLiveData.value !is Success) {
+        // If State isn't `Success` then reload posts.
+        if (mViewModel.postsLiveData.value !is State.Success) {
             getPosts()
         }
     }

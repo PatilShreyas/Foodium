@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.shreyaspatil.foodium.database.PostsRepository
-import dev.shreyaspatil.foodium.utils.PostListViewState
+import dev.shreyaspatil.foodium.utils.PostListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -18,9 +18,9 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val postsRepository: PostsRepository) :
     ViewModel() {
 
-    private val _postsLiveData = MutableLiveData<PostListViewState>()
+    private val _postsLiveData = MutableLiveData<PostListState>()
 
-    val postsLiveData: LiveData<PostListViewState>
+    val postsLiveData: LiveData<PostListState>
         get() = _postsLiveData
 
     fun getPosts() {
