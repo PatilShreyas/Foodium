@@ -16,7 +16,7 @@ abstract class BaseActivity<VM : ViewModel, VB : ViewBinding> : AppCompatActivit
     @Inject
     protected lateinit var mViewModelProvider: ViewModelProvider.Factory
 
-    protected lateinit var mViewModel: VM
+    protected val mViewModel by lazy { getViewModel() }
 
     protected lateinit var mViewBinding: VB
 
@@ -26,21 +26,16 @@ abstract class BaseActivity<VM : ViewModel, VB : ViewBinding> : AppCompatActivit
 
         mViewBinding = getViewBinding()
 
-        // Check if ViewModel is initialized or not
-        if (!this::mViewModel.isInitialized) {
-            mViewModel = getViewModel()
-        }
-
         setContentView(mViewBinding.root)
     }
 
     /**
-     * It returns [ViewBinding] [VB] which is assigned to [mViewBinding] and used in [onCreate]
+     * It returns [VB] which is assigned to [mViewBinding] and used in [onCreate]
      */
     abstract fun getViewBinding(): VB
 
     /**
-     * It returns [ViewModel] [VM] which is assigned to [mViewModel] and initialized in [onCreate]
+     * It returns [VM] which is assigned to [mViewModel] and initialized in [onCreate]
      */
     abstract fun getViewModel(): VM
 }
