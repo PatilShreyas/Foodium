@@ -1,9 +1,8 @@
-package dev.shreyaspatil.foodium
+package dev.shreyaspatil.foodium.database
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import dev.shreyaspatil.foodium.database.FoodiumPostsDatabase
 import dev.shreyaspatil.foodium.model.Post
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking

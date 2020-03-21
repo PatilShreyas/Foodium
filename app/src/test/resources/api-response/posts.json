@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "Title 1",
+    "imageUrl": "Image URL 1",
+    "author": "John Doe"
+  },
+  {
+    "id": 2,
+    "title": "Title 2",
+    "imageUrl": "Image URL 2",
+    "author": "Doe John"
+  }
+]

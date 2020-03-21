@@ -17,7 +17,7 @@ import dev.shreyaspatil.foodium.model.Post
 abstract class FoodiumPostsDatabase : RoomDatabase() {
 
     /**
-     * @return Foodium Posts DAO [PostsDao]
+     * @return [PostsDao] Foodium Posts Data Access Object.
      */
     abstract fun getPostsDao(): PostsDao
 
