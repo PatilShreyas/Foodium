@@ -55,6 +55,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                     showLoading(false)
                 }
             }
+            println("STATE CHANGED = $state")
         })
 
         mViewBinding.swipeRefreshLayout.setOnRefreshListener {
@@ -93,8 +94,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                         .setListener(null)
                 }
             } else {
-                if (mViewModel.postsLiveData.value is Error) {
+                println("CURRENT STATE = ${mViewModel.postsLiveData.value}")
+                if (mViewModel.postsLiveData.value is State.Error) {
                     getPosts()
+                    println("CURRENT STATE: GETTING POSTS CALLED")
                 }
                 mViewBinding.textViewNetworkStatus.text = getString(R.string.text_connectivity)
                 mViewBinding.networkStatusLayout.apply {

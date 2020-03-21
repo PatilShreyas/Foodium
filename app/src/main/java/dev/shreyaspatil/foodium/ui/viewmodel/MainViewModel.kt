@@ -24,6 +24,7 @@ class MainViewModel @Inject constructor(private val postsRepository: PostsReposi
         get() = _postsLiveData
 
     fun getPosts() {
+        println("CURRENT STATE: IN VM")
         viewModelScope.launch {
             postsRepository.getAllPosts().collect {
                 _postsLiveData.value = it

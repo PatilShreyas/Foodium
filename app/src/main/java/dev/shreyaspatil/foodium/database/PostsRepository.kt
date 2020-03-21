@@ -56,8 +56,13 @@ class PostsRepository @Inject constructor(
 
         // Retrieve posts from persistence storage and emit
         emitAll(fetchFromDatabase().map {
+            if (!it.isNullOrEmpty()) {
                 // Posts retrieved. Emit Success state
-            State.success<List<Post>>(it)
+                State.success<List<Post>>(it)
+            } else {
+                // No posts found in persistence storage.
+                State.error<List<Post>>("Can't get latest posts!")
+            }
         })
     }.flowOn(Dispatchers.IO)
 
