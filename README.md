@@ -3,7 +3,7 @@
 # Foodium 🍲 
 
 ![CI](https://github.com/PatilShreyas/Foodium/workflows/CI/badge.svg?branch=master)
-[![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AkshayChordiya//blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![Github Followers](https://img.shields.io/github/followers/PatilShreyas?label=Follow&style=social)
 ![GitHub stars](https://img.shields.io/github/stars/PatilShreyas/Foodium?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/PatilShreyas/Foodium?style=social)
@@ -12,7 +12,12 @@
 
 **Foodium** is a sample food blog 🍲 Android application 📱 built to demonstrate use of *Modern Android development* tools. Dedicated to all Android Developers with ❤️. 
 
-## About 
+***You can Install and test latest Foodium app from below 👇***
+
+[![Foodium App](https://img.shields.io/badge/Foodium🍲-APK-red.svg?style=for-the-badge)](https://github.com/PatilShreyas/Foodium/raw/master/apk/Foodium.apk)
+
+
+## About
 It simply loads **Posts** data from API and stores it in persistence storage (i.e. SQLite Database). Posts will be always loaded from local database. Remote data (from API) and Local data is always synchronized. 
 - This makes it offline capable 😃. 
 - Clean and Simple Material UI.
@@ -35,7 +40,6 @@ It simply loads **Posts** data from API and stores it in persistence storage (i.
 - [Moshi Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/moshi) - A Converter which uses Moshi for serialization to and from JSON.
 - [Coil-kt](https://coil-kt.github.io/coil/) - An image loading library for Android backed by Kotlin Coroutines.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android
-- [Material Dialog](https://github.com/PatilShreyas/MaterialDialog-Android#introduction) - Library to Implement animated, beautiful, stylish Material Dialog in android apps easily.
 
 ## Architecture
 This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
