@@ -2,6 +2,8 @@ package dev.shreyaspatil.foodium.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.shreyaspatil.foodium.databinding.ItemPostBinding
 import dev.shreyaspatil.foodium.model.Post
@@ -12,7 +14,7 @@ import javax.inject.Inject
  * This is [RecyclerView.Adapter] for [RecyclerView] which binds [Post] along with [PostViewHolder]
  */
 class PostListAdapter @Inject constructor() :
-    RecyclerView.Adapter<PostViewHolder>() {
+    ListAdapter<Post, PostViewHolder>(DIFF_CALLBACK) {
 
     private val mPostList: MutableList<Post> = mutableListOf()
 
@@ -40,5 +42,16 @@ class PostListAdapter @Inject constructor() :
 
     fun clearAllPosts() {
         mPostList.clear()
+    }
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Post>() {
+            override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean =
+                oldItem == newItem
+
+        }
     }
 }
