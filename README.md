@@ -4,6 +4,7 @@
 
 ![CI](https://github.com/PatilShreyas/Foodium/workflows/CI/badge.svg?branch=master)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23406-2CA3E6.svg?style=flat)](http://androidweekly.net/issues/issue-406)
 ![Github Followers](https://img.shields.io/github/followers/PatilShreyas?label=Follow&style=social)
 ![GitHub stars](https://img.shields.io/github/stars/PatilShreyas/Foodium?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/PatilShreyas/Foodium?style=social)
