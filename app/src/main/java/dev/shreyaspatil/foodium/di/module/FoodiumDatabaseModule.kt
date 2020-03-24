@@ -3,7 +3,7 @@ package dev.shreyaspatil.foodium.di.module
 import android.app.Application
 import dagger.Module
 import dagger.Provides
-import dev.shreyaspatil.foodium.database.FoodiumPostsDatabase
+import dev.shreyaspatil.foodium.data.local.FoodiumPostsDatabase
 import javax.inject.Singleton
 
 @Module

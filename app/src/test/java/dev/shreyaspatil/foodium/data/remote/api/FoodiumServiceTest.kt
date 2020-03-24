@@ -1,4 +1,4 @@
-package dev.shreyaspatil.foodium.api
+package dev.shreyaspatil.foodium.data.remote.api
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.squareup.moshi.Moshi
@@ -50,7 +50,7 @@ class FoodiumServiceTest {
     }
 
     @Test
-    fun getPosts() = runBlocking {
+    fun getPostsTest() = runBlocking {
         enqueueResponse("posts.json")
         val posts = service.getPosts().body()
 

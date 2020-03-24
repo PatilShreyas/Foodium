@@ -4,4 +4,6 @@
     <dimen name="dimen_4">4dp</dimen>
     <dimen name="dimen_8">8dp</dimen>
     <dimen name="dimen_16">16dp</dimen>
+
+    <dimen name="app_bar_height">192dp</dimen>
 </resources>

@@ -5,6 +5,7 @@
     <color name="windowBackground">#F3F3F3</color>
     <color name="colorAccent">#00838F</color>
     <color name="statusBarColor">@android:color/white</color>
+    <color name="statusBarColorFade">#0DFFFFFF</color>
 
     <color name="textColor">@android:color/black</color>
     <color name="bulbColor">@android:color/black</color>

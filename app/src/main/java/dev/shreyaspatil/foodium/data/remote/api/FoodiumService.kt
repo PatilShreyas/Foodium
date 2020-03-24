@@ -1,7 +1,8 @@
-package dev.shreyaspatil.foodium.api
+package dev.shreyaspatil.foodium.data.remote.api
 
-import dev.shreyaspatil.foodium.api.FoodiumService.Companion.FOODIUM_API_URL
-import dev.shreyaspatil.foodium.utils.PostsResponse
+import dev.shreyaspatil.foodium.data.remote.api.FoodiumService.Companion.FOODIUM_API_URL
+import dev.shreyaspatil.foodium.model.Post
+import retrofit2.Response
 import retrofit2.http.GET
 
 /**
@@ -10,7 +11,7 @@ import retrofit2.http.GET
 interface FoodiumService {
 
     @GET("/DummyFoodiumApi/api/posts/")
-    suspend fun getPosts(): PostsResponse
+    suspend fun getPosts(): Response<List<Post>>
 
     companion object {
         const val FOODIUM_API_URL = "https://patilshreyas.github.io/"

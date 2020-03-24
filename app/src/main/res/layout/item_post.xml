@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dimen_1"
-    android:background="@color/post_background">
+    android:background="@color/post_background"
+    android:foreground="?android:attr/selectableItemBackground"
+    tools:ignore="UnusedAttribute">
 
     <TextView
         android:id="@+id/post_title"
@@ -29,11 +31,13 @@
     <ImageView
         android:id="@+id/imageView"
         style="@style/PostImage"
+        android:contentDescription="@string/text_post_header"
         android:layout_width="82sp"
         android:layout_height="82sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
+        android:transitionName="photo"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 </androidx.constraintlayout.widget.ConstraintLayout>

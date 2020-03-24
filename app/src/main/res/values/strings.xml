@@ -2,4 +2,5 @@
     <string name="app_name">Foodium</string>
     <string name="text_no_connectivity">No Connection</string>
     <string name="text_connectivity">Back Online</string>
+    <string name="text_post_header">Post Header</string>
 </resources>

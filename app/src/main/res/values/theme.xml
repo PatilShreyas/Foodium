@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="fontFamily">@font/google_sans</item>
+
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:statusBarColor">@color/statusBarColor</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/windowLightStatusBar
+        </item>
+
+        <item name="actionBarStyle">@style/Widget.MaterialComponents.ActionBar.Primary</item>
+
+        <!-- Material Dialog Customizations -->
+        <item name="material_dialog_background">@color/windowBackground</item>
+        <item name="material_dialog_message_text_color">@color/textColor</item>
+        <item name="material_dialog_title_text_color">@color/textColor</item>
+        <item name="material_dialog_positive_button_color">@color/colorAccent</item>
+        <item name="material_dialog_positive_button_text_color">@color/colorPrimary</item>
+        <item name="material_dialog_negative_button_text_color">@color/colorAccent</item>
+    </style>
+
+    <!-- The theme without ActionBar -->
+    <style name="AppTheme.NoActionBar">
+        <item name="android:fontFamily">@font/google_sans</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+        <item name="android:windowContentTransitions">true</item>
+
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_image_transform
+        </item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_image_transform
+        </item>
+    </style>
+
+    <!-- The splash theme to set the background with your splash screen drawable -->
+    <style name="AppTheme.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents">
+        <item name="android:fontFamily">@font/google_sans</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents">
+        <item name="android:fontFamily">@font/google_sans</item>
+    </style>
+</resources>

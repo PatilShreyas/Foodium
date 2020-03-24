@@ -1,34 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="fontFamily">@font/google_sans</item>
-
-        <item name="android:windowBackground">@color/windowBackground</item>
-        <item name="android:statusBarColor">@color/statusBarColor</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/windowLightStatusBar
-        </item>
-
-        <item name="actionBarStyle">@style/Widget.MaterialComponents.ActionBar.Primary</item>
-
-        <!-- Material Dialog Customizations -->
-        <item name="material_dialog_background">@color/windowBackground</item>
-        <item name="material_dialog_message_text_color">@color/textColor</item>
-        <item name="material_dialog_title_text_color">@color/textColor</item>
-        <item name="material_dialog_positive_button_color">@color/colorAccent</item>
-        <item name="material_dialog_positive_button_text_color">@color/colorPrimary</item>
-        <item name="material_dialog_negative_button_text_color">@color/colorAccent</item>
-    </style>
-
-    <!-- The splash theme to set the background with your splash screen drawable -->
-    <style name="AppTheme.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_screen</item>
-    </style>
+<resources>
 
     <style name="PostTitleText">
         <item name="android:layout_marginStart">@dimen/dimen_16</item>
@@ -66,6 +36,32 @@
         <item name="android:clipToPadding">false</item>
         <item name="android:scrollbars">vertical</item>
         <item name="android:paddingTop">@dimen/dimen_4</item>
+    </style>
+
+    <style name="ToolbarTitleTextAppearance" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+    <style name="PostTitleDetailText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/textColor</item>
+
+    </style>
+
+    <style name="PostAuthorDetailText">
+        <item name="drawableLeftCompat">@drawable/ic_person</item>
+        <item name="android:drawablePadding">@dimen/dimen_4</item>
+        <item name="drawableTint">@android:color/secondary_text_dark</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">@dimen/dimen_8</item>
+    </style>
+
+    <style name="PostBodyText">
+        <item name="android:layout_marginTop">@dimen/dimen_16</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">@dimen/dimen_4</item>
     </style>
 
 </resources>

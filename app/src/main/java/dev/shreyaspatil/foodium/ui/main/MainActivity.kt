@@ -1,34 +1,40 @@
-package dev.shreyaspatil.foodium.ui.activity
+package dev.shreyaspatil.foodium.ui.main
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shreyaspatil.MaterialDialog.MaterialDialog
 import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ActivityMainBinding
-import dev.shreyaspatil.foodium.ui.State
-import dev.shreyaspatil.foodium.ui.adapter.PostListAdapter
-import dev.shreyaspatil.foodium.ui.viewmodel.MainViewModel
+import dev.shreyaspatil.foodium.model.Post
+import dev.shreyaspatil.foodium.ui.base.BaseActivity
+import dev.shreyaspatil.foodium.ui.details.PostDetailsActivity
+import dev.shreyaspatil.foodium.ui.main.adapter.PostListAdapter
 import dev.shreyaspatil.foodium.utils.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
+    PostListAdapter.OnItemClickListener {
 
-    @Inject
-    lateinit var mAdapter: PostListAdapter
+    private lateinit var mAdapter: PostListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)  // Set AppTheme before setting content view.
 
         super.onCreate(savedInstanceState)
+        setContentView(mViewBinding.root)
+
+        mAdapter = PostListAdapter(this)
 
         // Initialize RecyclerView
         mViewBinding.postsRecyclerView.apply {
@@ -80,20 +86,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
      */
     private fun handleNetworkChanges() {
         NetworkUtils.getNetworkLiveData(applicationContext).observe(this, Observer { isConnected ->
+            println("STATE CHANGED = $isConnected")
             if (!isConnected) {
-
                 mViewBinding.textViewNetworkStatus.text = getString(R.string.text_no_connectivity)
                 mViewBinding.networkStatusLayout.apply {
-                    alpha = 0f
                     show()
                     setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
-                    animate()
-                        .alpha(1f)
-                        .setDuration(ANIMATION_DURATION)
-                        .setListener(null)
                 }
             } else {
-                if (mViewModel.postsLiveData.value is State.Error) {
+                if (mViewModel.postsLiveData.value is State.Error || mAdapter.itemCount == 0) {
                     getPosts()
                 }
                 mViewBinding.textViewNetworkStatus.text = getString(R.string.text_connectivity)
@@ -101,7 +102,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                     setBackgroundColor(getColorRes(R.color.colorStatusConnected))
 
                     animate()
-                        .alpha(0f)
+                        .alpha(1f)
                         .setStartDelay(ANIMATION_DURATION)
                         .setDuration(ANIMATION_DURATION)
                         .setListener(object : AnimatorListenerAdapter() {
@@ -162,5 +163,18 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     companion object {
         const val ANIMATION_DURATION = 1000.toLong()
+    }
+
+    override fun onItemClicked(post: Post, imageView: ImageView) {
+        val intent = Intent(this, PostDetailsActivity::class.java)
+        intent.putExtra(PostDetailsActivity.POST_ID, post.id)
+
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this,
+            imageView,
+            imageView.transitionName
+        )
+
+        startActivity(intent, options.toBundle())
     }
 }

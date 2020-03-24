@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:animateLayoutChanges="true">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.activity.MainActivity">
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        tools:context=".ui.main.MainActivity">
 
         <LinearLayout
             android:id="@+id/networkStatusLayout"

@@ -3,6 +3,7 @@ package dev.shreyaspatil.foodium.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
+import android.net.NetworkInfo
 import android.net.NetworkRequest
 import android.os.Build
 import androidx.lifecycle.LiveData
@@ -13,7 +14,7 @@ import androidx.lifecycle.MutableLiveData
  */
 object NetworkUtils {
 
-    private val networkLiveData: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val networkLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     /**
      * Returns instance of [LiveData] which can be observed for network changes.
@@ -38,6 +39,11 @@ object NetworkUtils {
             val builder = NetworkRequest.Builder()
             connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
         }
+
+        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+
+        networkLiveData.postValue(isConnected)
 
         return networkLiveData
     }

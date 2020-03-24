@@ -3,6 +3,7 @@
     <color name="colorPrimary">#002022</color>
     <color name="windowBackground">#001719</color>
     <color name="statusBarColor">#002022</color>
+    <color name="statusBarColorFade">#0D002022</color>
 
     <color name="textColor">@android:color/white</color>
     <color name="bulbColor">@android:color/white</color>
