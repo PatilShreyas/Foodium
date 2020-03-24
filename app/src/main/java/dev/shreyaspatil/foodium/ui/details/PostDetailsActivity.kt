@@ -15,7 +15,6 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(mViewBinding.root)
 
         setSupportActionBar(toolbar)

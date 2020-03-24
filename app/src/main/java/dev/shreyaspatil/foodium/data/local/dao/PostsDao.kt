@@ -30,7 +30,7 @@ interface PostsDao {
     /**
      * Fetches the post from the [Post.TABLE_NAME] table whose id is [postId].
      * @param postId Unique ID of [Post]
-     * @return [Flow]
+     * @return [Flow] of [Post] from database table.
      */
     @Query("SELECT * FROM ${Post.TABLE_NAME} WHERE ID = :postId")
     fun getPostById(postId: Int): Flow<Post>

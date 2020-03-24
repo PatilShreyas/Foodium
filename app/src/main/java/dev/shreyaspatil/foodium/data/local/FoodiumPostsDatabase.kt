@@ -29,8 +29,7 @@ abstract class FoodiumPostsDatabase : RoomDatabase() {
         private var INSTANCE: FoodiumPostsDatabase? = null
 
         fun getInstance(context: Context): FoodiumPostsDatabase {
-            val tempInstance =
-                INSTANCE
+            val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
             }

@@ -86,7 +86,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
      */
     private fun handleNetworkChanges() {
         NetworkUtils.getNetworkLiveData(applicationContext).observe(this, Observer { isConnected ->
-            println("STATE CHANGED = $isConnected")
             if (!isConnected) {
                 mViewBinding.textViewNetworkStatus.text = getString(R.string.text_no_connectivity)
                 mViewBinding.networkStatusLayout.apply {
