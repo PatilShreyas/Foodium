@@ -43,31 +43,32 @@ It simply loads **Posts** data from API and stores it in persistence storage (i.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android
 
 # Package Structure
-
-- **`dev.shreyaspatil.foodium`** - Root Package
-
-  - **`data`** - For data handling.
-    - **`local`** - Local Persistence Database. Room (SQLite) database.
-      - **`dao`** - Data Access Object for Room.
-    - **`remote`** - Remote Data Handlers
-      - **`api`** - Retrofit API for remote end point.
-    - **`repository`** - For fetching data from remote and storing it in database for offline capability. Single source of data.
     
-  - **`di`** - Dependency Injection
-    - **`builder`** - Activity Builde
-    - **`component`** - DI Components
-    - **`module`** - DI Modules
-    
-  - **`model`** - Model classes
-  
-  - **`ui`** - *Activity/View* layer
-    - **`base`** - Base View
-    - **`main`** - Main Screen *Activity* and *ViewModel*
-      - **`adapter`** - Adapter for *RecyclerView*
-      - **`viewholder`** - *ViewHolder* for *RecyclerView*
-    - **`detail`** - Detail Screen *Activity* and *ViewModel*
-  
-  - **`utils`** - Utility classes / Kotlin extensions
+    dev.shreyaspatil.foodium    # Root Package
+    .
+    ├── data                # For data handling.
+    │   ├── local           # Local Persistence Database. Room (SQLite) database
+    |   │   ├── dao         # Data Access Object for Room   
+    │   ├── remote          # Remote Data Handlers     
+    |   │   ├── api         # Retrofit API for remote end point.
+    │   └── repository      # Single source of data.
+    |
+    ├── model               # Model classes
+    |
+    ├── di                  # Dependency Injection             
+    │   ├── builder         # Activity Builder
+    │   ├── component       # DI Components       
+    │   └── module          # DI Modules
+    |
+    ├── ui                  # Activity/View layer
+    │   ├── base            # Base View
+    │   ├── main            # Main Screen Activity & ViewModel
+    |   │   ├── adapter     # Adapter for RecyclerView
+    |   │   ├── viewmodel   # ViewHolder for RecyclerView   
+    │   └── details         # Detail Screen Activity and ViewModel
+    |
+    └── utils               # Utility Classes / Kotlin extensions
+
 
 ## Architecture
 This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
