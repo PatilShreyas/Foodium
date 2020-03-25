@@ -50,7 +50,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
     PostListAdapter.OnItemClickListener {
 
-    private lateinit var mAdapter: PostListAdapter
+    private val mAdapter: PostListAdapter by lazy { PostListAdapter(onItemClickListener = this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)  // Set AppTheme before setting content view.
@@ -58,12 +58,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
         super.onCreate(savedInstanceState)
         setContentView(mViewBinding.root)
 
-        mAdapter = PostListAdapter(this)
-
         // Initialize RecyclerView
         mViewBinding.postsRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            setHasFixedSize(true)
             adapter = mAdapter
         }
 
@@ -77,8 +74,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
             when (state) {
                 is State.Loading -> showLoading(true)
                 is State.Success -> {
-                    mAdapter.setPosts(state.data)
-                    showLoading(false)
+                    if (state.data.isNotEmpty()) {
+                        mAdapter.submitList(state.data.toMutableList())
+                        showLoading(false)
+                    }
                 }
                 is State.Error -> {
                     showToast(state.message)

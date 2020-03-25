@@ -36,37 +36,21 @@ import dev.shreyaspatil.foodium.ui.main.viewholder.PostViewHolder
 
 /**
  * Adapter class [RecyclerView.Adapter] for [RecyclerView] which binds [Post] along with [PostViewHolder]
+ * @param onItemClickListener Listener which will receive callback when item is clicked.
  */
 class PostListAdapter(private val onItemClickListener: OnItemClickListener) :
     ListAdapter<Post, PostViewHolder>(DIFF_CALLBACK) {
 
-    private val mPostList: MutableList<Post> = mutableListOf()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = createPostViewHolder(parent)
-
-    override fun getItemCount() = mPostList.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PostViewHolder(
+        ItemPostBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+    )
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) =
-        holder.bind(mPostList[position], onItemClickListener)
-
-    private fun createPostViewHolder(parent: ViewGroup) =
-        PostViewHolder(
-            ItemPostBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-
-    fun setPosts(postList: List<Post>) {
-        clearAllPosts()
-        mPostList.addAll(postList)
-        notifyDataSetChanged()
-    }
-
-    fun clearAllPosts() {
-        mPostList.clear()
-    }
+        holder.bind(getItem(position), onItemClickListener)
 
     interface OnItemClickListener {
         fun onItemClicked(post: Post, imageView: ImageView)
