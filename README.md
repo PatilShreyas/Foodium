@@ -40,7 +40,15 @@ It simply loads **Posts** data from API and stores it in persistence storage (i.
 - [Moshi](https://github.com/square/moshi) - A modern JSON library for Kotlin and Java.
 - [Moshi Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/moshi) - A Converter which uses Moshi for serialization to and from JSON.
 - [Coil-kt](https://coil-kt.github.io/coil/) - An image loading library for Android backed by Kotlin Coroutines.
-- [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android
+- [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
+
+
+## Want [`Koin`](https://insert-koin.io/) DI Version?
+If you want to use *Koin - Dependency Injection framework* in app then visit below repository.
+https://github.com/pranaypatel512/Foodium
+
+**Contributed By:** [Pranay Patel](https://github.com/pranaypatel512/)
+
 
 # Package Structure
     
