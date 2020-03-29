@@ -45,7 +45,8 @@ It simply loads **Posts** data from API and stores it in persistence storage (i.
 
 ## Want [`Koin`](https://insert-koin.io/) DI Version?
 If you want to use *Koin - Dependency Injection framework* in app then visit below repository.
-https://github.com/pranaypatel512/Foodium
+
+[![Koin Version](https://img.shields.io/badge/PranayPatel512-Foodium-blue.svg?style=flat-square&logo=github)](https://github.com/pranaypatel512/Foodium)
 
 **Contributed By:** [Pranay Patel](https://github.com/pranaypatel512/)
 
