@@ -15,7 +15,7 @@
 
 ***You can Install and test latest Foodium app from below 👇***
 
-[![Foodium App](https://img.shields.io/badge/Foodium🍲-APK-red.svg?style=for-the-badge)](https://github.com/PatilShreyas/Foodium/raw/master/apk/Foodium.apk)
+[![Foodium App](https://img.shields.io/badge/Foodium🍲-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/PatilShreyas/Foodium/raw/master/apk/Foodium.apk)
 
 
 ## About
