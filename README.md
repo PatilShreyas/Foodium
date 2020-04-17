@@ -73,7 +73,7 @@ If you want to use *Koin - Dependency Injection framework* in app then visit bel
     │   ├── base            # Base View
     │   ├── main            # Main Screen Activity & ViewModel
     |   │   ├── adapter     # Adapter for RecyclerView
-    |   │   ├── viewmodel   # ViewHolder for RecyclerView   
+    |   │   └── viewmodel   # ViewHolder for RecyclerView   
     │   └── details         # Detail Screen Activity and ViewModel
     |
     └── utils               # Utility Classes / Kotlin extensions
