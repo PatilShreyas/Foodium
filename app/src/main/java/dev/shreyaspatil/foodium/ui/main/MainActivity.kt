@@ -168,11 +168,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
         MaterialDialog.Builder(this)
             .setTitle(getString(R.string.exit_dialog_title))
             .setMessage(getString(R.string.exit_dialog_message))
-            .setPositiveButton(getString(R.string.yes)) { dialogInterface, _ ->
+            .setPositiveButton(getString(R.string.option_yes)) { dialogInterface, _ ->
                 dialogInterface.dismiss()
                 super.onBackPressed()
             }
-            .setNegativeButton(getString(R.string.no)) { dialogInterface, _ ->
+            .setNegativeButton(getString(R.string.option_no)) { dialogInterface, _ ->
                 dialogInterface.dismiss()
             }
             .build()
