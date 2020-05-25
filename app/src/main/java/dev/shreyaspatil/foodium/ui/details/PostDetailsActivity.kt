@@ -24,10 +24,10 @@
 
 package dev.shreyaspatil.foodium.ui.details
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.app.ShareCompat
 import androidx.lifecycle.Observer
 import coil.api.load
 import dev.shreyaspatil.foodium.R
@@ -41,7 +41,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetailsBinding>() {
 
-    private var getPost: Post? = null
+    private lateinit var post: Post
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +59,7 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
     private fun initPost(postId: Int) {
         mViewModel.getPost(postId).observe(this, Observer { post ->
             mViewBinding.postContent.apply {
-                getPost = post
+                this@PostDetailsActivity.post = post
 
                 postTitle.text = post.title
                 postAuthor.text = post.author
@@ -91,17 +91,17 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
             }
 
             R.id.action_share -> {
-                if (getPost != null) {
-                    val post = getPost!!
-                    val shareMsg = """
-                        "${post.title}" by ${post.author} on Foodium App
-                    """.trimIndent()
+                val shareMsg = """
+                    "${post.title}" by ${post.author} on Foodium App
+                """.trimIndent()
 
-                    val intent = Intent()
-                    intent.action = Intent.ACTION_SEND
-                    intent.putExtra(Intent.EXTRA_TEXT, shareMsg)
-                    intent.type = "text/plain"
-                    startActivity(Intent.createChooser(intent, "Share to:"))
+                val intent = ShareCompat.IntentBuilder.from(this)
+                    .setType("text/plain")
+                    .setText(shareMsg)
+                    .intent
+
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
                 }
                 return true
             }
