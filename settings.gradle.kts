@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-rootProject.name='Foodium'
-include ':app'
+rootProject.name="Foodium"
+include(":app")
