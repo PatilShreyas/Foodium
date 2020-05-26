@@ -74,10 +74,6 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
         return true
     }
 
-    companion object {
-        const val POST_ID = "postId"
-    }
-
     override fun getViewBinding(): ActivityPostDetailsBinding =
         ActivityPostDetailsBinding.inflate(layoutInflater)
 
@@ -108,5 +104,9 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    companion object {
+        const val POST_ID = "postId"
     }
 }
