@@ -25,10 +25,14 @@
 package dev.shreyaspatil.foodium.ui.details
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import androidx.core.app.ShareCompat
 import androidx.lifecycle.Observer
 import coil.api.load
+import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ActivityPostDetailsBinding
+import dev.shreyaspatil.foodium.model.Post
 import dev.shreyaspatil.foodium.ui.base.BaseActivity
 import dev.shreyaspatil.foodium.utils.viewModelOf
 import kotlinx.android.synthetic.main.activity_post_details.*
@@ -36,6 +40,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetailsBinding>() {
+
+    private lateinit var post: Post
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +59,8 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
     private fun initPost(postId: Int) {
         mViewModel.getPost(postId).observe(this, Observer { post ->
             mViewBinding.postContent.apply {
+                this@PostDetailsActivity.post = post
+
                 postTitle.text = post.title
                 postAuthor.text = post.author
                 postBody.text = post.body
@@ -61,8 +69,9 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
         })
     }
 
-    companion object {
-        const val POST_ID = "postId"
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        return true
     }
 
     override fun getViewBinding(): ActivityPostDetailsBinding =
@@ -76,8 +85,28 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
                 supportFinishAfterTransition()
                 return true
             }
+
+            R.id.action_share -> {
+                val shareMsg = """
+                    "${post.title}" by ${post.author} on Foodium App
+                """.trimIndent()
+
+                val intent = ShareCompat.IntentBuilder.from(this)
+                    .setType("text/plain")
+                    .setText(shareMsg)
+                    .intent
+
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
+                return true
+            }
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    companion object {
+        const val POST_ID = "postId"
     }
 }
