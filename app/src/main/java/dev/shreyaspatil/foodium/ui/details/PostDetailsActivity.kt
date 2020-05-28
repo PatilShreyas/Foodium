@@ -88,7 +88,8 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
 
             R.id.action_share -> {
                 val shareMsg = """
-                    "${post.title}" by ${post.author} on Foodium App
+                    "${post.title}" by ${post.author} on Foodium App.
+                    Visit: https://github.com/PatilShreyas/Foodium
                 """.trimIndent()
 
                 val intent = ShareCompat.IntentBuilder.from(this)
