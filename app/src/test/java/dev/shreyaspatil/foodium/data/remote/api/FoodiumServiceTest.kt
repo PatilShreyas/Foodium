@@ -27,7 +27,8 @@ package dev.shreyaspatil.foodium.data.remote.api
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okio.buffer
@@ -73,8 +74,9 @@ class FoodiumServiceTest {
         mockWebServer.shutdown()
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun getPostsTest() = runBlocking {
+    fun getPostsTest() = runBlockingTest {
         enqueueResponse("posts.json")
         val posts = service.getPosts().body()
 
