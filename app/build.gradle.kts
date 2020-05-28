@@ -130,6 +130,8 @@ dependencies {
     testImplementation(Testing.room)
     testImplementation(Testing.okHttp)
     testImplementation(Testing.jUnit)
+
+    // Android Testing
     androidTestImplementation(Testing.extJUnit)
     androidTestImplementation(Testing.espresso)
 }

@@ -27,7 +27,7 @@ package dev.shreyaspatil.foodium.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
-import android.net.NetworkInfo
+import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
 import androidx.lifecycle.LiveData
@@ -36,7 +36,7 @@ import androidx.lifecycle.MutableLiveData
 /**
  * Network Utility to detect availability or unavailability of Internet connection
  */
-object NetworkUtils {
+object NetworkUtils : ConnectivityManager.NetworkCallback() {
 
     private val networkLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -47,28 +47,37 @@ object NetworkUtils {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        val networkCallback = object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network?) {
-                networkLiveData.postValue(true)
-            }
-
-            override fun onLost(network: Network?) {
-                networkLiveData.postValue(false)
-            }
-        }
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            connectivityManager.registerDefaultNetworkCallback(networkCallback)
+            connectivityManager.registerDefaultNetworkCallback(this)
         } else {
             val builder = NetworkRequest.Builder()
-            connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
+            connectivityManager.registerNetworkCallback(builder.build(), this)
         }
 
-        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
-        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+        var isConnected = false
+
+        // Retrieve current status of connectivity
+        connectivityManager.allNetworks.forEach { network ->
+            val networkCapability = connectivityManager.getNetworkCapabilities(network)
+
+            networkCapability?.let {
+                if (it.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)) {
+                    isConnected = true
+                    return@forEach
+                }
+            }
+        }
 
         networkLiveData.postValue(isConnected)
 
         return networkLiveData
+    }
+
+    override fun onAvailable(network: Network?) {
+        networkLiveData.postValue(true)
+    }
+
+    override fun onLost(network: Network?) {
+        networkLiveData.postValue(false)
     }
 }
