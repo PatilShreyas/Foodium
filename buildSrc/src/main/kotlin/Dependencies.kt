@@ -9,9 +9,9 @@ object Testing {
 }
 
 object Dependencies {
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.70"
-    const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.70"
-    const val gradle = "com.android.tools.build:gradle:3.6.1"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72"
+    const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72"
+    const val gradle = "com.android.tools.build:gradle:3.6.3"
     const val materialDesign = "com.google.android.material:material:1.1.0"
     const val materialDialog = "com.shreyaspatil:MaterialDialog:2.1"
     const val coil = "io.coil-kt:coil:0.9.5"
