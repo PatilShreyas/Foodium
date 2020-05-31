@@ -29,6 +29,8 @@ import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.provider.Settings.Global.putInt
+import android.provider.Settings.Secure.putInt
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -65,8 +67,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
         }
 
         initPosts()
-
+        initTheme()
         handleNetworkChanges()
+    }
+
+    private fun initTheme() {
+        var mode=PreferenceHelper.getInt(SAVE_THEME,this)
+        if(mode!=0){
+            AppCompatDelegate.setDefaultNightMode(mode)
+        }
     }
 
     private fun initPosts() {
@@ -157,6 +166,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
 
                 // Change UI Mode
                 AppCompatDelegate.setDefaultNightMode(mode)
+                PreferenceHelper.putIntger(SAVE_THEME, mode, this)
                 true
             }
 
@@ -185,6 +195,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
 
     companion object {
         const val ANIMATION_DURATION = 1000.toLong()
+        const val SAVE_THEME = "save_mode"
     }
 
     override fun onItemClicked(post: Post, imageView: ImageView) {

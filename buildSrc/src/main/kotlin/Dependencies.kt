@@ -51,3 +51,6 @@ object Room {
     const val ktx = "androidx.room:room-ktx:2.2.5"
     const val runtime = "androidx.room:room-runtime:2.2.5"
 }
+object  Prefrence{
+    const val prefrence = "androidx.preference:preference-ktx:1.1.0"
+}

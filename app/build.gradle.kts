@@ -124,6 +124,9 @@ dependencies {
     implementation(Dagger.support)
     kapt(Dagger.processor)
 
+    //prefrence
+    implementation(Prefrence.prefrence)
+
     // Testing
     testImplementation(Testing.core)
     testImplementation(Testing.coroutines)
