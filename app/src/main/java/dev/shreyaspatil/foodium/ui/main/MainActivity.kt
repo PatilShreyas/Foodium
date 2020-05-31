@@ -166,13 +166,13 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
 
     override fun onBackPressed() {
         MaterialDialog.Builder(this)
-            .setTitle("Exit?")
-            .setMessage("Are you sure want to exit?")
-            .setPositiveButton("Yes") { dialogInterface, _ ->
+            .setTitle(getString(R.string.exit_dialog_title))
+            .setMessage(getString(R.string.exit_dialog_message))
+            .setPositiveButton(getString(R.string.option_yes)) { dialogInterface, _ ->
                 dialogInterface.dismiss()
                 super.onBackPressed()
             }
-            .setNegativeButton("No") { dialogInterface, _ ->
+            .setNegativeButton(getString(R.string.option_no)) { dialogInterface, _ ->
                 dialogInterface.dismiss()
             }
             .build()

@@ -27,4 +27,8 @@
     <string name="text_no_connectivity">No Connection</string>
     <string name="text_connectivity">Back Online</string>
     <string name="text_post_header">Post Header</string>
+    <string name="exit_dialog_message">Are you sure want to exit?</string>
+    <string name="exit_dialog_title">Exit?</string>
+    <string name="option_yes">Yes</string>
+    <string name="option_no">No</string>
 </resources>
