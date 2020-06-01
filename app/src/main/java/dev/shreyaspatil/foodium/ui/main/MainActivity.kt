@@ -34,6 +34,7 @@ import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.app.ShareCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shreyaspatil.MaterialDialog.MaterialDialog
@@ -145,7 +146,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_theme -> {
-                // Get new mode.
                 val mode =
                     if ((resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
                         Configuration.UI_MODE_NIGHT_NO
@@ -154,9 +154,22 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
                     } else {
                         AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
                     }
-
                 // Change UI Mode
                 AppCompatDelegate.setDefaultNightMode(mode)
+                true
+            }
+            R.id.action_share ->{
+                val shareMsg = """
+                    Visit:https://github.com/PatilShreyas/Foodium
+                """.trimIndent()
+                val intent = ShareCompat.IntentBuilder.from(this)
+                    .setType("text/plain")
+                    .setText(shareMsg)
+                    .intent
+
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
                 true
             }
 

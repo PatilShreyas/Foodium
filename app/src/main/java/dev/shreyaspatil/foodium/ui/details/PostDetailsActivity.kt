@@ -60,7 +60,6 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
         mViewModel.getPost(postId).observe(this, Observer { post ->
             mViewBinding.postContent.apply {
                 this@PostDetailsActivity.post = post
-
                 postTitle.text = post.title
                 postAuthor.text = post.author
                 postBody.text = post.body
@@ -85,25 +84,19 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
                 supportFinishAfterTransition()
                 return true
             }
-
             R.id.action_share -> {
-                val shareMsg = """
-                    "${post.title}" by ${post.author} on Foodium App.
-                    Visit: https://github.com/PatilShreyas/Foodium
-                """.trimIndent()
-
+                val shareMsg = """${post.title}" by ${post.author} 
+                    ${post.body} """.trimMargin()
                 val intent = ShareCompat.IntentBuilder.from(this)
                     .setType("text/plain")
                     .setText(shareMsg)
                     .intent
-
                 if (intent.resolveActivity(packageManager) != null) {
                     startActivity(intent)
                 }
                 return true
             }
         }
-
         return super.onOptionsItemSelected(item)
     }
 

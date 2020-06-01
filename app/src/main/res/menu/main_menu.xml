@@ -28,6 +28,12 @@
     <item
         android:id="@+id/action_theme"
         android:icon="@drawable/ic_lightbulb"
-        android:title="Theme"
+        android:title="@string/dark_theme"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share"
+        android:title="@string/share_application"
+         />
 </menu>

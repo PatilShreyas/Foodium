@@ -31,4 +31,6 @@
     <string name="exit_dialog_title">Exit?</string>
     <string name="option_yes">Yes</string>
     <string name="option_no">No</string>
+    <string name="share_application">Share Application</string>
+    <string name="dark_theme">Dark Mode</string>
 </resources>
