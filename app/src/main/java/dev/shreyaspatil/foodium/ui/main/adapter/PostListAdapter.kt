@@ -27,6 +27,7 @@ package dev.shreyaspatil.foodium.ui.main.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -53,7 +54,7 @@ class PostListAdapter(private val onItemClickListener: OnItemClickListener) :
         holder.bind(getItem(position), onItemClickListener)
 
     interface OnItemClickListener {
-        fun onItemClicked(post: Post, imageView: ImageView)
+        fun onItemClicked(post: Post, imageView: ImageView, textView: TextView)
     }
 
     companion object {

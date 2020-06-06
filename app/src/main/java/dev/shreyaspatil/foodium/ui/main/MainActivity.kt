@@ -29,9 +29,12 @@ import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
@@ -187,14 +190,16 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
         const val ANIMATION_DURATION = 1000.toLong()
     }
 
-    override fun onItemClicked(post: Post, imageView: ImageView) {
+    override fun onItemClicked(post: Post, imageView: ImageView, textView: TextView) {
         val intent = Intent(this, PostDetailsActivity::class.java)
         intent.putExtra(PostDetailsActivity.POST_ID, post.id)
 
+        val pTv = androidx.core.util.Pair(textView as View, textView.transitionName)
+        val pIv = androidx.core.util.Pair(imageView as View, imageView.transitionName)
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
             this,
-            imageView,
-            imageView.transitionName
+            pTv,
+            pIv
         )
 
         startActivity(intent, options.toBundle())

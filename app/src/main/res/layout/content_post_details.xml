@@ -40,6 +40,7 @@
             android:id="@+id/post_title"
             style="@style/PostTitleDetailText"
             android:layout_width="0dp"
+            android:transitionName="title"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

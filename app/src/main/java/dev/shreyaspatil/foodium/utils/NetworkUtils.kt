@@ -81,3 +81,4 @@ object NetworkUtils : ConnectivityManager.NetworkCallback() {
         networkLiveData.postValue(false)
     }
 }
+

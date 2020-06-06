@@ -47,7 +47,7 @@ class PostViewHolder(private val binding: ItemPostBinding) : RecyclerView.ViewHo
 
         onItemClickListener?.let { listener ->
             binding.root.setOnClickListener {
-                listener.onItemClicked(post, binding.imageView)
+                listener.onItemClicked(post, binding.imageView, binding.postTitle)
             }
         }
     }

@@ -37,6 +37,7 @@
         android:id="@+id/post_title"
         style="@style/PostTitleText"
         android:layout_width="0dp"
+        android:transitionName="title"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
