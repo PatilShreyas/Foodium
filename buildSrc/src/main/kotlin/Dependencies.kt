@@ -11,7 +11,8 @@ object Testing {
 object Dependencies {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72"
     const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72"
-    const val gradle = "com.android.tools.build:gradle:3.6.3"
+    const val gradle = "com.android.tools.build:gradle:4.0.0"
+    const val daggerHilt = "com.google.dagger:hilt-android-gradle-plugin:2.28-alpha"
     const val materialDesign = "com.google.android.material:material:1.1.0"
     const val materialDialog = "com.shreyaspatil:MaterialDialog:2.1"
     const val coil = "io.coil-kt:coil:0.9.5"
@@ -20,12 +21,11 @@ object Dependencies {
     const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
 }
 
-object Dagger {
-    const val dagger = "com.google.dagger:dagger:2.27"
-    const val compiler = "com.google.dagger:dagger-compiler:2.27"
-    const val android = "com.google.dagger:dagger-android:2.27"
-    const val support = "com.google.dagger:dagger-android-support:2.27"
-    const val processor = "com.google.dagger:dagger-android-processor:2.27"
+object Hilt {
+    const val daggerCompiler = "com.google.dagger:hilt-android-compiler:2.28-alpha"
+    const val hiltCompiler = "androidx.hilt:hilt-compiler:1.0.0-alpha01"
+    const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
+    const val hiltAndroid = "com.google.dagger:hilt-android:2.28-alpha"
 }
 
 object Moshi {
@@ -41,7 +41,8 @@ object Coroutines {
 
 object Android {
     const val appcompat = "androidx.appcompat:appcompat:1.1.0"
-    const val ktx = "androidx.core:core-ktx:1.2.0"
+    const val activityKtx = "androidx.activity:activity-ktx:1.1.0"
+    const val coreKtx = "androidx.core:core-ktx:1.2.0"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 }

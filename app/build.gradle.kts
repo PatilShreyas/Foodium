@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlin-android-extensions")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -45,23 +45,30 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = hashMapOf(
+                arguments.plusAssign(
+                    hashMapOf(
                         "room.schemaLocation" to "$projectDir/schemas",
                         "room.incremental" to "true",
                         "room.expandProjection" to "true"
+                    )
                 )
             }
         }
     }
 
-    viewBinding {
-        isEnabled = true
+    buildFeatures {
+        viewBinding {
+            isEnabled = true
+        }
     }
 
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -71,7 +78,7 @@ android {
     }
 }
 
-tasks.withType<KotlinCompile>().configureEach {
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -89,7 +96,8 @@ dependencies {
 
     // Android
     implementation(Android.appcompat)
-    implementation(Android.ktx)
+    implementation(Android.activityKtx)
+    implementation(Android.coreKtx)
     implementation(Android.constraintLayout)
     implementation(Android.swipeRefreshLayout)
 
@@ -117,12 +125,11 @@ dependencies {
     implementation(Moshi.retrofitConverter)
     kapt(Moshi.codeGen)
 
-    // Dagger 2
-    implementation(Dagger.dagger)
-    kapt(Dagger.compiler)
-    implementation(Dagger.android)
-    implementation(Dagger.support)
-    kapt(Dagger.processor)
+    // Hilt + Dagger
+    implementation(Hilt.hiltAndroid)
+    implementation(Hilt.hiltViewModel)
+    kapt(Hilt.daggerCompiler)
+    kapt(Hilt.hiltCompiler)
 
     // Testing
     testImplementation(Testing.core)
