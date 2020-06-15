@@ -32,11 +32,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shreyaspatil.MaterialDialog.MaterialDialog
+import dagger.hilt.android.AndroidEntryPoint
 import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ActivityMainBinding
 import dev.shreyaspatil.foodium.model.Post
@@ -47,8 +49,11 @@ import dev.shreyaspatil.foodium.utils.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
     PostListAdapter.OnItemClickListener {
+
+    override val mViewModel: MainViewModel by viewModels()
 
     private val mAdapter: PostListAdapter by lazy { PostListAdapter(onItemClickListener = this) }
 
@@ -180,8 +185,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
     }
 
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-
-    override fun getViewModel() = viewModelOf<MainViewModel>(mViewModelProvider)
 
     companion object {
         const val ANIMATION_DURATION = 1000.toLong()
