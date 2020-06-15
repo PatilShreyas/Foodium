@@ -43,8 +43,14 @@ It simply loads **Posts** data from API and stores it in persistence storage (i.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 - [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html) - For writing Gradle build scripts using Kotlin.
 
+## [`Hilt`](https://developer.android.com/training/dependency-injection/hilt-android) DI Version 🗡️
+Hilt provides a standard way to use DI in your application by providing containers for every Android class in your project and managing their lifecycles automatically. Hilt is built on top of the popular DI library Dagger to benefit from the compile-time correctness, runtime performance, scalability, and Android Studio support that Dagger provides.
+If you want to see this app's implementation with Hilt, see branch [***`dev-hilt-android`***](https://github.com/PatilShreyas/Foodium/tree/dev-hilt-android)
 
-## Want [`Koin`](https://insert-koin.io/) DI Version?
+[![Hilt Version](https://img.shields.io/static/v1?label=Foodium&message=Hilt-DI&color=brightgreen&logo=android)](https://github.com/PatilShreyas/Foodium/tree/dev-hilt-android)
+
+
+## [`Koin`](https://insert-koin.io/) DI Version 🗡️
 If you want to use *Koin - Dependency Injection framework* in app then visit below repository.
 
 [![Koin Version](https://img.shields.io/badge/PranayPatel512-Foodium-blue.svg?style=flat-square&logo=github)](https://github.com/pranaypatel512/Foodium)
