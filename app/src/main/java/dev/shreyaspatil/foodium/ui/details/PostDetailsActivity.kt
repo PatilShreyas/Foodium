@@ -27,19 +27,23 @@ package dev.shreyaspatil.foodium.ui.details
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.core.app.ShareCompat
 import androidx.lifecycle.Observer
 import coil.api.load
+import dagger.hilt.android.AndroidEntryPoint
 import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ActivityPostDetailsBinding
 import dev.shreyaspatil.foodium.model.Post
 import dev.shreyaspatil.foodium.ui.base.BaseActivity
-import dev.shreyaspatil.foodium.utils.viewModelOf
 import kotlinx.android.synthetic.main.activity_post_details.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetailsBinding>() {
+
+    override val mViewModel: PostDetailsViewModel by viewModels()
 
     private lateinit var post: Post
 
@@ -51,7 +55,7 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val postId = intent.extras?.getInt(POST_ID)
-            ?: throw IllegalArgumentException("postId must be non-null")
+            ?: throw IllegalArgumentException("`postId` must be non-null")
 
         initPost(postId)
     }
@@ -76,8 +80,6 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
 
     override fun getViewBinding(): ActivityPostDetailsBinding =
         ActivityPostDetailsBinding.inflate(layoutInflater)
-
-    override fun getViewModel() = viewModelOf<PostDetailsViewModel>(mViewModelProvider)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

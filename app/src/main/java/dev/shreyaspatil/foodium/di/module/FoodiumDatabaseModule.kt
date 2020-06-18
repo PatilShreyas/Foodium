@@ -27,9 +27,12 @@ package dev.shreyaspatil.foodium.di.module
 import android.app.Application
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import dev.shreyaspatil.foodium.data.local.FoodiumPostsDatabase
 import javax.inject.Singleton
 
+@InstallIn(ApplicationComponent::class)
 @Module
 class FoodiumDatabaseModule {
 
