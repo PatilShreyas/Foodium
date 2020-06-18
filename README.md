@@ -35,7 +35,9 @@ It simply loads **Posts** data from API and stores it in persistence storage (i.
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes. 
   - [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - Generates a binding class for each XML layout file present in that module and allows you to more easily write code that interacts with views.
   - [Room](https://developer.android.com/topic/libraries/architecture/room) - SQLite object mapping library.
-- [Dagger 2](https://dagger.dev/) - Dependency Injection Framework
+- [Dependency Injection](https://developer.android.com/training/dependency-injection) - 
+  - [Hilt-Dagger](https://dagger.dev/hilt/) - Standard library to incorporate Dagger dependency injection into an Android application.
+  - [Hilt-ViewModel](https://developer.android.com/training/dependency-injection/hilt-jetpack) - DI for injecting `ViewModel`.
 - [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java.
 - [Moshi](https://github.com/square/moshi) - A modern JSON library for Kotlin and Java.
 - [Moshi Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/moshi) - A Converter which uses Moshi for serialization to and from JSON.
@@ -43,11 +45,10 @@ It simply loads **Posts** data from API and stores it in persistence storage (i.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 - [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html) - For writing Gradle build scripts using Kotlin.
 
-## [`Hilt`](https://developer.android.com/training/dependency-injection/hilt-android) DI Version 🗡️
-Hilt provides a standard way to use DI in your application by providing containers for every Android class in your project and managing their lifecycles automatically. Hilt is built on top of the popular DI library Dagger to benefit from the compile-time correctness, runtime performance, scalability, and Android Studio support that Dagger provides.
-If you want to see this app's implementation with Hilt, see branch [***`dev-hilt-android`***](https://github.com/PatilShreyas/Foodium/tree/dev-hilt-android)
+## [`Dagger`](https://dagger.dev/) (Old) DI Version 🗡️
+If you want to refer old way of Dependency Injetion using Dagger2, see branch [***`dagger2-di`***](https://github.com/PatilShreyas/Foodium/tree/dagger2-di)
 
-[![Hilt Version](https://img.shields.io/static/v1?label=Foodium&message=Hilt-DI&color=brightgreen&logo=android)](https://github.com/PatilShreyas/Foodium/tree/dev-hilt-android)
+[![Dagger2 Version](https://img.shields.io/static/v1?label=Foodium&message=Dagger2-DI&color=brightgreen&logo=android)](https://github.com/PatilShreyas/Foodium/tree/dev-hilt-android)
 
 
 ## [`Koin`](https://insert-koin.io/) DI Version 🗡️
