@@ -73,11 +73,11 @@ object NetworkUtils : ConnectivityManager.NetworkCallback() {
         return networkLiveData
     }
 
-    override fun onAvailable(network: Network?) {
+    override fun onAvailable(network: Network) {
         networkLiveData.postValue(true)
     }
 
-    override fun onLost(network: Network?) {
+    override fun onLost(network: Network) {
         networkLiveData.postValue(false)
     }
 }
