@@ -26,7 +26,7 @@ package dev.shreyaspatil.foodium.data.repository
 
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
-import dev.shreyaspatil.foodium.utils.State
+import dev.shreyaspatil.foodium.model.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
@@ -70,9 +70,11 @@ abstract class NetworkBoundRepository<RESULT, REQUEST> {
         }
 
         // Retrieve posts from persistence storage and emit
-        emitAll(fetchFromLocal().map {
-            State.success<RESULT>(it)
-        })
+        emitAll(
+            fetchFromLocal().map {
+                State.success<RESULT>(it)
+            }
+        )
     }
 
     /**

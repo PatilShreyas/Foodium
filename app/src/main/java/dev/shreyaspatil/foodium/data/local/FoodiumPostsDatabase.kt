@@ -60,17 +60,14 @@ abstract class FoodiumPostsDatabase : RoomDatabase() {
 
             synchronized(this) {
                 val instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        FoodiumPostsDatabase::class.java,
-                        DB_NAME
-                    )
-                    .addMigrations(*DatabaseMigrations.MIGRATIONS)
-                    .build()
+                    context.applicationContext,
+                    FoodiumPostsDatabase::class.java,
+                    DB_NAME
+                ).addMigrations(*DatabaseMigrations.MIGRATIONS).build()
 
                 INSTANCE = instance
                 return instance
             }
         }
-
     }
 }

@@ -13,10 +13,13 @@ object Dependencies {
     const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72"
     const val gradle = "com.android.tools.build:gradle:4.0.0"
     const val daggerHilt = "com.google.dagger:hilt-android-gradle-plugin:2.28-alpha"
+    const val ktLint = "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
     const val materialDesign = "com.google.android.material:material:1.1.0"
     const val materialDialog = "com.shreyaspatil:MaterialDialog:2.1"
     const val coil = "io.coil-kt:coil:0.9.5"
-    const val retrofit = "com.squareup.retrofit2:retrofit:2.8.1"
+}
+
+object Lifecycle {
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
 }
@@ -29,9 +32,13 @@ object Hilt {
 }
 
 object Moshi {
-    const val kotlin = "com.squareup.moshi:moshi-kotlin:1.9.2"
-    const val retrofitConverter = "com.squareup.retrofit2:converter-moshi:2.7.2"
+    const val moshi = "com.squareup.moshi:moshi-kotlin:1.9.2"
     const val codeGen = "com.squareup.moshi:moshi-kotlin-codegen:1.9.2"
+}
+
+object Retrofit {
+    const val retrofit = "com.squareup.retrofit2:retrofit:2.8.1"
+    const val moshiRetrofitConverter = "com.squareup.retrofit2:converter-moshi:2.7.2"
 }
 
 object Coroutines {

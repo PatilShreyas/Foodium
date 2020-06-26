@@ -31,13 +31,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion(29)
-    buildToolsVersion("29.0.3")
+    compileSdkVersion(30)
+    buildToolsVersion("30.0.0")
 
     defaultConfig {
         applicationId = "dev.shreyaspatil.foodium"
         minSdkVersion(21)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
 
@@ -56,11 +56,7 @@ android {
         }
     }
 
-    buildFeatures {
-        viewBinding {
-            isEnabled = true
-        }
-    }
+    buildFeatures.viewBinding = true
 
     buildTypes {
         getByName("release") {
@@ -75,6 +71,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude("META-INF/*.kotlin_module")
     }
 }
 
@@ -102,13 +102,13 @@ dependencies {
     implementation(Android.swipeRefreshLayout)
 
     // Architecture Components
-    implementation(Dependencies.viewModel)
-    implementation(Dependencies.liveData)
+    implementation(Lifecycle.viewModel)
+    implementation(Lifecycle.liveData)
 
     // Room components
     implementation(Room.runtime)
-    kapt(Room.compiler)
     implementation(Room.ktx)
+    kapt(Room.compiler)
 
     // Material Design
     implementation(Dependencies.materialDesign)
@@ -118,11 +118,12 @@ dependencies {
     implementation(Dependencies.coil)
 
     // Retrofit
-    implementation(Dependencies.retrofit)
+    implementation(Retrofit.retrofit)
+    implementation(Retrofit.moshiRetrofitConverter)
 
     // Moshi
-    implementation(Moshi.kotlin)
-    implementation(Moshi.retrofitConverter)
+    implementation(Moshi.moshi)
+    implementation(Moshi.codeGen)
     kapt(Moshi.codeGen)
 
     // Hilt + Dagger

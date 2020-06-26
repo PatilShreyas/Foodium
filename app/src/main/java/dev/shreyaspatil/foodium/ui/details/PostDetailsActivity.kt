@@ -61,16 +61,19 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
     }
 
     private fun initPost(postId: Int) {
-        mViewModel.getPost(postId).observe(this, Observer { post ->
-            mViewBinding.postContent.apply {
-                this@PostDetailsActivity.post = post
+        mViewModel.getPost(postId).observe(
+            this,
+            Observer { post ->
+                mViewBinding.postContent.apply {
+                    this@PostDetailsActivity.post = post
 
-                postTitle.text = post.title
-                postAuthor.text = post.author
-                postBody.text = post.body
+                    postTitle.text = post.title
+                    postAuthor.text = post.author
+                    postBody.text = post.body
+                }
+                mViewBinding.imageView.load(post.imageUrl)
             }
-            mViewBinding.imageView.load(post.imageUrl)
-        })
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -89,10 +92,8 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
             }
 
             R.id.action_share -> {
-                val shareMsg = """
-                    "${post.title}" by ${post.author} on Foodium App.
-                    Visit: https://github.com/PatilShreyas/Foodium
-                """.trimIndent()
+                val shareMsg = """${post.title}" by ${post.author} on Foodium App.
+                                Visit: https://github.com/PatilShreyas/Foodium""".trimIndent()
 
                 val intent = ShareCompat.IntentBuilder.from(this)
                     .setType("text/plain")

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package dev.shreyaspatil.foodium.utils
+package dev.shreyaspatil.foodium.model
 
 /**
  * State Management for UI & Data.
@@ -55,5 +55,4 @@ sealed class State<T> {
         fun <T> error(message: String) =
             Error<T>(message)
     }
-
 }

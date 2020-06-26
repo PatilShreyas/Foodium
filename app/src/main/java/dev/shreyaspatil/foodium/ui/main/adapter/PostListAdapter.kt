@@ -63,7 +63,6 @@ class PostListAdapter(private val onItemClickListener: OnItemClickListener) :
 
             override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean =
                 oldItem == newItem
-
         }
     }
 }

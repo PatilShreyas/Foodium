@@ -28,7 +28,7 @@ import androidx.annotation.MainThread
 import dev.shreyaspatil.foodium.data.local.dao.PostsDao
 import dev.shreyaspatil.foodium.data.remote.api.FoodiumService
 import dev.shreyaspatil.foodium.model.Post
-import dev.shreyaspatil.foodium.utils.State
+import dev.shreyaspatil.foodium.model.State
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -61,7 +61,6 @@ class PostsRepository @Inject constructor(
             override fun fetchFromLocal(): Flow<List<Post>> = postsDao.getAllPosts()
 
             override suspend fun fetchFromRemote(): Response<List<Post>> = foodiumService.getPosts()
-
         }.asFlow().flowOn(Dispatchers.IO)
     }
 

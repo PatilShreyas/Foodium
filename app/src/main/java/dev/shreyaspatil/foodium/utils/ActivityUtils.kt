@@ -50,4 +50,3 @@ fun Activity.getColorRes(@ColorRes id: Int) = ContextCompat.getColor(application
  */
 inline fun <reified VM : ViewModel> AppCompatActivity.viewModelOf(factory: ViewModelProvider.Factory) =
     ViewModelProvider(this, factory).get(VM::class.java)
-
