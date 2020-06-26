@@ -56,6 +56,7 @@ Following Linters are used internally by super linter (enabled for this project)
 - XML: [LibXML](http://xmlsoft.org/)
 - Kotlin (kt/kts): [ktlint](https://github.com/pinterest/ktlint)
 
+
 ## [`Dagger`](https://dagger.dev/) (Old) DI Version 🗡️
 If you want to refer old way of Dependency Injetion using Dagger2, see branch [***`dagger2-di`***](https://github.com/PatilShreyas/Foodium/tree/dagger2-di)
 
