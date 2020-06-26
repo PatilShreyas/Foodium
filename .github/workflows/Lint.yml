@@ -17,3 +17,6 @@ jobs:
         uses: docker://github/super-linter:v2.2.0
         env:
           VALIDATE_ALL_CODEBASE: true
+          VALIDATE_MD: false
+          VALIDATE_XML: true
+          VALIDATE_KOTLIN: true

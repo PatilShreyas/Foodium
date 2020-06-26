@@ -51,12 +51,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
-    PostListAdapter.OnItemClickListener {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     override val mViewModel: MainViewModel by viewModels()
 
-    private val mAdapter: PostListAdapter by lazy { PostListAdapter(onItemClickListener = this) }
+    private val mAdapter = PostListAdapter(this::onItemClicked)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme) // Set AppTheme before setting content view.
@@ -191,11 +190,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
 
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
-    companion object {
-        const val ANIMATION_DURATION = 1000.toLong()
-    }
-
-    override fun onItemClicked(post: Post, imageView: ImageView) {
+    private fun onItemClicked(post: Post, imageView: ImageView) {
         val intent = Intent(this, PostDetailsActivity::class.java)
         intent.putExtra(PostDetailsActivity.POST_ID, post.id)
 
@@ -206,5 +201,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
         )
 
         startActivity(intent, options.toBundle())
+    }
+
+    companion object {
+        const val ANIMATION_DURATION = 1000.toLong()
     }
 }

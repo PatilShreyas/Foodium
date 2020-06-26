@@ -24,6 +24,7 @@
 
 package dev.shreyaspatil.foodium.ui.main.viewholder
 
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import dev.shreyaspatil.foodium.R
@@ -37,7 +38,7 @@ import dev.shreyaspatil.foodium.ui.main.adapter.PostListAdapter
  */
 class PostViewHolder(private val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(post: Post, onItemClickListener: PostListAdapter.OnItemClickListener? = null) {
+    fun bind(post: Post, onItemClicked: (Post, ImageView) -> Unit) {
         binding.postTitle.text = post.title
         binding.postAuthor.text = post.author
         binding.imageView.load(post.imageUrl) {
@@ -45,10 +46,8 @@ class PostViewHolder(private val binding: ItemPostBinding) : RecyclerView.ViewHo
             error(R.drawable.ic_broken_image)
         }
 
-        onItemClickListener?.let { listener ->
-            binding.root.setOnClickListener {
-                listener.onItemClicked(post, binding.imageView)
-            }
+        binding.root.setOnClickListener {
+            onItemClicked(post, binding.imageView)
         }
     }
 }
