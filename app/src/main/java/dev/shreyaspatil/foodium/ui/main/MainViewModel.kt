@@ -31,7 +31,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.shreyaspatil.foodium.data.repository.PostsRepository
 import dev.shreyaspatil.foodium.model.Post
-import dev.shreyaspatil.foodium.utils.State
+import dev.shreyaspatil.foodium.model.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -55,5 +55,4 @@ class MainViewModel @ViewModelInject constructor(private val postsRepository: Po
             }
         }
     }
-
 }

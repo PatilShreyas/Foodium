@@ -50,5 +50,4 @@ class FoodiumApiModule {
         )
         .build()
         .create(FoodiumService::class.java)
-
 }

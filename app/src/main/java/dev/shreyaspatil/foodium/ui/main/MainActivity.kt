@@ -42,6 +42,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ActivityMainBinding
 import dev.shreyaspatil.foodium.model.Post
+import dev.shreyaspatil.foodium.model.State
 import dev.shreyaspatil.foodium.ui.base.BaseActivity
 import dev.shreyaspatil.foodium.ui.details.PostDetailsActivity
 import dev.shreyaspatil.foodium.ui.main.adapter.PostListAdapter
@@ -58,7 +59,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
     private val mAdapter: PostListAdapter by lazy { PostListAdapter(onItemClickListener = this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)  // Set AppTheme before setting content view.
+        setTheme(R.style.AppTheme) // Set AppTheme before setting content view.
 
         super.onCreate(savedInstanceState)
         setContentView(mViewBinding.root)
@@ -75,21 +76,24 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
     }
 
     private fun initPosts() {
-        mViewModel.postsLiveData.observe(this, Observer { state ->
-            when (state) {
-                is State.Loading -> showLoading(true)
-                is State.Success -> {
-                    if (state.data.isNotEmpty()) {
-                        mAdapter.submitList(state.data.toMutableList())
+        mViewModel.postsLiveData.observe(
+            this,
+            Observer { state ->
+                when (state) {
+                    is State.Loading -> showLoading(true)
+                    is State.Success -> {
+                        if (state.data.isNotEmpty()) {
+                            mAdapter.submitList(state.data.toMutableList())
+                            showLoading(false)
+                        }
+                    }
+                    is State.Error -> {
+                        showToast(state.message)
                         showLoading(false)
                     }
                 }
-                is State.Error -> {
-                    showToast(state.message)
-                    showLoading(false)
-                }
             }
-        })
+        )
 
         mViewBinding.swipeRefreshLayout.setOnRefreshListener {
             getPosts()
@@ -136,7 +140,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
                             override fun onAnimationEnd(animation: Animator) {
                                 hide()
                             }
-                        })
+                        }
+                        )
                 }
             }
         })

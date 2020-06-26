@@ -28,7 +28,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
     }
     dependencies {
         classpath(Dependencies.gradle)
@@ -47,6 +46,6 @@ allprojects {
     }
 }
 
-tasks.register("clean", Delete::class){
+tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
