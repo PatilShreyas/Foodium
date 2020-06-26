@@ -1,2 +1,2 @@
 [*.{kt, kts}]
-disabled_rules = no-wildcard-imports, experimental:annotation
+disabled_rules = no-wildcard-imports

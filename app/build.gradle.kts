@@ -28,6 +28,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-android-extensions")
     id("dagger.hilt.android.plugin")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -142,4 +143,9 @@ dependencies {
     // Android Testing
     androidTestImplementation(Testing.extJUnit)
     androidTestImplementation(Testing.espresso)
+}
+
+ktlint {
+    android.set(true)
+    outputColorName.set("RED")
 }
