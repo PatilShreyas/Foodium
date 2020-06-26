@@ -48,13 +48,12 @@ It simply loads **Posts** data from API and stores it in persistence storage (i.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 - [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html) - For writing Gradle build scripts using Kotlin.
 
-## Lint
-This project uses [GitHub Super Linter](https://github.com/github/super-linter) which is Combination of multiple linters to install as a GitHub Action.
+## Lint ✅
+This project uses [***GitHub Super Linter***](https://github.com/github/super-linter) which is Combination of multiple linters to install as a GitHub Action.
 
 Following Linters are used internally by super linter (enabled for this project):
-
 - XML: [LibXML](http://xmlsoft.org/)
-- Kotlin (kt/kts): [ktlint](https://github.com/pinterest/ktlint)
+- Kotlin: [ktlint](https://github.com/pinterest/ktlint)
 
 
 ## [`Dagger`](https://dagger.dev/) (Old) DI Version 🗡️
