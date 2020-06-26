@@ -1,0 +1,21 @@
+name: Lint Test
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    # Name the Job
+    name: Lint Check
+    # Set the agent to run on
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Lint Code Base
+        uses: docker://github/super-linter:v2.2.0
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_XML: true
+          VALIDATE_KOTLIN: true
