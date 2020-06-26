@@ -69,6 +69,5 @@ abstract class FoodiumPostsDatabase : RoomDatabase() {
                 return instance
             }
         }
-
     }
 }
