@@ -1,14 +1,11 @@
-name: Lint Code Base
+name: Lint
 
-on:
-  push:
-    branches-ignore:
-      - 'master'
+on: [push, pull_request]
 
 jobs:
-  build:
+  lint:
     # Name the Job
-    name: Lint Code Base
+    name: Lint Check
     # Set the agent to run on
     runs-on: ubuntu-latest
 
