@@ -13,6 +13,7 @@ object Dependencies {
     const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72"
     const val gradle = "com.android.tools.build:gradle:4.0.0"
     const val daggerHilt = "com.google.dagger:hilt-android-gradle-plugin:2.28-alpha"
+    const val ktLint = "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
     const val materialDesign = "com.google.android.material:material:1.1.0"
     const val materialDialog = "com.shreyaspatil:MaterialDialog:2.1"
     const val coil = "io.coil-kt:coil:0.9.5"

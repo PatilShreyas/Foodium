@@ -28,11 +28,13 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven("https://plugins.gradle.org/m2/")
     }
     dependencies {
         classpath(Dependencies.gradle)
         classpath(Dependencies.kotlinGradle)
         classpath(Dependencies.daggerHilt)
+        classpath(Dependencies.ktLint)
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -49,3 +51,5 @@ allprojects {
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
+
+apply(plugin = "org.jlleitschuh.gradle.ktlint")
