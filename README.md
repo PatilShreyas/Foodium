@@ -47,7 +47,14 @@ It simply loads **Posts** data from API and stores it in persistence storage (i.
 - [Coil-kt](https://coil-kt.github.io/coil/) - An image loading library for Android backed by Kotlin Coroutines.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 - [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html) - For writing Gradle build scripts using Kotlin.
-- [ktlint](https://github.com/pinterest/ktlint) - An anti-bikeshedding Kotlin linter with built-in formatter.
+
+## Lint
+This project uses [GitHub Super Linter](https://github.com/github/super-linter) which is Combination of multiple linters to install as a GitHub Action.
+
+Following Linters are used internally by super linter (enabled for this project):
+
+- XML: [LibXML](http://xmlsoft.org/)
+- Kotlin (kt/kts): [ktlint](https://github.com/pinterest/ktlint)
 
 ## [`Dagger`](https://dagger.dev/) (Old) DI Version 🗡️
 If you want to refer old way of Dependency Injetion using Dagger2, see branch [***`dagger2-di`***](https://github.com/PatilShreyas/Foodium/tree/dagger2-di)
