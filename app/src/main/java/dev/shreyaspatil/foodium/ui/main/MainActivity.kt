@@ -51,12 +51,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
-    PostListAdapter.OnItemClickListener {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     override val mViewModel: MainViewModel by viewModels()
 
-    private val mAdapter: PostListAdapter by lazy { PostListAdapter(onItemClickListener = this) }
+    private val mAdapter = PostListAdapter(this::onItemClicked)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme) // Set AppTheme before setting content view.
@@ -117,34 +116,38 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
      * Observe network changes i.e. Internet Connectivity
      */
     private fun handleNetworkChanges() {
-        NetworkUtils.getNetworkLiveData(applicationContext).observe(this, Observer { isConnected ->
-            if (!isConnected) {
-                mViewBinding.textViewNetworkStatus.text = getString(R.string.text_no_connectivity)
-                mViewBinding.networkStatusLayout.apply {
-                    show()
-                    setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
-                }
-            } else {
-                if (mViewModel.postsLiveData.value is State.Error || mAdapter.itemCount == 0) {
-                    getPosts()
-                }
-                mViewBinding.textViewNetworkStatus.text = getString(R.string.text_connectivity)
-                mViewBinding.networkStatusLayout.apply {
-                    setBackgroundColor(getColorRes(R.color.colorStatusConnected))
+        NetworkUtils.getNetworkLiveData(applicationContext).observe(
+            this,
+            Observer { isConnected ->
+                if (!isConnected) {
+                    mViewBinding.textViewNetworkStatus.text =
+                        getString(R.string.text_no_connectivity)
+                    mViewBinding.networkStatusLayout.apply {
+                        show()
+                        setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
+                    }
+                } else {
+                    if (mViewModel.postsLiveData.value is State.Error || mAdapter.itemCount == 0) {
+                        getPosts()
+                    }
+                    mViewBinding.textViewNetworkStatus.text = getString(R.string.text_connectivity)
+                    mViewBinding.networkStatusLayout.apply {
+                        setBackgroundColor(getColorRes(R.color.colorStatusConnected))
 
-                    animate()
-                        .alpha(1f)
-                        .setStartDelay(ANIMATION_DURATION)
-                        .setDuration(ANIMATION_DURATION)
-                        .setListener(object : AnimatorListenerAdapter() {
-                            override fun onAnimationEnd(animation: Animator) {
-                                hide()
+                        animate()
+                            .alpha(1f)
+                            .setStartDelay(ANIMATION_DURATION)
+                            .setDuration(ANIMATION_DURATION)
+                            .setListener(object : AnimatorListenerAdapter() {
+                                override fun onAnimationEnd(animation: Animator) {
+                                    hide()
+                                }
                             }
-                        }
-                        )
+                            )
+                    }
                 }
             }
-        })
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -191,11 +194,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
 
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
-    companion object {
-        const val ANIMATION_DURATION = 1000.toLong()
-    }
-
-    override fun onItemClicked(post: Post, imageView: ImageView) {
+    private fun onItemClicked(post: Post, imageView: ImageView) {
         val intent = Intent(this, PostDetailsActivity::class.java)
         intent.putExtra(PostDetailsActivity.POST_ID, post.id)
 
@@ -206,5 +205,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
         )
 
         startActivity(intent, options.toBundle())
+    }
+
+    companion object {
+        const val ANIMATION_DURATION = 1000.toLong()
     }
 }

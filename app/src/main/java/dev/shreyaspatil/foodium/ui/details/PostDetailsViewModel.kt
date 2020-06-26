@@ -34,8 +34,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
  * ViewModel for [PostDetailsActivity]
  */
 @ExperimentalCoroutinesApi
-class PostDetailsViewModel @ViewModelInject constructor(private val postsRepository: PostsRepository) :
-    ViewModel() {
+class PostDetailsViewModel @ViewModelInject constructor(
+    private val postsRepository: PostsRepository
+) : ViewModel() {
 
     fun getPost(id: Int) = postsRepository.getPostById(id).asLiveData()
 }

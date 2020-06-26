@@ -48,5 +48,6 @@ fun Activity.getColorRes(@ColorRes id: Int) = ContextCompat.getColor(application
 /**
  * Provides [ViewModel] of type [VM] from [factory].
  */
-inline fun <reified VM : ViewModel> AppCompatActivity.viewModelOf(factory: ViewModelProvider.Factory) =
-    ViewModelProvider(this, factory).get(VM::class.java)
+inline fun <reified VM : ViewModel> AppCompatActivity.viewModelOf(
+    factory: ViewModelProvider.Factory
+) = ViewModelProvider(this, factory).get(VM::class.java)
