@@ -1,2 +1,2 @@
 [*.{kt, kts}]
-disabled_rules = no-wildcard-imports
+disabled_rules = no-wildcard-imports, import-ordering
