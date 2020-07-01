@@ -8,10 +8,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: Configure JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 12
+
+#      - name: Configure JDK
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: 12
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
