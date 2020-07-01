@@ -31,4 +31,5 @@
     <string name="exit_dialog_title">Exit?</string>
     <string name="option_yes">Yes</string>
     <string name="option_no">No</string>
+    <string name="share_message">\"%s\" by %s. \nVisit: https://github.com/PatilShreyas/Foodium</string>
 </resources>
