@@ -1,4 +1,4 @@
-name: CI
+name: Build
 on:
   pull_request:
     branches:
@@ -8,33 +8,16 @@ on:
       - 'master'
 
 jobs:
-  test:
-    name: Run Unit Tests
-    runs-on: ubuntu-18.04
-
-    steps:
-      - uses: actions/checkout@v1
-      - name: set up JDK 1.8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-      
-      - name: Grant Permission to Execute
-        run: chmod +x gradlew
-        
-      - name: Unit tests
-        run: bash ./gradlew test --stacktrace
-
-  apk:
+  build_apk:
     name: Generate APK
     runs-on: ubuntu-18.04
 
     steps:
       - uses: actions/checkout@v1
-      - name: set up JDK 1.8
+      - name: Set up JDK 12
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 12
 
       - name: Grant Permission to Execute
         run: chmod +x gradlew

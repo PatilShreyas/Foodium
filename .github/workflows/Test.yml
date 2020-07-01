@@ -1,0 +1,16 @@
+name: Test
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Run Unit tests
+        run: ./gradlew test --stacktrace
