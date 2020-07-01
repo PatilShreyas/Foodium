@@ -23,4 +23,6 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v1
         with:
           api-level: 29
+          arch: x86
+          disable-animations: true
           script: ./gradlew connectedCheck --stacktrace
