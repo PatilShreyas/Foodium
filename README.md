@@ -2,8 +2,9 @@
 
 # Foodium 🍲 
 
-![CI](https://github.com/PatilShreyas/Foodium/workflows/CI/badge.svg?branch=master)
-![Lint](https://github.com/PatilShreyas/Foodium/workflows/Lint/badge.svg?branch=master)
+[![Test](https://github.com/PatilShreyas/Foodium/workflows/Test/badge.svg?branch=master)](https://github.com/PatilShreyas/Foodium/actions?query=workflow%3ATest)
+[![Build](https://github.com/PatilShreyas/Foodium/workflows/Build/badge.svg?branch=master)](https://github.com/PatilShreyas/Foodium/actions?query=workflow%3ABuild)
+[![Lint](https://github.com/PatilShreyas/Foodium/workflows/Lint/badge.svg?branch=master)](https://github.com/PatilShreyas/Foodium/actions?query=workflow%3ALint)
 
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23406-2CA3E6.svg?style=flat)](http://androidweekly.net/issues/issue-406)
