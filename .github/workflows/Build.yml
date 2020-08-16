@@ -1,11 +1,5 @@
 name: Build
-on:
-  pull_request:
-    branches:
-      - 'master'
-  push:
-    branches:
-      - 'master'
+on: [push, pull_request]
 
 jobs:
   build_apk:
@@ -18,6 +12,20 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 12
+
+      # Cache gradle
+      - name: Cache Gradle
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.gradle/wrapper/
+          key: cache-clean-wrapper-${{ runner.os }}-${{ matrix.jdk }}
 
       - name: Grant Permission to Execute
         run: chmod +x gradlew
