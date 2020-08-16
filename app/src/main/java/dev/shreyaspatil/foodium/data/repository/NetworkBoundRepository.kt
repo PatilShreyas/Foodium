@@ -45,28 +45,22 @@ abstract class NetworkBoundRepository<RESULT, REQUEST> {
         // Emit Loading State
         emit(State.loading())
 
-        try {
-            // Emit Database content first
-            emit(State.success(fetchFromLocal().first()))
+        // Emit Database content first
+        emit(State.success(fetchFromLocal().first()))
 
-            // Fetch latest posts from remote
-            val apiResponse = fetchFromRemote()
+        // Fetch latest posts from remote
+        val apiResponse = fetchFromRemote()
 
-            // Parse body
-            val remotePosts = apiResponse.body()
+        // Parse body
+        val remotePosts = apiResponse.body()
 
-            // Check for response validation
-            if (apiResponse.isSuccessful && remotePosts != null) {
-                // Save posts into the persistence storage
-                saveRemoteData(remotePosts)
-            } else {
-                // Something went wrong! Emit Error state.
-                emit(State.error(apiResponse.message()))
-            }
-        } catch (e: Exception) {
-            // Exception occurred! Emit error
-            emit(State.error("Network error! Can't get latest posts."))
-            e.printStackTrace()
+        // Check for response validation
+        if (apiResponse.isSuccessful && remotePosts != null) {
+            // Save posts into the persistence storage
+            saveRemoteData(remotePosts)
+        } else {
+            // Something went wrong! Emit Error state.
+            emit(State.error(apiResponse.message()))
         }
 
         // Retrieve posts from persistence storage and emit
@@ -75,6 +69,10 @@ abstract class NetworkBoundRepository<RESULT, REQUEST> {
                 State.success<RESULT>(it)
             }
         )
+    }.catch { e ->
+        // Exception occurred! Emit error
+        emit(State.error("Network error! Can't get latest posts."))
+        e.printStackTrace()
     }
 
     /**
