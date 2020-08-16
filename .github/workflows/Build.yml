@@ -1,11 +1,5 @@
 name: Build
-on:
-  pull_request:
-    branches:
-      - 'master'
-  push:
-    branches:
-      - 'master'
+on: [push, pull_request]
 
 jobs:
   build_apk:
