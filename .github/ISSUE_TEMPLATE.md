@@ -1,6 +1,6 @@
 ---
-name: Bug/Feature request Template
-about: Issue template for reporting bug or feature request
+name: Bug/Feature request template
+about: Issue Template for reporting bug/feature request.
 title: "[BUG/FEATURE REQUEST] Title"
 labels: ''
 assignees: ''
