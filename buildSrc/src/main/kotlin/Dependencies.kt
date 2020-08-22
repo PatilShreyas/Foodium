@@ -1,5 +1,5 @@
 object Testing {
-    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.5"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9"
     const val room = "androidx.room:room-testing:2.2.5"
     const val jUnit = "junit:junit:4.13"
     const val extJUnit = "androidx.test.ext:junit:1.1.1"
@@ -9,8 +9,8 @@ object Testing {
 }
 
 object Dependencies {
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72"
-    const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.0"
+    const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0"
     const val gradle = "com.android.tools.build:gradle:4.0.1"
     const val daggerHilt = "com.google.dagger:hilt-android-gradle-plugin:2.28-alpha"
     const val ktLint = "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
@@ -42,8 +42,8 @@ object Retrofit {
 }
 
 object Coroutines {
-    const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5"
-    const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5"
+    const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
+    const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
 }
 
 object Android {
