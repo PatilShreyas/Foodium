@@ -64,10 +64,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         setContentView(mViewBinding.root)
 
         // Initialize RecyclerView
-        mViewBinding.postsRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = mAdapter
-        }
+        mViewBinding.postsRecyclerView.adapter = mAdapter
 
         initPosts()
 
