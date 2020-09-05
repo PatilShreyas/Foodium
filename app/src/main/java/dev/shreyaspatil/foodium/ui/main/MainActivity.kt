@@ -35,8 +35,6 @@ import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityOptionsCompat
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.shreyaspatil.MaterialDialog.MaterialDialog
 import dagger.hilt.android.AndroidEntryPoint
 import dev.shreyaspatil.foodium.R
@@ -64,10 +62,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         setContentView(mViewBinding.root)
 
         // Initialize RecyclerView
-        mViewBinding.postsRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = mAdapter
-        }
+        mViewBinding.postsRecyclerView.adapter = mAdapter
 
         initPosts()
 
@@ -77,7 +72,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     private fun initPosts() {
         mViewModel.postsLiveData.observe(
             this,
-            Observer { state ->
+            { state ->
                 when (state) {
                     is State.Loading -> showLoading(true)
                     is State.Success -> {
@@ -118,7 +113,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     private fun handleNetworkChanges() {
         NetworkUtils.getNetworkLiveData(applicationContext).observe(
             this,
-            Observer { isConnected ->
+            { isConnected ->
                 if (!isConnected) {
                     mViewBinding.textViewNetworkStatus.text =
                         getString(R.string.text_no_connectivity)

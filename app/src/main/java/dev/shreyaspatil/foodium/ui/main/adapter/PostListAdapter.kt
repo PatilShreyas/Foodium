@@ -53,10 +53,6 @@ class PostListAdapter(
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) =
         holder.bind(getItem(position), onItemClicked)
 
-    interface OnItemClickListener {
-        fun onItemClicked(post: Post, imageView: ImageView)
-    }
-
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Post>() {
             override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
