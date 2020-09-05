@@ -70,24 +70,22 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     private fun initPosts() {
-        mViewModel.postsLiveData.observe(
-            this,
-            { state ->
-                when (state) {
-                    is State.Loading -> showLoading(true)
-                    is State.Success -> {
-                        if (state.data.isNotEmpty()) {
-                            mAdapter.submitList(state.data.toMutableList())
-                            showLoading(false)
-                        }
-                    }
-                    is State.Error -> {
-                        showToast(state.message)
+        mViewModel.postsLiveData.observe(this) { state ->
+            when (state) {
+                is State.Loading -> showLoading(true)
+                is State.Success -> {
+                    if (state.data.isNotEmpty()) {
+                        mAdapter.submitList(state.data.toMutableList())
                         showLoading(false)
                     }
                 }
+                is State.Error -> {
+                    showToast(state.message)
+                    showLoading(false)
+                }
             }
-        )
+        }
+
 
         mViewBinding.swipeRefreshLayout.setOnRefreshListener {
             getPosts()
@@ -111,38 +109,34 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
      * Observe network changes i.e. Internet Connectivity
      */
     private fun handleNetworkChanges() {
-        NetworkUtils.getNetworkLiveData(applicationContext).observe(
-            this,
-            { isConnected ->
-                if (!isConnected) {
-                    mViewBinding.textViewNetworkStatus.text =
-                        getString(R.string.text_no_connectivity)
-                    mViewBinding.networkStatusLayout.apply {
-                        show()
-                        setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
-                    }
-                } else {
-                    if (mViewModel.postsLiveData.value is State.Error || mAdapter.itemCount == 0) {
-                        getPosts()
-                    }
-                    mViewBinding.textViewNetworkStatus.text = getString(R.string.text_connectivity)
-                    mViewBinding.networkStatusLayout.apply {
-                        setBackgroundColor(getColorRes(R.color.colorStatusConnected))
+        NetworkUtils.getNetworkLiveData(applicationContext).observe(this) { isConnected ->
+            if (!isConnected) {
+                mViewBinding.textViewNetworkStatus.text =
+                    getString(R.string.text_no_connectivity)
+                mViewBinding.networkStatusLayout.apply {
+                    show()
+                    setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
+                }
+            } else {
+                if (mViewModel.postsLiveData.value is State.Error || mAdapter.itemCount == 0) {
+                    getPosts()
+                }
+                mViewBinding.textViewNetworkStatus.text = getString(R.string.text_connectivity)
+                mViewBinding.networkStatusLayout.apply {
+                    setBackgroundColor(getColorRes(R.color.colorStatusConnected))
 
-                        animate()
-                            .alpha(1f)
-                            .setStartDelay(ANIMATION_DURATION)
-                            .setDuration(ANIMATION_DURATION)
-                            .setListener(object : AnimatorListenerAdapter() {
-                                override fun onAnimationEnd(animation: Animator) {
-                                    hide()
-                                }
+                    animate()
+                        .alpha(1f)
+                        .setStartDelay(ANIMATION_DURATION)
+                        .setDuration(ANIMATION_DURATION)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                hide()
                             }
-                            )
-                    }
+                        })
                 }
             }
-        )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

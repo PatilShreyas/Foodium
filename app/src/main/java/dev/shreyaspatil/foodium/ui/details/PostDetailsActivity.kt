@@ -29,7 +29,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.app.ShareCompat
-import androidx.lifecycle.Observer
 import coil.api.load
 import dagger.hilt.android.AndroidEntryPoint
 import dev.shreyaspatil.foodium.R
@@ -61,19 +60,16 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
     }
 
     private fun initPost(postId: Int) {
-        mViewModel.getPost(postId).observe(
-            this,
-            Observer { post ->
-                mViewBinding.postContent.apply {
-                    this@PostDetailsActivity.post = post
+        mViewModel.getPost(postId).observe(this) { post ->
+            mViewBinding.postContent.apply {
+                this@PostDetailsActivity.post = post
 
-                    postTitle.text = post.title
-                    postAuthor.text = post.author
-                    postBody.text = post.body
-                }
-                mViewBinding.imageView.load(post.imageUrl)
+                postTitle.text = post.title
+                postAuthor.text = post.author
+                postBody.text = post.body
             }
-        )
+            mViewBinding.imageView.load(post.imageUrl)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
