@@ -86,7 +86,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             }
         }
 
-
         mViewBinding.swipeRefreshLayout.setOnRefreshListener {
             getPosts()
         }
