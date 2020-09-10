@@ -24,17 +24,13 @@
 
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        tools:context=".ui.main.MainActivity"
-        app:layoutDescription="@xml/activity_main_scene">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/networkStatusLayout"
@@ -54,17 +50,27 @@
                 tools:text="@string/text_no_connectivity" />
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/postsRecyclerView"
-            style="@style/PostsRecyclerStyle"
+        <androidx.constraintlayout.motion.widget.MotionLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            app:layoutDescription="@xml/activity_main_scene"
             app:layout_constraintTop_toBottomOf="@+id/networkStatusLayout"
-            tools:listitem="@layout/item_post" />
+            tools:context=".ui.main.MainActivity">
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/postsRecyclerView"
+                style="@style/PostsRecyclerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/networkStatusLayout"
+                tools:listitem="@layout/item_post" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
