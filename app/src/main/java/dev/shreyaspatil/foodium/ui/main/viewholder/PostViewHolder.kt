@@ -26,7 +26,7 @@ package dev.shreyaspatil.foodium.ui.main.viewholder
 
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ItemPostBinding
 import dev.shreyaspatil.foodium.model.Post
