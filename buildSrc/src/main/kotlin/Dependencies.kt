@@ -1,5 +1,5 @@
 object Testing {
-    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1"
     const val room = "androidx.room:room-testing:2.2.5"
     const val jUnit = "junit:junit:4.13"
     const val extJUnit = "androidx.test.ext:junit:1.1.1"
@@ -9,14 +9,14 @@ object Testing {
 }
 
 object Dependencies {
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.0"
-    const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0"
-    const val gradle = "com.android.tools.build:gradle:4.0.1"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:1.4.20"
+    const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.20"
+    const val gradle = "com.android.tools.build:gradle:4.1.1"
     const val daggerHilt = "com.google.dagger:hilt-android-gradle-plugin:2.28-alpha"
     const val ktLint = "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
-    const val materialDesign = "com.google.android.material:material:1.1.0"
+    const val materialDesign = "com.google.android.material:material:1.2.0"
     const val materialDialog = "com.shreyaspatil:MaterialDialog:2.1"
-    const val coil = "io.coil-kt:coil:0.9.5"
+    const val coil = "io.coil-kt:coil:1.0.0"
 }
 
 object Lifecycle {
@@ -42,8 +42,8 @@ object Retrofit {
 }
 
 object Coroutines {
-    const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
-    const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1"
+    const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
 }
 
 object Android {
