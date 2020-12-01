@@ -26,7 +26,6 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
-    id("kotlin-android-extensions")
     id("dagger.hilt.android.plugin")
     id("org.jlleitschuh.gradle.ktlint")
 }
