@@ -53,7 +53,7 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val postId = intent.extras?.getInt(POST_ID)
-            ?: throw IllegalArgumentException("`postId` must be non-null")
+                ?: throw IllegalArgumentException("`postId` must be non-null")
 
         initPost(postId)
     }
@@ -77,7 +77,7 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
     }
 
     override fun getViewBinding(): ActivityPostDetailsBinding =
-        ActivityPostDetailsBinding.inflate(layoutInflater)
+            ActivityPostDetailsBinding.inflate(layoutInflater)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
