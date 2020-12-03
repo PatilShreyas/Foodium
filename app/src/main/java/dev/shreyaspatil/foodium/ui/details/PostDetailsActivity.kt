@@ -30,6 +30,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.core.app.ShareCompat
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import dev.shreyaspatil.foodium.R
@@ -72,13 +73,24 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.detail_menu, menu)
-        return true
+    private fun share() {
+        val shareMsg = getString(R.string.share_message, post.title, post.author)
+
+        val intent = ShareCompat.IntentBuilder.from(this)
+            .setType("text/plain")
+            .setText(shareMsg)
+            .intent
+
+        startActivity(Intent.createChooser(intent, null))
     }
 
     override fun getViewBinding(): ActivityPostDetailsBinding =
         ActivityPostDetailsBinding.inflate(layoutInflater)
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        return true
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -88,28 +100,12 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
             }
 
             R.id.action_share -> {
-                showShareTray()
+                share()
                 return true
             }
         }
 
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun showShareTray() {
-        val shareMsg = getString(
-                R.string.share_message,
-                post.title,
-                post.author
-        )
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.apply {
-            type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, shareMsg)
-            putExtra(Intent.EXTRA_TITLE, post.title)
-        }
-
-        startActivity(Intent.createChooser(intent, null))
     }
 
     companion object {
