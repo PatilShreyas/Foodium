@@ -188,7 +188,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             imageView,
             imageView.transitionName
         )
-        PostDetailsActivity.start(this, post.id, options)
+        val intent = PostDetailsActivity.getStartIntent(this, post.id)
+        startActivity(intent, options.toBundle())
     }
 
     companion object {

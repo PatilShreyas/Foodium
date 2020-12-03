@@ -114,10 +114,8 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
     companion object {
         private const val POST_ID = "postId"
 
-        fun start(context: Context, postId: Int?, options: ActivityOptionsCompat) {
-            val intent = Intent(context, PostDetailsActivity::class.java)
-            intent.putExtra(POST_ID, postId)
-            context.startActivity(intent, options.toBundle())
+        fun getStartIntent(context: Context, postId: Int?) = Intent(context, PostDetailsActivity::class.java).apply {
+            putExtra(POST_ID, postId)
         }
     }
 }
