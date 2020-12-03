@@ -24,8 +24,8 @@
 
 package dev.shreyaspatil.foodium.ui.details
 
-import android.content.Context
 import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -73,13 +73,24 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.detail_menu, menu)
-        return true
+    private fun share() {
+        val shareMsg = getString(R.string.share_message, post.title, post.author)
+
+        val intent = ShareCompat.IntentBuilder.from(this)
+            .setType("text/plain")
+            .setText(shareMsg)
+            .intent
+
+        startActivity(Intent.createChooser(intent, null))
     }
 
     override fun getViewBinding(): ActivityPostDetailsBinding =
         ActivityPostDetailsBinding.inflate(layoutInflater)
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        return true
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -89,20 +100,7 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
             }
 
             R.id.action_share -> {
-                val shareMsg = getString(
-                    R.string.share_message,
-                    post.title,
-                    post.author
-                )
-
-                val intent = ShareCompat.IntentBuilder.from(this)
-                    .setType("text/plain")
-                    .setText(shareMsg)
-                    .intent
-
-                if (intent.resolveActivity(packageManager) != null) {
-                    startActivity(intent)
-                }
+                share()
                 return true
             }
         }
