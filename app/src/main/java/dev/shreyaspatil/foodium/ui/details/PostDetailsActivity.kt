@@ -30,7 +30,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.ShareCompat
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
