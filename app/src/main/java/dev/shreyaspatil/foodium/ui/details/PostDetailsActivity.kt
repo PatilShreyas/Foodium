@@ -24,10 +24,13 @@
 
 package dev.shreyaspatil.foodium.ui.details
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.ShareCompat
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
@@ -109,6 +112,12 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
     }
 
     companion object {
-        const val POST_ID = "postId"
+        private const val POST_ID = "postId"
+
+        fun start(context: Context, postId: Int?, options: ActivityOptionsCompat) {
+            val intent = Intent(context, PostDetailsActivity::class.java)
+            intent.putExtra(POST_ID, postId)
+            context.startActivity(intent, options.toBundle())
+        }
     }
 }

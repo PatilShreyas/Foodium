@@ -26,7 +26,6 @@ package dev.shreyaspatil.foodium.ui.main
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
@@ -183,16 +182,13 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     private fun onItemClicked(post: Post, imageView: ImageView) {
-        val intent = Intent(this, PostDetailsActivity::class.java)
-        intent.putExtra(PostDetailsActivity.POST_ID, post.id)
 
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
             this,
             imageView,
             imageView.transitionName
         )
-
-        startActivity(intent, options.toBundle())
+        PostDetailsActivity.start(this, post.id, options)
     }
 
     companion object {
