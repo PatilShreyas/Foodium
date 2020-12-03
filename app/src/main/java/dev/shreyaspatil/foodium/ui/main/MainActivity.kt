@@ -182,13 +182,16 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     private fun onItemClicked(post: Post, imageView: ImageView) {
-
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
             this,
             imageView,
             imageView.transitionName
         )
-        val intent = PostDetailsActivity.getStartIntent(this, post.id)
+        val postId = post.id ?: run {
+            showToast("Unable to launch details")
+            return
+        }
+        val intent = PostDetailsActivity.getStartIntent(this, postId)
         startActivity(intent, options.toBundle())
     }
 
