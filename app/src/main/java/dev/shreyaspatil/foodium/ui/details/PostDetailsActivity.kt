@@ -47,7 +47,6 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
 
     override val mViewModel: PostDetailsViewModel by viewModels()
     private lateinit var binding: ActivityPostDetailsBinding
-
     private lateinit var post: Post
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,14 +67,12 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
 
     private fun initPost() {
         mViewModel.postDetail.observe(this, Observer { post ->
-            Log.d("TAG", "initPost: $post")
             this.post = post
         })
     }
 
     private fun share() {
         val shareMsg = getString(R.string.share_message, post.title, post.author)
-
         val intent = ShareCompat.IntentBuilder.from(this)
             .setType("text/plain")
             .setText(shareMsg)
