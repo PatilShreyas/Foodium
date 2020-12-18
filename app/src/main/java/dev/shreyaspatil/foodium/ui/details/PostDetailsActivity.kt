@@ -27,13 +27,11 @@ package dev.shreyaspatil.foodium.ui.details
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ActivityPostDetailsBinding
@@ -66,7 +64,7 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
     }
 
     private fun initPost() {
-        mViewModel.postDetail.observe(this, Observer { post ->
+        mViewModel.postDetail.observe(this) { post ->
             this.post = post
         })
     }

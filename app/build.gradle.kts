@@ -77,7 +77,6 @@ android {
     packagingOptions {
         exclude("META-INF/*.kotlin_module")
     }
-
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
@@ -147,16 +146,18 @@ dependencies {
     androidTestImplementation(Testing.extJUnit)
     androidTestImplementation(Testing.espresso)
 
+    //Binding
     kapt(Binding.binding)
     implementation(Binding.viewModel)
     implementation(Binding.ext)
 
-
+    //Glide
     implementation(Glide.glide)
     implementation(Glide.annotation)
     implementation(Glide.integration)
     kapt(Glide.kapt)
 
+    //ViewModel
     implementation(Lifecycle.viewModel)
     implementation(Lifecycle.liveData)
     implementation(Lifecycle.ext)

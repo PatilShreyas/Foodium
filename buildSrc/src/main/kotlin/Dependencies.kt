@@ -23,7 +23,7 @@ object Lifecycle {
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     const val ext = "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    const val arch ="android.arch.lifecycle:extensions:1.1.1"
+    const val arch = "android.arch.lifecycle:extensions:1.1.1"
 }
 
 object Hilt {
