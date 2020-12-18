@@ -24,10 +24,15 @@
 
 package dev.shreyaspatil.foodium.ui.details
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import dev.shreyaspatil.foodium.data.repository.PostsRepository
+import dev.shreyaspatil.foodium.model.Post
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
@@ -38,5 +43,14 @@ class PostDetailsViewModel @ViewModelInject constructor(
     private val postsRepository: PostsRepository
 ) : ViewModel() {
 
-    fun getPost(id: Int) = postsRepository.getPostById(id).asLiveData()
+    private var _postDetail = MutableLiveData<Post>()
+
+    val postDetail: LiveData<Post>
+        get() = _postDetail
+
+    fun getPost(id: Int) {
+        postsRepository.getPostById(id).asLiveData().observeForever {
+            _postDetail.value = it
+        }
+    }
 }

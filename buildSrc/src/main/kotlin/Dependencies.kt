@@ -22,6 +22,8 @@ object Dependencies {
 object Lifecycle {
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    const val ext = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    const val arch ="android.arch.lifecycle:extensions:1.1.1"
 }
 
 object Hilt {
@@ -29,6 +31,19 @@ object Hilt {
     const val hiltCompiler = "androidx.hilt:hilt-compiler:1.0.0-alpha01"
     const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
     const val hiltAndroid = "com.google.dagger:hilt-android:2.28-alpha"
+}
+
+object Binding {
+    const val binding = "com.android.databinding:compiler:3.1.4"
+    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    const val ext = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+}
+
+object Glide {
+    const val glide = "com.github.bumptech.glide:glide:4.11.0"
+    const val annotation = "com.github.bumptech.glide:annotations:4.11.0"
+    const val integration = "com.github.bumptech.glide:okhttp3-integration:4.11.0"
+    const val kapt = "com.github.bumptech.glide:compiler:4.11.0"
 }
 
 object Moshi {
@@ -52,6 +67,7 @@ object Android {
     const val coreKtx = "androidx.core:core-ktx:1.2.0"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    const val androidx = "androidx.lifecycle:lifecycle-extensions:2.2.0"
 }
 
 object Room {

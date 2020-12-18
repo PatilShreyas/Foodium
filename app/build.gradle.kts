@@ -57,6 +57,7 @@ android {
     }
 
     buildFeatures.viewBinding = true
+    buildFeatures.dataBinding = true
 
     buildTypes {
         getByName("release") {
@@ -76,6 +77,7 @@ android {
     packagingOptions {
         exclude("META-INF/*.kotlin_module")
     }
+
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
@@ -100,6 +102,8 @@ dependencies {
     implementation(Android.coreKtx)
     implementation(Android.constraintLayout)
     implementation(Android.swipeRefreshLayout)
+    implementation(Android.swipeRefreshLayout)
+    implementation(Android.androidx)
 
     // Architecture Components
     implementation(Lifecycle.viewModel)
@@ -142,6 +146,21 @@ dependencies {
     // Android Testing
     androidTestImplementation(Testing.extJUnit)
     androidTestImplementation(Testing.espresso)
+
+    kapt(Binding.binding)
+    implementation(Binding.viewModel)
+    implementation(Binding.ext)
+
+
+    implementation(Glide.glide)
+    implementation(Glide.annotation)
+    implementation(Glide.integration)
+    kapt(Glide.kapt)
+
+    implementation(Lifecycle.viewModel)
+    implementation(Lifecycle.liveData)
+    implementation(Lifecycle.ext)
+    implementation(Lifecycle.arch)
 }
 
 ktlint {

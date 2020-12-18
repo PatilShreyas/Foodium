@@ -24,14 +24,16 @@
 
 package dev.shreyaspatil.foodium.ui.details
 
-import android.content.Intent
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.app.ShareCompat
-import coil.load
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ActivityPostDetailsBinding
@@ -44,12 +46,15 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetailsBinding>() {
 
     override val mViewModel: PostDetailsViewModel by viewModels()
+    private lateinit var binding: ActivityPostDetailsBinding
 
     private lateinit var post: Post
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mViewBinding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_post_details)
+        binding.viewModel = mViewModel
+        binding.lifecycleOwner = this
 
         setSupportActionBar(mViewBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -57,20 +62,15 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
         val postId = intent.extras?.getInt(POST_ID)
             ?: throw IllegalArgumentException("`postId` must be non-null")
 
-        initPost(postId)
+        mViewModel.getPost(postId)
+        initPost()
     }
 
-    private fun initPost(postId: Int) {
-        mViewModel.getPost(postId).observe(this) { post ->
-            mViewBinding.postContent.apply {
-                this@PostDetailsActivity.post = post
-
-                postTitle.text = post.title
-                postAuthor.text = post.author
-                postBody.text = post.body
-            }
-            mViewBinding.imageView.load(post.imageUrl)
-        }
+    private fun initPost() {
+        mViewModel.postDetail.observe(this, Observer { post ->
+            Log.d("TAG", "initPost: $post")
+            this.post = post
+        })
     }
 
     private fun share() {
