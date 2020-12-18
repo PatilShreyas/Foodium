@@ -146,18 +146,18 @@ dependencies {
     androidTestImplementation(Testing.extJUnit)
     androidTestImplementation(Testing.espresso)
 
-    //Binding
+    // Binding
     kapt(Binding.binding)
     implementation(Binding.viewModel)
     implementation(Binding.ext)
 
-    //Glide
+    // Glide
     implementation(Glide.glide)
     implementation(Glide.annotation)
     implementation(Glide.integration)
     kapt(Glide.kapt)
 
-    //ViewModel
+    // ViewModel
     implementation(Lifecycle.viewModel)
     implementation(Lifecycle.liveData)
     implementation(Lifecycle.ext)

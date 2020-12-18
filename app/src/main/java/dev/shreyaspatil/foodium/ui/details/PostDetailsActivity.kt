@@ -66,7 +66,7 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
     private fun initPost() {
         mViewModel.postDetail.observe(this) { post ->
             this.post = post
-        })
+        }
     }
 
     private fun share() {

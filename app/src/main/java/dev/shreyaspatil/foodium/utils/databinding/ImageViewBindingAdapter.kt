@@ -12,5 +12,4 @@ fun ImageView.LoadImageUrl(imageUrl: String?, placeholder: Drawable?) {
         .placeholder(placeholder)
         .error(placeholder)
         .into(this)
-
 }
