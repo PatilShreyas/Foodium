@@ -26,7 +26,6 @@ package dev.shreyaspatil.foodium.data.repository
 
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
-import dev.shreyaspatil.foodium.model.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
@@ -40,13 +39,10 @@ import retrofit2.Response
 @ExperimentalCoroutinesApi
 abstract class NetworkBoundRepository<RESULT, REQUEST> {
 
-    fun asFlow() = flow<State<RESULT>> {
-
-        // Emit Loading State
-        emit(State.loading())
+    fun asFlow() = flow<Resource<RESULT>> {
 
         // Emit Database content first
-        emit(State.success(fetchFromLocal().first()))
+        emit(Resource.Success(fetchFromLocal().first()))
 
         // Fetch latest posts from remote
         val apiResponse = fetchFromRemote()
@@ -60,19 +56,18 @@ abstract class NetworkBoundRepository<RESULT, REQUEST> {
             saveRemoteData(remotePosts)
         } else {
             // Something went wrong! Emit Error state.
-            emit(State.error(apiResponse.message()))
+            emit(Resource.Error(apiResponse.message()))
         }
 
         // Retrieve posts from persistence storage and emit
         emitAll(
             fetchFromLocal().map {
-                State.success<RESULT>(it)
+                Resource.Success<RESULT>(it)
             }
         )
     }.catch { e ->
-        // Exception occurred! Emit error
-        emit(State.error("Network error! Can't get latest posts."))
         e.printStackTrace()
+        emit(Resource.Error("Network error! Can't get latest posts."))
     }
 
     /**

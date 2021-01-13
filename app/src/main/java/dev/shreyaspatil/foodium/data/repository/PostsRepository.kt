@@ -28,7 +28,6 @@ import androidx.annotation.MainThread
 import dev.shreyaspatil.foodium.data.local.dao.PostsDao
 import dev.shreyaspatil.foodium.data.remote.api.FoodiumService
 import dev.shreyaspatil.foodium.model.Post
-import dev.shreyaspatil.foodium.model.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
@@ -50,7 +49,7 @@ class PostsRepository @Inject constructor(
      * Fetched the posts from network and stored it in database. At the end, data from persistence
      * storage is fetched and emitted.
      */
-    fun getAllPosts(): Flow<State<List<Post>>> {
+    fun getAllPosts(): Flow<Resource<List<Post>>> {
         return object : NetworkBoundRepository<List<Post>, List<Post>>() {
 
             override suspend fun saveRemoteData(response: List<Post>) =
