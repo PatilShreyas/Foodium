@@ -34,6 +34,8 @@ import dev.shreyaspatil.foodium.model.Post
 import dev.shreyaspatil.foodium.model.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 /**
@@ -45,14 +47,14 @@ class MainViewModel @ViewModelInject constructor(private val postsRepository: Po
 
     private val _postsLiveData = MutableLiveData<State<List<Post>>>()
 
-    val postsLiveData: LiveData<State<List<Post>>>
-        get() = _postsLiveData
+    val postsLiveData: LiveData<State<List<Post>>> = _postsLiveData
 
     fun getPosts() {
         viewModelScope.launch {
-            postsRepository.getAllPosts().collect {
-                _postsLiveData.value = it
-            }
+            postsRepository.getAllPosts()
+                .onStart { _postsLiveData.value = State.loading() }
+                .map { resource -> State.fromResource(resource) }
+                .collect { state -> _postsLiveData.value = state }
         }
     }
 }
