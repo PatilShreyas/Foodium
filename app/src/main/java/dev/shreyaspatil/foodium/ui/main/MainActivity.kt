@@ -60,15 +60,31 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(mViewBinding.root)
 
-        // Initialize RecyclerView
-        mViewBinding.postsRecyclerView.adapter = mAdapter
+        initView()
+    }
 
-        initPosts()
-
+    override fun onStart() {
+        super.onStart()
+        observePosts()
         handleNetworkChanges()
     }
 
-    private fun initPosts() {
+    fun initView() {
+        mViewBinding.run {
+            postsRecyclerView.adapter = mAdapter
+
+            swipeRefreshLayout.setOnRefreshListener { getPosts() }
+        }
+
+        // If Current State isn't `Success` then reload posts.
+        mViewModel.postsLiveData.value?.let { currentState ->
+            if (!currentState.isSuccessful()) {
+                getPosts()
+            }
+        }
+    }
+
+    private fun observePosts() {
         mViewModel.postsLiveData.observe(this) { state ->
             when (state) {
                 is State.Loading -> showLoading(true)
@@ -84,20 +100,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                 }
             }
         }
-
-        mViewBinding.swipeRefreshLayout.setOnRefreshListener {
-            getPosts()
-        }
-
-        // If State isn't `Success` then reload posts.
-        if (mViewModel.postsLiveData.value !is State.Success) {
-            getPosts()
-        }
     }
 
-    private fun getPosts() {
-        mViewModel.getPosts()
-    }
+    private fun getPosts() = mViewModel.getPosts()
 
     private fun showLoading(isLoading: Boolean) {
         mViewBinding.swipeRefreshLayout.isRefreshing = isLoading
@@ -196,6 +201,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     companion object {
-        const val ANIMATION_DURATION = 1000.toLong()
+        const val ANIMATION_DURATION = 1000L
     }
 }
