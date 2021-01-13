@@ -56,7 +56,7 @@ abstract class NetworkBoundRepository<RESULT, REQUEST> {
             saveRemoteData(remotePosts)
         } else {
             // Something went wrong! Emit Error state.
-            emit(Resource.Error(apiResponse.message()))
+            emit(Resource.Failed(apiResponse.message()))
         }
 
         // Retrieve posts from persistence storage and emit
@@ -67,7 +67,7 @@ abstract class NetworkBoundRepository<RESULT, REQUEST> {
         )
     }.catch { e ->
         e.printStackTrace()
-        emit(Resource.Error("Network error! Can't get latest posts."))
+        emit(Resource.Failed("Network error! Can't get latest posts."))
     }
 
     /**
