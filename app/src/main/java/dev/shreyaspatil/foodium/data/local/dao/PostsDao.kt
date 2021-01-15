@@ -43,7 +43,7 @@ interface PostsDao {
      * @param posts Posts
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPosts(posts: List<Post>)
+    suspend fun addPosts(posts: List<Post>)
 
     /**
      * Deletes all the posts from the [Post.TABLE_NAME] table.

@@ -24,12 +24,12 @@
 
 package dev.shreyaspatil.foodium.ui.main
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.shreyaspatil.foodium.data.repository.PostsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.shreyaspatil.foodium.data.repository.PostRepository
 import dev.shreyaspatil.foodium.model.Post
 import dev.shreyaspatil.foodium.model.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -37,12 +37,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * ViewModel for [MainActivity]
  */
 @ExperimentalCoroutinesApi
-class MainViewModel @ViewModelInject constructor(private val postsRepository: PostsRepository) :
+@HiltViewModel
+class MainViewModel @Inject constructor(private val postRepository: PostRepository) :
     ViewModel() {
 
     private val _postsLiveData = MutableLiveData<State<List<Post>>>()
@@ -51,7 +53,7 @@ class MainViewModel @ViewModelInject constructor(private val postsRepository: Po
 
     fun getPosts() {
         viewModelScope.launch {
-            postsRepository.getAllPosts()
+            postRepository.getAllPosts()
                 .onStart { _postsLiveData.value = State.loading() }
                 .map { resource -> State.fromResource(resource) }
                 .collect { state -> _postsLiveData.value = state }

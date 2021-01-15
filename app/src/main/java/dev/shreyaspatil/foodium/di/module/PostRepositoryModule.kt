@@ -22,23 +22,23 @@
  * SOFTWARE.
  */
 
-package dev.shreyaspatil.foodium.ui.details
+package dev.shreyaspatil.foodium.di.module
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
+import dev.shreyaspatil.foodium.data.repository.DefaultPostRepository
 import dev.shreyaspatil.foodium.data.repository.PostRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import javax.inject.Inject
 
-/**
- * ViewModel for [PostDetailsActivity]
- */
 @ExperimentalCoroutinesApi
-@HiltViewModel
-class PostDetailsViewModel @Inject constructor(
-    private val postRepository: PostRepository
-) : ViewModel() {
+@InstallIn(ViewModelComponent::class)
+@Module
+abstract class PostRepositoryModule {
 
-    fun getPost(id: Int) = postRepository.getPostById(id).asLiveData()
+    @ViewModelScoped
+    @Binds
+    abstract fun bindPostRepository(repository: DefaultPostRepository): PostRepository
 }
