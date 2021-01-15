@@ -59,7 +59,7 @@ class PostsDaoTest {
             Post(2, "Test 2", "Test 2", "Test 3")
         )
 
-        mDatabase.getPostsDao().insertPosts(posts)
+        mDatabase.getPostsDao().addPosts(posts)
 
         val dbPosts = mDatabase.getPostsDao().getAllPosts().toList()[0]
 
@@ -74,7 +74,7 @@ class PostsDaoTest {
             Post(2, "Test 2", "Test 2", "Test 3")
         )
 
-        mDatabase.getPostsDao().insertPosts(posts)
+        mDatabase.getPostsDao().addPosts(posts)
 
         var dbPost = mDatabase.getPostsDao().getPostById(1)
         assertThat(dbPost.toList()[0], equalTo(posts[0]))
