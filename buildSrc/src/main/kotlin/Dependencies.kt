@@ -9,10 +9,10 @@ object Testing {
 }
 
 object Dependencies {
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:1.4.20"
-    const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.20"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:1.4.21"
+    const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21"
     const val gradle = "com.android.tools.build:gradle:4.1.1"
-    const val daggerHilt = "com.google.dagger:hilt-android-gradle-plugin:2.28-alpha"
+    const val daggerHilt = "com.google.dagger:hilt-android-gradle-plugin:2.31-alpha"
     const val ktLint = "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
     const val materialDesign = "com.google.android.material:material:1.2.0"
     const val materialDialog = "com.shreyaspatil:MaterialDialog:2.1"
@@ -25,10 +25,10 @@ object Lifecycle {
 }
 
 object Hilt {
-    const val daggerCompiler = "com.google.dagger:hilt-android-compiler:2.28-alpha"
-    const val hiltCompiler = "androidx.hilt:hilt-compiler:1.0.0-alpha01"
-    const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
-    const val hiltAndroid = "com.google.dagger:hilt-android:2.28-alpha"
+    const val daggerCompiler = "com.google.dagger:hilt-android-compiler:2.31-alpha"
+    const val hiltCompiler = "androidx.hilt:hilt-compiler:1.0.0-alpha02"
+    const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"
+    const val hiltAndroid = "com.google.dagger:hilt-android:2.31-alpha"
 }
 
 object Moshi {
@@ -55,7 +55,7 @@ object Android {
 }
 
 object Room {
-    const val compiler = "androidx.room:room-compiler:2.2.5"
-    const val ktx = "androidx.room:room-ktx:2.2.5"
-    const val runtime = "androidx.room:room-runtime:2.2.5"
+    const val compiler = "androidx.room:room-compiler:2.2.6"
+    const val ktx = "androidx.room:room-ktx:2.2.6"
+    const val runtime = "androidx.room:room-runtime:2.2.6"
 }
