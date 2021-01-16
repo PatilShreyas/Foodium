@@ -32,9 +32,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 interface PostRepository {
     fun getAllPosts(): Flow<Resource<List<Post>>>
     fun getPostById(postId: Int): Flow<Post>
@@ -45,7 +43,6 @@ interface PostRepository {
  * for offline capability. This is Single source of data.
  */
 @ExperimentalCoroutinesApi
-@Singleton
 class DefaultPostRepository @Inject constructor(
     private val postsDao: PostsDao,
     private val foodiumService: FoodiumService

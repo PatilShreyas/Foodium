@@ -24,8 +24,8 @@
 
 package dev.shreyaspatil.foodium.ui.details
 
-import android.content.Intent
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -35,17 +35,23 @@ import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import dev.shreyaspatil.foodium.R
 import dev.shreyaspatil.foodium.databinding.ActivityPostDetailsBinding
-import dev.shreyaspatil.foodium.model.Post
 import dev.shreyaspatil.foodium.ui.base.BaseActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetailsBinding>() {
 
-    override val mViewModel: PostDetailsViewModel by viewModels()
+    @Inject
+    lateinit var viewModelFactory: PostDetailsViewModel.PostDetailsViewModelFactory
 
-    private lateinit var post: Post
+    override val mViewModel: PostDetailsViewModel by viewModels {
+        val postId = intent.extras?.getInt(KEY_POST_ID)
+            ?: throw IllegalArgumentException("`postId` must be non-null")
+
+        PostDetailsViewModel.provideFactory(viewModelFactory, postId)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,18 +59,16 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
 
         setSupportActionBar(mViewBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val postId = intent.extras?.getInt(POST_ID)
-            ?: throw IllegalArgumentException("`postId` must be non-null")
-
-        initPost(postId)
     }
 
-    private fun initPost(postId: Int) {
-        mViewModel.getPost(postId).observe(this) { post ->
-            mViewBinding.postContent.apply {
-                this@PostDetailsActivity.post = post
+    override fun onStart() {
+        super.onStart()
+        initPost()
+    }
 
+    private fun initPost() {
+        mViewModel.post.observe(this) { post ->
+            mViewBinding.postContent.apply {
                 postTitle.text = post.title
                 postAuthor.text = post.author
                 postBody.text = post.body
@@ -74,6 +78,7 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
     }
 
     private fun share() {
+        val post = mViewModel.post.value ?: return
         val shareMsg = getString(R.string.share_message, post.title, post.author)
 
         val intent = ShareCompat.IntentBuilder.from(this)
@@ -109,11 +114,11 @@ class PostDetailsActivity : BaseActivity<PostDetailsViewModel, ActivityPostDetai
     }
 
     companion object {
-        private const val POST_ID = "postId"
+        private const val KEY_POST_ID = "postId"
 
         fun getStartIntent(
             context: Context,
             postId: Int
-        ) = Intent(context, PostDetailsActivity::class.java).apply { putExtra(POST_ID, postId) }
+        ) = Intent(context, PostDetailsActivity::class.java).apply { putExtra(KEY_POST_ID, postId) }
     }
 }
