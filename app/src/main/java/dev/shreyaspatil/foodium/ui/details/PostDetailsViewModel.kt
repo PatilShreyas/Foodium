@@ -25,20 +25,39 @@
 package dev.shreyaspatil.foodium.ui.details
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
-import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dev.shreyaspatil.foodium.data.repository.PostRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import javax.inject.Inject
 
 /**
  * ViewModel for [PostDetailsActivity]
  */
 @ExperimentalCoroutinesApi
-@HiltViewModel
-class PostDetailsViewModel @Inject constructor(
-    private val postRepository: PostRepository
+class PostDetailsViewModel @AssistedInject constructor(
+    postRepository: PostRepository,
+    @Assisted postId: Int
 ) : ViewModel() {
 
-    fun getPost(id: Int) = postRepository.getPostById(id).asLiveData()
+    val post = postRepository.getPostById(postId).asLiveData()
+
+    @AssistedFactory
+    interface PostDetailsViewModelFactory {
+        fun create(postId: Int): PostDetailsViewModel
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    companion object {
+        fun provideFactory(
+            assistedFactory: PostDetailsViewModelFactory,
+            postId: Int
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return assistedFactory.create(postId) as T
+            }
+        }
+    }
 }
