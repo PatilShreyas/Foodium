@@ -27,18 +27,22 @@ package dev.shreyaspatil.foodium.di.module
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import dev.shreyaspatil.foodium.data.repository.DefaultPostRepository
 import dev.shreyaspatil.foodium.data.repository.PostRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+/**
+ * Currently PostRepository is only used in ViewModels.
+ * PostDetailsViewModel is not injected using @HiltViewModel so can't install in ViewModelComponent.
+ */
 @ExperimentalCoroutinesApi
-@InstallIn(ViewModelComponent::class)
+@InstallIn(ActivityRetainedComponent::class)
 @Module
 abstract class PostRepositoryModule {
 
-    @ViewModelScoped
+    @ActivityRetainedScoped
     @Binds
     abstract fun bindPostRepository(repository: DefaultPostRepository): PostRepository
 }
