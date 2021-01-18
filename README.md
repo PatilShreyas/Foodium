@@ -109,6 +109,10 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 If you want to contribute to this library, you're always welcome!
 See [Contributing Guidelines](CONTRIBUTING.md). 
 
+## Discuss 💬
+
+Have any questions, doubts or want to present your opinions, views? You're always welcome. You can [start discussions](https://github.com/PatilShreyas/Foodium/discussions).
+
 ## Contact
 If you need any help, you can connect with me.
 
