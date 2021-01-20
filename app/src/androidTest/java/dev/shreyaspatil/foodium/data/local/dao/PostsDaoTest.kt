@@ -30,7 +30,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import dev.shreyaspatil.foodium.data.local.FoodiumPostsDatabase
 import dev.shreyaspatil.foodium.model.Post
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
