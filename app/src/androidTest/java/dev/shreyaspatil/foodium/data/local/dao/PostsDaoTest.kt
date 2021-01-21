@@ -29,7 +29,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import dev.shreyaspatil.foodium.data.local.FoodiumPostsDatabase
 import dev.shreyaspatil.foodium.model.Post
-import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
@@ -61,7 +61,7 @@ class PostsDaoTest {
 
         mDatabase.getPostsDao().addPosts(posts)
 
-        val dbPosts = mDatabase.getPostsDao().getAllPosts().toList()[0]
+        val dbPosts = mDatabase.getPostsDao().getAllPosts().first()
 
         assertThat(dbPosts, equalTo(posts))
     }
@@ -76,11 +76,11 @@ class PostsDaoTest {
 
         mDatabase.getPostsDao().addPosts(posts)
 
-        var dbPost = mDatabase.getPostsDao().getPostById(1)
-        assertThat(dbPost.toList()[0], equalTo(posts[0]))
+        var dbPost = mDatabase.getPostsDao().getPostById(1).first()
+        assertThat(dbPost, equalTo(posts[0]))
 
-        dbPost = mDatabase.getPostsDao().getPostById(1)
-        assertThat(dbPost.toList()[1], equalTo(posts[1]))
+        dbPost = mDatabase.getPostsDao().getPostById(2).first()
+        assertThat(dbPost, equalTo(posts[1]))
     }
 
     @After
