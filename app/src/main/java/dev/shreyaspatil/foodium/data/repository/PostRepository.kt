@@ -30,6 +30,8 @@ import dev.shreyaspatil.foodium.data.remote.api.FoodiumService
 import dev.shreyaspatil.foodium.model.Post
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -69,5 +71,5 @@ class DefaultPostRepository @Inject constructor(
      * @return [Post] data fetched from the database.
      */
     @MainThread
-    override fun getPostById(postId: Int): Flow<Post> = postsDao.getPostByIdUntilChanged(postId)
+    override fun getPostById(postId: Int): Flow<Post> = postsDao.getPostById(postId).distinctUntilChanged()
 }

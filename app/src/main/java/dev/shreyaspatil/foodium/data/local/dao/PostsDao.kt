@@ -60,8 +60,6 @@ interface PostsDao {
     @Query("SELECT * FROM ${Post.TABLE_NAME} WHERE ID = :postId")
     fun getPostById(postId: Int): Flow<Post>
 
-    fun getPostByIdUntilChanged(id: Int) = getPostById(id).distinctUntilChanged()
-
     /**
      * Fetches all the posts from the [Post.TABLE_NAME] table.
      * @return [Flow]
