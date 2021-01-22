@@ -30,7 +30,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import dev.shreyaspatil.foodium.model.Post
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
 
 /**
  * Data Access Object (DAO) for [dev.shreyaspatil.foodium.data.local.FoodiumPostsDatabase]
