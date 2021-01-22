@@ -69,5 +69,5 @@ class DefaultPostRepository @Inject constructor(
      * @return [Post] data fetched from the database.
      */
     @MainThread
-    override fun getPostById(postId: Int): Flow<Post> = postsDao.getPostById(postId)
+    override fun getPostById(postId: Int): Flow<Post> = postsDao.getPostByIdUntilChanged(postId)
 }

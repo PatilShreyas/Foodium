@@ -30,6 +30,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import dev.shreyaspatil.foodium.model.Post
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 /**
  * Data Access Object (DAO) for [dev.shreyaspatil.foodium.data.local.FoodiumPostsDatabase]
@@ -58,6 +59,8 @@ interface PostsDao {
      */
     @Query("SELECT * FROM ${Post.TABLE_NAME} WHERE ID = :postId")
     fun getPostById(postId: Int): Flow<Post>
+
+    fun getPostByIdUntilChanged(id: Int) = getPostById(id).distinctUntilChanged()
 
     /**
      * Fetches all the posts from the [Post.TABLE_NAME] table.
