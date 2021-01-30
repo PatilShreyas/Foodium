@@ -24,6 +24,8 @@
 
 package dev.shreyaspatil.foodium.data.repository
 
+import androidx.annotation.MainThread
+import androidx.annotation.WorkerThread
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
@@ -36,9 +38,9 @@ import retrofit2.Response
  */
 @ExperimentalCoroutinesApi
 inline fun <RESULT, REQUEST> networkBoundResource(
-    crossinline fetchFromLocal: () -> Flow<RESULT>,
-    crossinline fetchFromRemote: suspend () -> Response<REQUEST>,
-    crossinline saveRemoteData: suspend (response: REQUEST) -> Unit,
+    @MainThread crossinline fetchFromLocal: () -> Flow<RESULT>,
+    @MainThread crossinline fetchFromRemote: suspend () -> Response<REQUEST>,
+    @WorkerThread crossinline saveRemoteData: suspend (response: REQUEST) -> Unit,
 ): Flow<Resource<RESULT>> {
     return flow<Resource<RESULT>> {
 
