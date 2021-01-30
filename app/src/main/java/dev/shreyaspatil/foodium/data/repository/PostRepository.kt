@@ -54,14 +54,11 @@ class DefaultPostRepository @Inject constructor(
      * storage is fetched and emitted.
      */
     override fun getAllPosts(): Flow<Resource<List<Post>>> {
-        return object : NetworkBoundRepository<List<Post>, List<Post>>() {
-
-            override suspend fun saveRemoteData(response: List<Post>) = postsDao.addPosts(response)
-
-            override fun fetchFromLocal(): Flow<List<Post>> = postsDao.getAllPosts()
-
-            override suspend fun fetchFromRemote(): Response<List<Post>> = foodiumService.getPosts()
-        }.asFlow()
+        return networkBoundResource(
+            fetchFromLocal = { postsDao.getAllPosts() },
+            fetchFromRemote = { foodiumService.getPosts() },
+            saveRemoteData = { postsDao.addPosts(it) }
+        )
     }
 
     /**

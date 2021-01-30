@@ -24,22 +24,23 @@
 
 package dev.shreyaspatil.foodium.data.repository
 
-import androidx.annotation.MainThread
-import androidx.annotation.WorkerThread
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
 
 /**
- * A repository which provides resource from local database as well as remote end point.
+ * A helper function which provides resource from local database as well as remote end point.
  *
  * [RESULT] represents the type for database.
  * [REQUEST] represents the type for network.
  */
 @ExperimentalCoroutinesApi
-abstract class NetworkBoundRepository<RESULT, REQUEST> {
-
-    fun asFlow() = flow<Resource<RESULT>> {
+inline fun <RESULT, REQUEST> networkBoundResource(
+    crossinline fetchFromLocal: () -> Flow<RESULT>,
+    crossinline fetchFromRemote: suspend () -> Response<REQUEST>,
+    crossinline saveRemoteData: suspend (response: REQUEST) -> Unit,
+): Flow<Resource<RESULT>> {
+    return flow<Resource<RESULT>> {
 
         // Emit Database content first
         emit(Resource.Success(fetchFromLocal().first()))
@@ -62,29 +63,11 @@ abstract class NetworkBoundRepository<RESULT, REQUEST> {
         // Retrieve posts from persistence storage and emit
         emitAll(
             fetchFromLocal().map {
-                Resource.Success<RESULT>(it)
+                Resource.Success(it)
             }
         )
     }.catch { e ->
         e.printStackTrace()
         emit(Resource.Failed("Network error! Can't get latest posts."))
     }
-
-    /**
-     * Saves retrieved from remote into the persistence storage.
-     */
-    @WorkerThread
-    protected abstract suspend fun saveRemoteData(response: REQUEST)
-
-    /**
-     * Retrieves all data from persistence storage.
-     */
-    @MainThread
-    protected abstract fun fetchFromLocal(): Flow<RESULT>
-
-    /**
-     * Fetches [Response] from the remote end point.
-     */
-    @MainThread
-    protected abstract suspend fun fetchFromRemote(): Response<REQUEST>
 }
