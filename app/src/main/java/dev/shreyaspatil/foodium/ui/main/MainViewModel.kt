@@ -32,6 +32,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.shreyaspatil.foodium.data.repository.PostRepository
 import dev.shreyaspatil.foodium.model.Post
 import dev.shreyaspatil.foodium.model.State
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
@@ -51,8 +52,12 @@ class MainViewModel @Inject constructor(private val postRepository: PostReposito
 
     val postsLiveData: LiveData<State<List<Post>>> = _postsLiveData
 
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        _postsLiveData.postValue(throwable.message?.let { State.error(it) })
+    }
+
     fun getPosts() {
-        viewModelScope.launch {
+        viewModelScope.launch(exceptionHandler) {
             postRepository.getAllPosts()
                 .onStart { _postsLiveData.value = State.loading() }
                 .map { resource -> State.fromResource(resource) }

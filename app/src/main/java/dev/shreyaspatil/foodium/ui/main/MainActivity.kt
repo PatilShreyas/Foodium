@@ -69,7 +69,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         handleNetworkChanges()
     }
 
-    fun initView() {
+    private fun initView() {
         mViewBinding.run {
             postsRecyclerView.adapter = mAdapter
 
