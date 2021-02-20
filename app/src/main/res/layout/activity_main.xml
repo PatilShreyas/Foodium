@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ MIT License
   ~
   ~ Copyright (c) 2020 Shreyas Patil
@@ -59,10 +58,13 @@
             style="@style/PostsRecyclerStyle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layoutAnimation="@anim/layout_animation_right_to_left"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/networkStatusLayout"
             tools:listitem="@layout/item_post" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
