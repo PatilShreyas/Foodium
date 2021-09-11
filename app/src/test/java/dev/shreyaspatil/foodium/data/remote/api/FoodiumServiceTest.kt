@@ -25,6 +25,7 @@
 package dev.shreyaspatil.foodium.data.remote.api
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.google.common.truth.Truth.assertThat
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.runBlocking
@@ -32,10 +33,7 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okio.buffer
 import okio.source
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.core.IsNull.notNullValue
 import org.junit.After
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -78,9 +76,9 @@ class FoodiumServiceTest {
         enqueueResponse("posts.json")
         val posts = service.getPosts().body()
 
-        assertThat(posts, notNullValue())
-        assertThat(posts!!.size, `is`(2))
-        assertThat(posts[0].title, `is`("Title 1"))
+        assertThat(posts).isNotNull()
+        assertThat(posts!!.size).isEqualTo(2)
+        assertThat(posts[0].title).isEqualTo("Title 1")
     }
 
     private fun enqueueResponse(fileName: String, headers: Map<String, String> = emptyMap()) {
