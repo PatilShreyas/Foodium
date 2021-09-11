@@ -6,6 +6,7 @@ object Testing {
     const val espresso = "androidx.test.espresso:espresso-core:3.3.0"
     const val okHttp = "com.squareup.okhttp3:mockwebserver:4.9.0"
     const val core = "androidx.arch.core:core-testing:2.1.0"
+    const val truth = "com.google.truth:truth:1.1.3"
 }
 
 object Dependencies {
