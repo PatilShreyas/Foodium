@@ -81,7 +81,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     private fun observePosts() {
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             mViewModel.posts.collect { state ->
                 when (state) {
                     is State.Loading -> showLoading(true)
