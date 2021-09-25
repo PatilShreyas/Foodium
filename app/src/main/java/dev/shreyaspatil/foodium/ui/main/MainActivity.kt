@@ -34,6 +34,7 @@ import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityOptionsCompat
+import androidx.lifecycle.lifecycleScope
 import com.shreyaspatil.MaterialDialog.MaterialDialog
 import dagger.hilt.android.AndroidEntryPoint
 import dev.shreyaspatil.foodium.R
@@ -45,6 +46,7 @@ import dev.shreyaspatil.foodium.ui.details.PostDetailsActivity
 import dev.shreyaspatil.foodium.ui.main.adapter.PostListAdapter
 import dev.shreyaspatil.foodium.utils.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -69,34 +71,29 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         handleNetworkChanges()
     }
 
-    fun initView() {
+    private fun initView() {
         mViewBinding.run {
             postsRecyclerView.adapter = mAdapter
 
             swipeRefreshLayout.setOnRefreshListener { getPosts() }
         }
-
-        // If Current State isn't `Success` then reload posts.
-        mViewModel.postsLiveData.value?.let { currentState ->
-            if (!currentState.isSuccessful()) {
-                getPosts()
-            }
-        }
     }
 
     private fun observePosts() {
-        mViewModel.postsLiveData.observe(this) { state ->
-            when (state) {
-                is State.Loading -> showLoading(true)
-                is State.Success -> {
-                    if (state.data.isNotEmpty()) {
-                        mAdapter.submitList(state.data.toMutableList())
+        lifecycleScope.launchWhenStarted {
+            mViewModel.posts.collect { state ->
+                when (state) {
+                    is State.Loading -> showLoading(true)
+                    is State.Success -> {
+                        if (state.data.isNotEmpty()) {
+                            mAdapter.submitList(state.data.toMutableList())
+                            showLoading(false)
+                        }
+                    }
+                    is State.Error -> {
+                        showToast(state.message)
                         showLoading(false)
                     }
-                }
-                is State.Error -> {
-                    showToast(state.message)
-                    showLoading(false)
                 }
             }
         }
@@ -121,9 +118,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                     setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
                 }
             } else {
-                if (mViewModel.postsLiveData.value is State.Error || mAdapter.itemCount == 0) {
-                    getPosts()
-                }
+                if (mAdapter.itemCount == 0) getPosts()
                 mViewBinding.textViewNetworkStatus.text = getString(R.string.text_connectivity)
                 mViewBinding.networkStatusLayout.apply {
                     setBackgroundColor(getColorRes(R.color.colorStatusConnected))
