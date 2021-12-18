@@ -34,7 +34,9 @@ import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityOptionsCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.shreyaspatil.MaterialDialog.MaterialDialog
 import dagger.hilt.android.AndroidEntryPoint
 import dev.shreyaspatil.foodium.R
@@ -47,6 +49,7 @@ import dev.shreyaspatil.foodium.ui.main.adapter.PostListAdapter
 import dev.shreyaspatil.foodium.utils.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -63,11 +66,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         setContentView(mViewBinding.root)
 
         initView()
+        observePosts()
     }
 
     override fun onStart() {
         super.onStart()
-        observePosts()
         handleNetworkChanges()
     }
 
@@ -80,19 +83,21 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     private fun observePosts() {
-        lifecycleScope.launchWhenStarted {
-            mViewModel.posts.collect { state ->
-                when (state) {
-                    is State.Loading -> showLoading(true)
-                    is State.Success -> {
-                        if (state.data.isNotEmpty()) {
-                            mAdapter.submitList(state.data.toMutableList())
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mViewModel.posts.collect { state ->
+                    when (state) {
+                        is State.Loading -> showLoading(true)
+                        is State.Success -> {
+                            if (state.data.isNotEmpty()) {
+                                mAdapter.submitList(state.data.toMutableList())
+                                showLoading(false)
+                            }
+                        }
+                        is State.Error -> {
+                            showToast(state.message)
                             showLoading(false)
                         }
-                    }
-                    is State.Error -> {
-                        showToast(state.message)
-                        showLoading(false)
                     }
                 }
             }

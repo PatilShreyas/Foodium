@@ -104,6 +104,7 @@ dependencies {
     // Architecture Components
     implementation(Lifecycle.viewModel)
     implementation(Lifecycle.liveData)
+    implementation(Lifecycle.runtimeKtx)
 
     // Room components
     implementation(Room.runtime)
