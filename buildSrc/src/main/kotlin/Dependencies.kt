@@ -16,7 +16,7 @@ object Dependencies {
     const val daggerHilt = "com.google.dagger:hilt-android-gradle-plugin:2.31-alpha"
     const val ktLint = "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
     const val materialDesign = "com.google.android.material:material:1.2.0"
-    const val materialDialog = "com.shreyaspatil:MaterialDialog:2.1"
+    const val materialDialog = "dev.shreyaspatil.MaterialDialog:MaterialDialog:2.2.3"
     const val coil = "io.coil-kt:coil:1.0.0"
 }
 
