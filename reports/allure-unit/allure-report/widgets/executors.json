@@ -1,0 +1,5 @@
+[ {
+  "name" : "Gradle",
+  "type" : "gradle",
+  "buildName" : "project ':app'"
+} ]

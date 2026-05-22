@@ -26,11 +26,15 @@ package dev.shreyaspatil.foodium.data.local.dao
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import io.qameta.allure.android.runners.AllureAndroidJUnit4
 import dev.shreyaspatil.foodium.data.local.FoodiumPostsDatabase
 import dev.shreyaspatil.foodium.model.Post
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import io.qameta.allure.kotlin.Description
+import io.qameta.allure.kotlin.Epic
+import io.qameta.allure.kotlin.Feature
+import io.qameta.allure.kotlin.Story
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
@@ -38,7 +42,9 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
+@Epic("Instrumented Tests")
+@Feature("PostsDao")
+@RunWith(AllureAndroidJUnit4::class)
 class PostsDaoTest {
 
     private lateinit var mDatabase: FoodiumPostsDatabase
@@ -51,6 +57,8 @@ class PostsDaoTest {
         ).build()
     }
 
+    @Story("Insert and Select")
+    @Description("Проверка вставки и получения постов из БД")
     @Test
     @Throws(InterruptedException::class)
     fun insert_and_select_posts() = runBlocking {
@@ -66,6 +74,8 @@ class PostsDaoTest {
         assertThat(dbPosts, equalTo(posts))
     }
 
+    @Story("Select by ID")
+    @Description("Проверка получения поста по ID")
     @Test
     @Throws(InterruptedException::class)
     fun select_post_by_id() = runBlocking {

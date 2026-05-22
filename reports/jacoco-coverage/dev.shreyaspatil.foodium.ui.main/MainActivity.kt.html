@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainActivity.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">dev.shreyaspatil.foodium.ui.main</a> &gt; <span class="el_source">MainActivity.kt</span></div><h1>MainActivity.kt</h1><pre class="source lang-java linenums">/*
+ * MIT License
+ *
+ * Copyright (c) 2020 Shreyas Patil
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package dev.shreyaspatil.foodium.ui.main
+
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.content.res.Configuration
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.ImageView
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityOptionsCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import dagger.hilt.android.AndroidEntryPoint
+import dev.shreyaspatil.MaterialDialog.MaterialDialog
+import dev.shreyaspatil.foodium.R
+import dev.shreyaspatil.foodium.databinding.ActivityMainBinding
+import dev.shreyaspatil.foodium.model.Post
+import dev.shreyaspatil.foodium.model.State
+import dev.shreyaspatil.foodium.ui.base.BaseActivity
+import dev.shreyaspatil.foodium.ui.details.PostDetailsActivity
+import dev.shreyaspatil.foodium.ui.main.adapter.PostListAdapter
+import dev.shreyaspatil.foodium.utils.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
+<span class="nc" id="L56">class MainActivity : BaseActivity&lt;MainViewModel, ActivityMainBinding&gt;() {</span>
+
+<span class="nc" id="L58">    override val mViewModel: MainViewModel by viewModels()</span>
+
+<span class="nc" id="L60">    private val mAdapter = PostListAdapter(this::onItemClicked)</span>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+<span class="nc" id="L63">        setTheme(R.style.AppTheme) // Set AppTheme before setting content view.</span>
+
+<span class="nc" id="L65">        super.onCreate(savedInstanceState)</span>
+<span class="nc" id="L66">        setContentView(mViewBinding.root)</span>
+
+<span class="nc" id="L68">        initView()</span>
+<span class="nc" id="L69">        observePosts()</span>
+<span class="nc" id="L70">    }</span>
+
+    override fun onStart() {
+<span class="nc" id="L73">        super.onStart()</span>
+<span class="nc" id="L74">        handleNetworkChanges()</span>
+<span class="nc" id="L75">    }</span>
+
+    private fun initView() {
+<span class="nc" id="L78">        mViewBinding.run {</span>
+<span class="nc" id="L79">            postsRecyclerView.adapter = mAdapter</span>
+
+<span class="nc" id="L81">            swipeRefreshLayout.setOnRefreshListener { getPosts() }</span>
+<span class="nc" id="L82">        }</span>
+<span class="nc" id="L83">    }</span>
+
+    private fun observePosts() {
+<span class="nc" id="L86">        lifecycleScope.launch {</span>
+<span class="nc" id="L87">            repeatOnLifecycle(Lifecycle.State.STARTED) {</span>
+<span class="nc" id="L88">                mViewModel.posts.collect { state -&gt;</span>
+                    when (state) {
+                        is State.Loading -&gt; showLoading(true)
+                        is State.Success -&gt; {
+                            if (state.data.isNotEmpty()) {
+                                mAdapter.submitList(state.data.toMutableList())
+                                showLoading(false)
+                            }
+                        }
+                        is State.Error -&gt; {
+                            showToast(state.message)
+                            showLoading(false)
+                        }
+                    }
+                }
+<span class="nc" id="L103">            }</span>
+<span class="nc" id="L104">        }</span>
+<span class="nc" id="L105">    }</span>
+
+<span class="nc" id="L107">    private fun getPosts() = mViewModel.getPosts()</span>
+
+    private fun showLoading(isLoading: Boolean) {
+<span class="nc" id="L110">        mViewBinding.swipeRefreshLayout.isRefreshing = isLoading</span>
+<span class="nc" id="L111">    }</span>
+
+    /**
+     * Observe network changes i.e. Internet Connectivity
+     */
+    private fun handleNetworkChanges() {
+<span class="nc" id="L117">        NetworkUtils.getNetworkLiveData(applicationContext).observe(this) { isConnected -&gt;</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">            if (!isConnected) {</span>
+                mViewBinding.textViewNetworkStatus.text =
+<span class="nc" id="L120">                    getString(R.string.text_no_connectivity)</span>
+<span class="nc" id="L121">                mViewBinding.networkStatusLayout.apply {</span>
+<span class="nc" id="L122">                    show()</span>
+<span class="nc" id="L123">                    setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))</span>
+<span class="nc" id="L124">                }</span>
+            } else {
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                if (mAdapter.itemCount == 0) getPosts()</span>
+<span class="nc" id="L127">                mViewBinding.textViewNetworkStatus.text = getString(R.string.text_connectivity)</span>
+<span class="nc" id="L128">                mViewBinding.networkStatusLayout.apply {</span>
+<span class="nc" id="L129">                    setBackgroundColor(getColorRes(R.color.colorStatusConnected))</span>
+
+<span class="nc" id="L131">                    animate()</span>
+<span class="nc" id="L132">                        .alpha(1f)</span>
+<span class="nc" id="L133">                        .setStartDelay(ANIMATION_DURATION)</span>
+<span class="nc" id="L134">                        .setDuration(ANIMATION_DURATION)</span>
+<span class="nc" id="L135">                        .setListener(object : AnimatorListenerAdapter() {</span>
+                            override fun onAnimationEnd(animation: Animator) {
+<span class="nc" id="L137">                                hide()</span>
+<span class="nc" id="L138">                            }</span>
+                        })
+<span class="nc" id="L140">                }</span>
+            }
+<span class="nc" id="L142">        }</span>
+<span class="nc" id="L143">    }</span>
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+<span class="nc" id="L146">        menuInflater.inflate(R.menu.main_menu, menu)</span>
+<span class="nc" id="L147">        return true</span>
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+<span class="nc bnc" id="L151" title="All 2 branches missed.">        return when (item.itemId) {</span>
+            R.id.action_theme -&gt; {
+                // Get new mode.
+<span class="nc" id="L154">                val mode =</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">                    if ((resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==</span>
+                        Configuration.UI_MODE_NIGHT_NO
+                    ) {
+<span class="nc" id="L158">                        AppCompatDelegate.MODE_NIGHT_YES</span>
+                    } else {
+<span class="nc" id="L160">                        AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY</span>
+                    }
+
+                // Change UI Mode
+<span class="nc" id="L164">                AppCompatDelegate.setDefaultNightMode(mode)</span>
+<span class="nc" id="L165">                true</span>
+            }
+
+<span class="nc" id="L168">            else -&gt; true</span>
+        }
+    }
+
+    override fun onBackPressed() {
+<span class="nc" id="L173">        MaterialDialog.Builder(this)</span>
+<span class="nc" id="L174">            .setTitle(getString(R.string.exit_dialog_title))</span>
+<span class="nc" id="L175">            .setMessage(getString(R.string.exit_dialog_message))</span>
+<span class="nc" id="L176">            .setPositiveButton(getString(R.string.option_yes)) { dialogInterface, _ -&gt;</span>
+<span class="nc" id="L177">                dialogInterface.dismiss()</span>
+<span class="nc" id="L178">                super.onBackPressed()</span>
+<span class="nc" id="L179">            }</span>
+<span class="nc" id="L180">            .setNegativeButton(getString(R.string.option_no)) { dialogInterface, _ -&gt;</span>
+<span class="nc" id="L181">                dialogInterface.dismiss()</span>
+<span class="nc" id="L182">            }</span>
+<span class="nc" id="L183">            .build()</span>
+<span class="nc" id="L184">            .show()</span>
+<span class="nc" id="L185">    }</span>
+
+<span class="nc" id="L187">    override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)</span>
+
+    private fun onItemClicked(post: Post, imageView: ImageView) {
+<span class="nc" id="L190">        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(</span>
+<span class="nc" id="L191">            this,</span>
+<span class="nc" id="L192">            imageView,</span>
+<span class="nc" id="L193">            imageView.transitionName</span>
+        )
+<span class="nc bnc" id="L195" title="All 2 branches missed.">        val postId = post.id ?: run {</span>
+<span class="nc" id="L196">            showToast(&quot;Unable to launch details&quot;)</span>
+<span class="nc" id="L197">            return</span>
+        }
+<span class="nc" id="L199">        val intent = PostDetailsActivity.getStartIntent(this, postId)</span>
+<span class="nc" id="L200">        startActivity(intent, options.toBundle())</span>
+<span class="nc" id="L201">    }</span>
+
+    companion object {
+        const val ANIMATION_DURATION = 1000L
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

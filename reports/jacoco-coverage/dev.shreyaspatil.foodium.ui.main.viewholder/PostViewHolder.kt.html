@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PostViewHolder.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">dev.shreyaspatil.foodium.ui.main.viewholder</a> &gt; <span class="el_source">PostViewHolder.kt</span></div><h1>PostViewHolder.kt</h1><pre class="source lang-java linenums">/*
+ * MIT License
+ *
+ * Copyright (c) 2020 Shreyas Patil
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package dev.shreyaspatil.foodium.ui.main.viewholder
+
+import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import dev.shreyaspatil.foodium.R
+import dev.shreyaspatil.foodium.databinding.ItemPostBinding
+import dev.shreyaspatil.foodium.model.Post
+import dev.shreyaspatil.foodium.ui.main.adapter.PostListAdapter
+
+/**
+ * [RecyclerView.ViewHolder] implementation to inflate View for RecyclerView.
+ * See [PostListAdapter]]
+ */
+<span class="nc" id="L39">class PostViewHolder(private val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root) {</span>
+
+    fun bind(post: Post, onItemClicked: (Post, ImageView) -&gt; Unit) {
+<span class="nc" id="L42">        binding.postTitle.text = post.title</span>
+<span class="nc" id="L43">        binding.postAuthor.text = post.author</span>
+<span class="nc" id="L44">        binding.imageView.load(post.imageUrl) {</span>
+<span class="nc" id="L45">            placeholder(R.drawable.ic_photo)</span>
+<span class="nc" id="L46">            error(R.drawable.ic_broken_image)</span>
+<span class="nc" id="L47">        }</span>
+
+<span class="nc" id="L49">        binding.root.setOnClickListener {</span>
+<span class="nc" id="L50">            onItemClicked(post, binding.imageView)</span>
+<span class="nc" id="L51">        }</span>
+<span class="nc" id="L52">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,48 @@
+{
+  "total" : 4,
+  "items" : [ {
+    "uid" : "154f5e70ae4b7001119a594106f56309",
+    "name" : "dev.shreyaspatil.foodium.utils.TimeUtilsTest",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 7,
+      "unknown" : 0,
+      "total" : 7
+    }
+  }, {
+    "uid" : "f93168ac7d289ae893a1190bf7a9787d",
+    "name" : "dev.shreyaspatil.foodium.model.StateTest",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 5,
+      "unknown" : 0,
+      "total" : 5
+    }
+  }, {
+    "uid" : "2684bf8d79548d808eb83933d90306f0",
+    "name" : "dev.shreyaspatil.foodium.ui.main.MainViewModelTest",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 3,
+      "unknown" : 0,
+      "total" : 3
+    }
+  }, {
+    "uid" : "f5d4c253d440d119ceddd418b9a6a1eb",
+    "name" : "dev.shreyaspatil.foodium.data.remote.api.FoodiumServiceTest",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    }
+  } ]
+}

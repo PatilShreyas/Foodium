@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PostDetailsViewModel.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">dev.shreyaspatil.foodium.ui.details</a> &gt; <span class="el_source">PostDetailsViewModel.kt</span></div><h1>PostDetailsViewModel.kt</h1><pre class="source lang-java linenums">/*
+ * MIT License
+ *
+ * Copyright (c) 2020 Shreyas Patil
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package dev.shreyaspatil.foodium.ui.details
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dev.shreyaspatil.foodium.data.repository.PostRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+
+/**
+ * ViewModel for [PostDetailsActivity]
+ */
+@ExperimentalCoroutinesApi
+<span class="nc" id="L40">class PostDetailsViewModel @AssistedInject constructor(</span>
+    postRepository: PostRepository,
+    @Assisted postId: Int
+<span class="nc" id="L43">) : ViewModel() {</span>
+
+<span class="nc" id="L45">    val post = postRepository.getPostById(postId).asLiveData()</span>
+
+    @AssistedFactory
+    interface PostDetailsViewModelFactory {
+        fun create(postId: Int): PostDetailsViewModel
+    }
+
+    @Suppress(&quot;UNCHECKED_CAST&quot;)
+    companion object {
+        fun provideFactory(
+            assistedFactory: PostDetailsViewModelFactory,
+            postId: Int
+<span class="nc" id="L57">        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {</span>
+            override fun &lt;T : ViewModel?&gt; create(modelClass: Class&lt;T&gt;): T {
+<span class="nc" id="L59">                return assistedFactory.create(postId) as T</span>
+            }
+<span class="nc" id="L61">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

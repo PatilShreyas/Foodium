@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PostDetailsActivity.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">dev.shreyaspatil.foodium.ui.details</a> &gt; <span class="el_source">PostDetailsActivity.kt</span></div><h1>PostDetailsActivity.kt</h1><pre class="source lang-java linenums">/*
+ * MIT License
+ *
+ * Copyright (c) 2020 Shreyas Patil
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package dev.shreyaspatil.foodium.ui.details
+
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.activity.viewModels
+import androidx.core.app.ShareCompat
+import coil.load
+import dagger.hilt.android.AndroidEntryPoint
+import dev.shreyaspatil.foodium.R
+import dev.shreyaspatil.foodium.databinding.ActivityPostDetailsBinding
+import dev.shreyaspatil.foodium.ui.base.BaseActivity
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
+
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
+<span class="nc" id="L44">class PostDetailsActivity : BaseActivity&lt;PostDetailsViewModel, ActivityPostDetailsBinding&gt;() {</span>
+
+    @Inject
+<span class="nc" id="L47">    lateinit var viewModelFactory: PostDetailsViewModel.PostDetailsViewModelFactory</span>
+
+<span class="nc" id="L49">    override val mViewModel: PostDetailsViewModel by viewModels {</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        val postId = intent.extras?.getInt(KEY_POST_ID)</span>
+<span class="nc" id="L51">            ?: throw IllegalArgumentException(&quot;`postId` must be non-null&quot;)</span>
+
+<span class="nc" id="L53">        PostDetailsViewModel.provideFactory(viewModelFactory, postId)</span>
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+<span class="nc" id="L57">        super.onCreate(savedInstanceState)</span>
+<span class="nc" id="L58">        setContentView(mViewBinding.root)</span>
+
+<span class="nc" id="L60">        setSupportActionBar(mViewBinding.toolbar)</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        supportActionBar?.setDisplayHomeAsUpEnabled(true)</span>
+<span class="nc" id="L62">    }</span>
+
+    override fun onStart() {
+<span class="nc" id="L65">        super.onStart()</span>
+<span class="nc" id="L66">        initPost()</span>
+<span class="nc" id="L67">    }</span>
+
+    private fun initPost() {
+<span class="nc" id="L70">        mViewModel.post.observe(this) { post -&gt;</span>
+<span class="nc" id="L71">            mViewBinding.postContent.apply {</span>
+<span class="nc" id="L72">                postTitle.text = post.title</span>
+<span class="nc" id="L73">                postAuthor.text = post.author</span>
+<span class="nc" id="L74">                postBody.text = post.body</span>
+<span class="nc" id="L75">            }</span>
+<span class="nc" id="L76">            mViewBinding.imageView.load(post.imageUrl)</span>
+<span class="nc" id="L77">        }</span>
+<span class="nc" id="L78">    }</span>
+
+    private fun share() {
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        val post = mViewModel.post.value ?: return</span>
+<span class="nc" id="L82">        val shareMsg = getString(R.string.share_message, post.title, post.author)</span>
+
+<span class="nc" id="L84">        val intent = ShareCompat.IntentBuilder.from(this)</span>
+<span class="nc" id="L85">            .setType(&quot;text/plain&quot;)</span>
+<span class="nc" id="L86">            .setText(shareMsg)</span>
+            .intent
+
+<span class="nc" id="L89">        startActivity(Intent.createChooser(intent, null))</span>
+<span class="nc" id="L90">    }</span>
+
+    override fun getViewBinding(): ActivityPostDetailsBinding =
+<span class="nc" id="L93">        ActivityPostDetailsBinding.inflate(layoutInflater)</span>
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+<span class="nc" id="L96">        menuInflater.inflate(R.menu.detail_menu, menu)</span>
+<span class="nc" id="L97">        return true</span>
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+<span class="nc bnc" id="L101" title="All 3 branches missed.">        when (item.itemId) {</span>
+            android.R.id.home -&gt; {
+<span class="nc" id="L103">                supportFinishAfterTransition()</span>
+<span class="nc" id="L104">                return true</span>
+            }
+
+            R.id.action_share -&gt; {
+<span class="nc" id="L108">                share()</span>
+<span class="nc" id="L109">                return true</span>
+            }
+        }
+
+<span class="nc" id="L113">        return super.onOptionsItemSelected(item)</span>
+    }
+
+    companion object {
+        private const val KEY_POST_ID = &quot;postId&quot;
+
+        fun getStartIntent(
+            context: Context,
+            postId: Int
+<span class="nc" id="L122">        ) = Intent(context, PostDetailsActivity::class.java).apply { putExtra(KEY_POST_ID, postId) }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

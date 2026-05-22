@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NetworkUtils.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">dev.shreyaspatil.foodium.utils</a> &gt; <span class="el_source">NetworkUtils.kt</span></div><h1>NetworkUtils.kt</h1><pre class="source lang-java linenums">/*
+ * MIT License
+ *
+ * Copyright (c) 2020 Shreyas Patil
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package dev.shreyaspatil.foodium.utils
+
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
+import android.os.Build
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+
+/**
+ * Network Utility to detect availability or unavailability of Internet connection
+ */
+<span class="nc" id="L39">object NetworkUtils : ConnectivityManager.NetworkCallback() {</span>
+
+<span class="nc" id="L41">    private val networkLiveData: MutableLiveData&lt;Boolean&gt; = MutableLiveData()</span>
+
+    /**
+     * Returns instance of [LiveData] which can be observed for network changes.
+     */
+    fun getNetworkLiveData(context: Context): LiveData&lt;Boolean&gt; {
+<span class="nc" id="L47">        val connectivityManager =</span>
+<span class="nc" id="L48">            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager</span>
+
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) {</span>
+<span class="nc" id="L51">            connectivityManager.registerDefaultNetworkCallback(this)</span>
+        } else {
+<span class="nc" id="L53">            val builder = NetworkRequest.Builder()</span>
+<span class="nc" id="L54">            connectivityManager.registerNetworkCallback(builder.build(), this)</span>
+        }
+
+<span class="nc" id="L57">        var isConnected = false</span>
+
+        // Retrieve current status of connectivity
+<span class="nc" id="L60">        connectivityManager.allNetworks.forEach { network -&gt;</span>
+<span class="nc" id="L61">            val networkCapability = connectivityManager.getNetworkCapabilities(network)</span>
+
+<span class="nc bnc" id="L63" title="All 2 branches missed.">            networkCapability?.let {</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">                if (it.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)) {</span>
+<span class="nc" id="L65">                    isConnected = true</span>
+<span class="nc" id="L66">                    return@forEach</span>
+                }
+<span class="nc" id="L68">            }</span>
+<span class="nc" id="L69">        }</span>
+
+<span class="nc" id="L71">        networkLiveData.postValue(isConnected)</span>
+
+<span class="nc" id="L73">        return networkLiveData</span>
+    }
+
+    override fun onAvailable(network: Network) {
+<span class="nc" id="L77">        networkLiveData.postValue(true)</span>
+<span class="nc" id="L78">    }</span>
+
+    override fun onLost(network: Network) {
+<span class="nc" id="L81">        networkLiveData.postValue(false)</span>
+<span class="nc" id="L82">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

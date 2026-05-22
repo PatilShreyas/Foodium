@@ -1,0 +1,56 @@
+{
+  "uid" : "cf322e63f785c59c",
+  "name" : "posts_initialState_isLoading",
+  "fullName" : "dev.shreyaspatil.foodium.ui.main.MainViewModelTest.posts_initialState_isLoading",
+  "historyId" : "2c81675e26b9cf760a30cae54389517",
+  "time" : {
+    "start" : 1779275639500,
+    "stop" : 1779275639504,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "package",
+    "value" : "dev.shreyaspatil.foodium.ui.main"
+  }, {
+    "name" : "testClass",
+    "value" : "dev.shreyaspatil.foodium.ui.main.MainViewModelTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "posts_initialState_isLoading"
+  }, {
+    "name" : "suite",
+    "value" : "dev.shreyaspatil.foodium.ui.main.MainViewModelTest"
+  }, {
+    "name" : "host",
+    "value" : "lt2351"
+  }, {
+    "name" : "thread",
+    "value" : "21888@lt2351.Test worker(15)"
+  }, {
+    "name" : "framework",
+    "value" : "junit4"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "cf322e63f785c59c.json",
+  "parameterValues" : [ ]
+}

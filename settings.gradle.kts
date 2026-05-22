@@ -24,3 +24,4 @@
 
 rootProject.name = "Foodium"
 include(":app")
+include(":api-tests")

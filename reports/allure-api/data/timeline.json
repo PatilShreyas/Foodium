@@ -1,0 +1,91 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "lt2351",
+    "children" : [ {
+      "name" : "16880@lt2351.Test worker(14)",
+      "children" : [ {
+        "name" : "deletePost_existingId_returns200",
+        "uid" : "74429d95773c37df",
+        "parentUid" : "50648855405cab8729821cc878c06c6b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275538916,
+          "stop" : 1779275539343,
+          "duration" : 427
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "getPostsByUserId_returnsFilteredList",
+        "uid" : "e2916f051cc2d569",
+        "parentUid" : "50648855405cab8729821cc878c06c6b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275539638,
+          "stop" : 1779275541222,
+          "duration" : 1584
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "getAllPosts_returnsOkStatus",
+        "uid" : "b492822aab039660",
+        "parentUid" : "50648855405cab8729821cc878c06c6b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275539366,
+          "stop" : 1779275539630,
+          "duration" : 264
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "getPostById_existingId_returnsPost",
+        "uid" : "ae2c02dafac67f13",
+        "parentUid" : "50648855405cab8729821cc878c06c6b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275541229,
+          "stop" : 1779275541805,
+          "duration" : 576
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "createPost_withValidData_returns201",
+        "uid" : "6bfc2ef140da4c6e",
+        "parentUid" : "50648855405cab8729821cc878c06c6b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275541814,
+          "stop" : 1779275542626,
+          "duration" : 812
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "getPostById_nonExistingId_returns404",
+        "uid" : "c33f5c1331192844",
+        "parentUid" : "50648855405cab8729821cc878c06c6b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275536383,
+          "stop" : 1779275538754,
+          "duration" : 2371
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "50648855405cab8729821cc878c06c6b"
+    } ],
+    "uid" : "faef21c7de10489e7bfdb9ac33ec5be5"
+  } ]
+}

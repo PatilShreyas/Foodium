@@ -35,6 +35,8 @@ buildscript {
         classpath(Dependencies.kotlinGradle)
         classpath(Dependencies.daggerHilt)
         classpath(Dependencies.ktLint)
+        classpath("org.jetbrains.kotlin:kotlin-serialization:1.4.21-2")
+        classpath("io.qameta.allure:allure-gradle:2.8.1")
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -44,6 +46,7 @@ buildscript {
 allprojects {
     repositories {
         google()
+        mavenCentral()
         jcenter()
     }
 }

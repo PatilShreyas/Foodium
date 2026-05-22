@@ -1,0 +1,221 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "lt2351",
+    "children" : [ {
+      "name" : "21888@lt2351.Test worker(15)",
+      "children" : [ {
+        "name" : "isNight_dayTime_returnsFalse",
+        "uid" : "30fe5830bd8e02cc",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275642930,
+          "stop" : 1779275643278,
+          "duration" : 348
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "isLoading_returnsTrueForLoadingState",
+        "uid" : "a6456f8bf7f44048",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275635999,
+          "stop" : 1779275635999,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "getPosts_failedResponse_emitsErrorState",
+        "uid" : "5145069506b48762",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275639482,
+          "stop" : 1779275639493,
+          "duration" : 11
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "isNight_boundaryAt18_returnsTrue",
+        "uid" : "441fdb7004963f93",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275642251,
+          "stop" : 1779275642572,
+          "duration" : 321
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "isNight_boundaryAt8_returnsFalse",
+        "uid" : "11a1e787d5714f32",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275643290,
+          "stop" : 1779275643592,
+          "duration" : 302
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "isFailed_returnsTrueForErrorState",
+        "uid" : "dd979324092d6d0e",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275635939,
+          "stop" : 1779275635947,
+          "duration" : 8
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "isNight_earlyMorning_returnsTrue",
+        "uid" : "fe65182c5f636d44",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275642583,
+          "stop" : 1779275642919,
+          "duration" : 336
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "isNight_boundaryAt7_returnsTrue",
+        "uid" : "991395c4ab776542",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275641295,
+          "stop" : 1779275641661,
+          "duration" : 366
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "isNight_boundaryAt17_returnsFalse",
+        "uid" : "cb9d417e8bc9bc4f",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275639524,
+          "stop" : 1779275641234,
+          "duration" : 1710
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "posts_initialState_isLoading",
+        "uid" : "cf322e63f785c59c",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275639500,
+          "stop" : 1779275639504,
+          "duration" : 4
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "isNight_lateNight_returnsTrue",
+        "uid" : "fe320ac4d4460b62",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275641675,
+          "stop" : 1779275642234,
+          "duration" : 559
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "getPostsTest",
+        "uid" : "ab1dd781fffc1227",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275632347,
+          "stop" : 1779275635694,
+          "duration" : 3347
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "isSuccessful_returnsTrueForSuccessState",
+        "uid" : "388c414acf6bf5a3",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275636011,
+          "stop" : 1779275636011,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "fromResource_withFailed_returnsErrorState",
+        "uid" : "991b223c1a55a418",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275636021,
+          "stop" : 1779275636023,
+          "duration" : 2
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "getPosts_successfulResponse_emitsSuccessState",
+        "uid" : "89f2551def87afb7",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275636065,
+          "stop" : 1779275639474,
+          "duration" : 3409
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "fromResource_withSuccess_returnsSuccessState",
+        "uid" : "f87a72a2c9f84537",
+        "parentUid" : "d27ec49b308f6b26b7537e0a2f19e19c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1779275635986,
+          "stop" : 1779275635989,
+          "duration" : 3
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "d27ec49b308f6b26b7537e0a2f19e19c"
+    } ],
+    "uid" : "faef21c7de10489e7bfdb9ac33ec5be5"
+  } ]
+}

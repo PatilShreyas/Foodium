@@ -1,0 +1,56 @@
+{
+  "uid" : "991395c4ab776542",
+  "name" : "isNight_boundaryAt7_returnsTrue",
+  "fullName" : "dev.shreyaspatil.foodium.utils.TimeUtilsTest.isNight_boundaryAt7_returnsTrue",
+  "historyId" : "b1f53b49946610d5727d89a19c187af6",
+  "time" : {
+    "start" : 1779275641295,
+    "stop" : 1779275641661,
+    "duration" : 366
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "package",
+    "value" : "dev.shreyaspatil.foodium.utils"
+  }, {
+    "name" : "testClass",
+    "value" : "dev.shreyaspatil.foodium.utils.TimeUtilsTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "isNight_boundaryAt7_returnsTrue"
+  }, {
+    "name" : "suite",
+    "value" : "dev.shreyaspatil.foodium.utils.TimeUtilsTest"
+  }, {
+    "name" : "host",
+    "value" : "lt2351"
+  }, {
+    "name" : "thread",
+    "value" : "21888@lt2351.Test worker(15)"
+  }, {
+    "name" : "framework",
+    "value" : "junit4"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "991395c4ab776542.json",
+  "parameterValues" : [ ]
+}

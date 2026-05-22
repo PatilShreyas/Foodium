@@ -1,0 +1,161 @@
+[ {
+  "uid" : "fe65182c5f636d44",
+  "name" : "isNight_earlyMorning_returnsTrue",
+  "time" : {
+    "start" : 1779275642583,
+    "stop" : 1779275642919,
+    "duration" : 336
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "11a1e787d5714f32",
+  "name" : "isNight_boundaryAt8_returnsFalse",
+  "time" : {
+    "start" : 1779275643290,
+    "stop" : 1779275643592,
+    "duration" : 302
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a6456f8bf7f44048",
+  "name" : "isLoading_returnsTrueForLoadingState",
+  "time" : {
+    "start" : 1779275635999,
+    "stop" : 1779275635999,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "30fe5830bd8e02cc",
+  "name" : "isNight_dayTime_returnsFalse",
+  "time" : {
+    "start" : 1779275642930,
+    "stop" : 1779275643278,
+    "duration" : 348
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "991b223c1a55a418",
+  "name" : "fromResource_withFailed_returnsErrorState",
+  "time" : {
+    "start" : 1779275636021,
+    "stop" : 1779275636023,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "89f2551def87afb7",
+  "name" : "getPosts_successfulResponse_emitsSuccessState",
+  "time" : {
+    "start" : 1779275636065,
+    "stop" : 1779275639474,
+    "duration" : 3409
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ab1dd781fffc1227",
+  "name" : "getPostsTest",
+  "time" : {
+    "start" : 1779275632347,
+    "stop" : 1779275635694,
+    "duration" : 3347
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "388c414acf6bf5a3",
+  "name" : "isSuccessful_returnsTrueForSuccessState",
+  "time" : {
+    "start" : 1779275636011,
+    "stop" : 1779275636011,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f87a72a2c9f84537",
+  "name" : "fromResource_withSuccess_returnsSuccessState",
+  "time" : {
+    "start" : 1779275635986,
+    "stop" : 1779275635989,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cb9d417e8bc9bc4f",
+  "name" : "isNight_boundaryAt17_returnsFalse",
+  "time" : {
+    "start" : 1779275639524,
+    "stop" : 1779275641234,
+    "duration" : 1710
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "441fdb7004963f93",
+  "name" : "isNight_boundaryAt18_returnsTrue",
+  "time" : {
+    "start" : 1779275642251,
+    "stop" : 1779275642572,
+    "duration" : 321
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5145069506b48762",
+  "name" : "getPosts_failedResponse_emitsErrorState",
+  "time" : {
+    "start" : 1779275639482,
+    "stop" : 1779275639493,
+    "duration" : 11
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "fe320ac4d4460b62",
+  "name" : "isNight_lateNight_returnsTrue",
+  "time" : {
+    "start" : 1779275641675,
+    "stop" : 1779275642234,
+    "duration" : 559
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "dd979324092d6d0e",
+  "name" : "isFailed_returnsTrueForErrorState",
+  "time" : {
+    "start" : 1779275635939,
+    "stop" : 1779275635947,
+    "duration" : 8
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cf322e63f785c59c",
+  "name" : "posts_initialState_isLoading",
+  "time" : {
+    "start" : 1779275639500,
+    "stop" : 1779275639504,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "991395c4ab776542",
+  "name" : "isNight_boundaryAt7_returnsTrue",
+  "time" : {
+    "start" : 1779275641295,
+    "stop" : 1779275641661,
+    "duration" : 366
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

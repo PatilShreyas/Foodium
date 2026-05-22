@@ -3,8 +3,13 @@
 /local.properties
 .DS_Store
 /build
+**/build/
 /captures
 .externalNativeBuild
 .cxx
 /buildSrc/build/
 /.idea/
+.claude/
+.allure/
+reports.zip
+*.tar
